@@ -24,7 +24,7 @@ export default function useFetch(url, config, initialData) {
 				const responseData = await sendHttpRequest(url, config);
 				setData(responseData);
 			} catch (error) {
-				setError(error.message || "Something went wrong with fetching data");
+				setError(error.message || "Something went wrong");
 			}
 			setLoading(false);
 		},
@@ -60,9 +60,9 @@ async function sendHttpRequest(url, config) {
 	const response = await fetch(url, config);
 
 	const responseData = await response.json();
-
-	if (!responseData.ok) {
+	if (!responseData) {
 		throw new Error(responseData.message || "Something went wrong, failed to send request");
 	}
+
 	return responseData;
 }

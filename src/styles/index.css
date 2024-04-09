@@ -1,0 +1,24 @@
+
+.app {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(244, 246, 248, 1);
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.main-content {
+    height: 50%;
+    background-color: aqua;
+    margin: 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

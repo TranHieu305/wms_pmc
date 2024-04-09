@@ -1,0 +1,38 @@
+/* Styles for Sidemenu */
+
+.sidemenu {
+   height: 100%;
+   width: 245px;
+   display: flex;
+   flex-direction: column;
+   box-shadow: -1px 0px 0px 0px rgba(201, 214, 223, 0.4) inset;
+
+}
+
+.sidemenu .sidemenu-header {
+    background-color: rgba(255, 255, 255, 1);
+    min-height: 47px;
+    box-shadow: -1px 0px 0px 0px rgba(201, 214, 223, 0.4) inset;
+}
+
+.sidemenu .sidemenu-vertical {
+    height: 100%;
+    position: relative;
+    top: 1px;
+  
+}
+
+/* Styles for Header */
+.header {
+    min-height: 47px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.header .notification {
+    position: relative;
+    display: inline-block;
+    right: 47px;
+    top: 16px;
+    font-size: 13px;
+}
+
