@@ -6,6 +6,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { AppstoreOutlined } from "@ant-design/icons";
 
 import "../../styles/layout.css";
+import Sider from "antd/es/layout/Sider";
 
 function SideMenu() {
 	const location = useLocation();

@@ -1,0 +1,5 @@
+.input-global-wrapper {
+    display: flex;
+    gap: 9px;
+    flex-direction: column;
+}

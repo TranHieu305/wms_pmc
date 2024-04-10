@@ -1,3 +1,26 @@
-.board-table {
+.board .board-container {
     width: 100%;
+}
+
+.board .board-title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 36px;
+    color: rgba(0, 28, 68, 1);
+}
+
+.board .board-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.board .board-action .board-search {
+    width: 380px;
+    height: 34px;
+    border-width: 0px, 0px, 0px, 0px;
+    border-style: solid;
+    border-color: rgba(236, 239, 243, 1);
+
+
 }

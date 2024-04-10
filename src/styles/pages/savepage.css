@@ -1,0 +1,43 @@
+.save-page .page-container {
+    width: 100%;
+}
+
+.save-page .page-title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 36px;
+    color: rgba(0, 28, 68, 1);
+}
+
+.save-page .back-button {
+    padding-left: 0px;
+    color: rgba(1, 103, 250, 1);
+    ;
+}
+
+.save-page .page-container .form-wrapper {
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(204, 212, 223, 1);
+    box-shadow: 4px 4px 10px 0px rgba(51, 65, 86, 0.1);
+    padding: 25px 35px 20px 35px;
+    border-radius: 4px;
+}
+
+.save-page .page-container .form-wrapper {
+    max-width: 650px;
+}
+
+.save-page .page-container .form-wrapper .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.save-page .page-container .form-wrapper .form .action-wrapper {
+    border-top: 1px solid rgba(236, 239, 243, 1);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 10px;
+}

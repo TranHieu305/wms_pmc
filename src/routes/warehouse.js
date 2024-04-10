@@ -1,8 +1,9 @@
-import { FormCreate, WarehouseBoard } from "../components/warehouse";
+import WarehouseBoardPage from "../pages/warehouse/BoardPage";
+import WarehouseSavePage from "../pages/warehouse/SavePage";
 
 const warehouseRouter = [
-	{ path: "warehouses", element: <WarehouseBoard /> },
-	{ path: "warehouses/create", element: <FormCreate /> },
+	{ path: "warehouses", element: <WarehouseBoardPage /> },
+	{ path: "warehouses/create", element: <WarehouseSavePage /> },
 ];
 
 export default warehouseRouter;

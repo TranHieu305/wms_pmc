@@ -1,7 +1,6 @@
 import { Badge } from "antd";
 import "../../styles/layout.css";
 import { BellFilled } from "@ant-design/icons";
-import Typography from "antd/es/typography/Typography";
 
 function Header() {
 	return (

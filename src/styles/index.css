@@ -15,8 +15,6 @@
 }
 
 .main-content {
-    height: 50%;
-    background-color: aqua;
     margin: 20px 80px;
     display: flex;
     flex-direction: column;

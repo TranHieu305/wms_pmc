@@ -1,11 +1,12 @@
 /* Styles for Sidemenu */
 
 .sidemenu {
-   height: 100%;
-   width: 245px;
-   display: flex;
-   flex-direction: column;
-   box-shadow: -1px 0px 0px 0px rgba(201, 214, 223, 0.4) inset;
+    position: fixed;
+    height: 100%;
+    width: 245px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -1px 0px 0px 0px rgba(201, 214, 223, 0.4) inset;
 
 }
 
@@ -29,10 +30,14 @@
 }
 
 .header .notification {
-    position: relative;
+    position: absolute;
     display: inline-block;
-    right: 47px;
-    top: 16px;
+    right: 80px;
+    top: 13px;
     font-size: 13px;
 }
 
+/* Styles for main contents */
+.page-content {
+    margin-left: 245px;
+}
