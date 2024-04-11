@@ -1,9 +1,44 @@
-import { Table } from "antd";
+import { Button, Dropdown, Menu, Space, Table } from "antd";
 import { API_BASE_URL } from "../../apis";
 import { useFetch } from "../../custom_hooks";
+import addKeyToArrayData from "../../utils/addKeyToData";
+import { EllipsisOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 export default function WarehouseBoard() {
-	const { data: warehouses, error, loading } = useFetch(`${API_BASE_URL}/warehouses`);
+	let { data: warehouses, error, loading } = useFetch(`${API_BASE_URL}/warehouses`);
+
+	if (!loading && warehouses) {
+		warehouses = addKeyToArrayData(warehouses);
+	}
+
+	const items = [
+		{
+			label: (
+				<a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+					1st menu item
+				</a>
+			),
+			key: "0",
+		},
+		{
+			label: (
+				<a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+					2nd menu item
+				</a>
+			),
+			key: "1",
+		},
+		{
+			type: "divider",
+		},
+		{
+			label: "3rd menu item（disabled）",
+			key: "3",
+			disabled: true,
+		},
+	];
+
 	return (
 		<Table
 			loading={loading}
@@ -13,11 +48,34 @@ export default function WarehouseBoard() {
 					key: "name",
 					title: "Warehouse name",
 					dataIndex: "name",
-					width: "50%",
 				},
 				{ key: "description", title: "Description", dataIndex: "description" },
 				{ key: "address", title: "Address", dataIndex: "address" },
 				{ key: "supervisor", title: "Supervisor", dataIndex: "supervisor" },
+				{
+					key: "actions",
+					title: "Action",
+					render: () => (
+						<Dropdown
+							overlay={
+								<Menu>
+									<Menu.Item key="0">
+										<Link>1st menu item</Link>
+									</Menu.Item>
+									<Menu.Item key="1">
+										<Link>2nd menu item</Link>
+									</Menu.Item>
+									<Menu.Divider />
+									<Menu.Item key="3" disabled>
+										<Link>1st menu item</Link>
+									</Menu.Item>
+								</Menu>
+							}
+						>
+							<Button icon={<EllipsisOutlined />} type="dash"></Button>
+						</Dropdown>
+					),
+				},
 			]}
 		></Table>
 	);

@@ -1,20 +1,19 @@
 import { Button } from "antd";
 import { useFormik } from "formik";
 import InputGlobal from "../ui/input";
-import { useFetch } from "../../custom_hooks";
+import { notificationError, notificationSuccess } from "../../utils/notification";
+import axios from "axios";
 import { WAREHOUSE_BASE_URL } from "../../apis/config";
-import { REQUEST_POST_CONFIG } from "../../configs";
 
-export default function FormCreate({ warehouse }) {
-	const {
-		data,
-		loading: isSending,
-		error,
-		sendRequest,
-	} = useFetch(WAREHOUSE_BASE_URL, REQUEST_POST_CONFIG);
-
+export default function FormCreate() {
 	function handleCreate(values) {
-		sendRequest(JSON.stringify(values));
+		axios
+			.post(WAREHOUSE_BASE_URL, values)
+			.then((response) => {
+				console.log(response);
+				notificationSuccess({ description: "Successfully created warehouse" });
+			})
+			.catch((err) => console.log(err));
 	}
 
 	const formik = useFormik({

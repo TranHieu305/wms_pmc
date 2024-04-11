@@ -22,7 +22,7 @@ export default function useFetch(url, config, initialData) {
 			setLoading(true);
 			try {
 				const responseData = await sendHttpRequest(url, { ...config, body: data });
-				setData(responseData);
+				setData(responseData.data);
 			} catch (error) {
 				setError(error.message || "Something went wrong");
 			}
