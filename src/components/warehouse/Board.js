@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu, Space, Table } from "antd";
+import { Button, Dropdown, Menu, Table } from "antd";
 import { API_BASE_URL } from "../../apis";
 import { useFetch } from "../../custom_hooks";
 import addKeyToArrayData from "../../utils/addKeyToData";
@@ -6,38 +6,11 @@ import { EllipsisOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 export default function WarehouseBoard() {
-	let { data: warehouses, error, loading } = useFetch(`${API_BASE_URL}/warehouses`);
+	let { data: warehouses, loading } = useFetch(`${API_BASE_URL}/warehouses`);
 
 	if (!loading && warehouses) {
 		warehouses = addKeyToArrayData(warehouses);
 	}
-
-	const items = [
-		{
-			label: (
-				<a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-					1st menu item
-				</a>
-			),
-			key: "0",
-		},
-		{
-			label: (
-				<a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-					2nd menu item
-				</a>
-			),
-			key: "1",
-		},
-		{
-			type: "divider",
-		},
-		{
-			label: "3rd menu item（disabled）",
-			key: "3",
-			disabled: true,
-		},
-	];
 
 	return (
 		<Table

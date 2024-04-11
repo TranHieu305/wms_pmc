@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useFormik } from "formik";
 import InputGlobal from "../ui/input";
-import { notificationError, notificationSuccess } from "../../utils/notification";
+import { notificationSuccess } from "../../utils/notification";
 import axios from "axios";
 import { WAREHOUSE_BASE_URL } from "../../apis/config";
 
