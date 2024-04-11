@@ -1,31 +1,44 @@
 import { Button } from "antd";
 import { useFormik } from "formik";
 import InputGlobal from "../ui/input";
-import { notificationSuccess } from "../../utils/notification";
+import { notificationError, notificationSuccess } from "../../utils/notification";
 import axios from "axios";
 import { WAREHOUSE_BASE_URL } from "../../apis/config";
+import { validationWarehouseSchema } from "../../validations/warehouse";
+import { useNavigate } from "react-router-dom";
 
 export default function FormCreate() {
+	const navigate = useNavigate();
+
+	const initialValues = {
+		name: "",
+		description: "",
+		address: "",
+		supervisor: "",
+		longitude: 0,
+		latitude: 0,
+		status: "active",
+	};
+
 	function handleCreate(values) {
 		axios
 			.post(WAREHOUSE_BASE_URL, values)
 			.then((response) => {
-				console.log(response);
 				notificationSuccess({ description: "Successfully created warehouse" });
+				setTimeout(() => navigate("/warehouses"), 1000);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				notificationError({ description: "Cannot create warehouse" });
+			});
+	}
+
+	function handleCancel() {
+		navigate("/warehouses");
 	}
 
 	const formik = useFormik({
-		initialValues: {
-			name: "",
-			description: "",
-			address: "",
-			supervisor: "",
-			longitude: 0,
-			latitude: 0,
-			status: "active",
-		},
+		initialValues: initialValues,
+		validationSchema: validationWarehouseSchema,
 		onSubmit: handleCreate,
 	});
 	return (
@@ -38,7 +51,9 @@ export default function FormCreate() {
 					name="name"
 					placeholder="Warehouse name"
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 					value={formik.values.name}
+					error={formik.touched.name && formik.errors.name}
 				/>
 				<InputGlobal
 					label="Description"
@@ -47,8 +62,11 @@ export default function FormCreate() {
 					name="description"
 					placeholder="Warehouse description"
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 					value={formik.values.description}
+					error={formik.touched.description && formik.errors.description}
 				/>
+
 				<InputGlobal
 					label="Address"
 					key="address"
@@ -56,11 +74,13 @@ export default function FormCreate() {
 					name="address"
 					placeholder="Warehouse address"
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 					value={formik.values.address}
+					error={formik.touched.address && formik.errors.address}
 				/>
 
 				<div className="action-wrapper">
-					<Button type="dash" htmlType="cancel">
+					<Button type="dash" htmlType="cancel" onClick={handleCancel}>
 						Cancel
 					</Button>
 					<Button type="primary" htmlType="submit">

@@ -33,14 +33,14 @@ export default function WarehouseBoard() {
 							overlay={
 								<Menu>
 									<Menu.Item key="0">
-										<Link>1st menu item</Link>
+										<Link>Edit</Link>
 									</Menu.Item>
-									<Menu.Item key="1">
-										<Link>2nd menu item</Link>
-									</Menu.Item>
+
 									<Menu.Divider />
-									<Menu.Item key="3" disabled>
-										<Link>1st menu item</Link>
+									<Menu.Item key="3">
+										<Link>
+											<p className="red">Delete</p>
+										</Link>
 									</Menu.Item>
 								</Menu>
 							}
