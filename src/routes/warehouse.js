@@ -4,15 +4,15 @@ import WarehouseDetailPage from "../pages/warehouse/DetailPage";
 import WarehouseSavePage from "../pages/warehouse/SavePage";
 
 const warehouseRouter = [
-	{ path: "warehouses", element: <WarehouseBoardPage /> },
-	{ path: "warehouses/create", element: <WarehouseSavePage /> },
+	{ path: "/warehouses", element: <WarehouseBoardPage /> },
+	{ path: "/warehouses/create", element: <WarehouseSavePage /> },
 	{
-		path: "warehouses/:warehouseId/edit",
+		path: "/warehouses/:warehouseId/edit",
 		element: <WarehouseSavePage />,
 		loader: warehouseDetailLoader,
 	},
 	{
-		path: "warehouses/:warehouseId",
+		path: "/warehouses/:warehouseId",
 		element: <WarehouseDetailPage />,
 		loader: warehouseDetailLoader,
 	},
