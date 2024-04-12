@@ -16,6 +16,7 @@
 
 .main-content {
     margin: 20px 80px;
+    margin-right: 320px;
     display: flex;
     flex-direction: column;
     gap: 20px;

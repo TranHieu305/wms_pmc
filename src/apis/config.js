@@ -1,6 +1,6 @@
-const API_BASE_URL = process.env.REACT_APP_API_ENDPOINT;
+const APP_API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
-const WAREHOUSE_BASE_URL = API_BASE_URL + "/warehouses";
+const WAREHOUSE_API_ENDPOINT = APP_API_ENDPOINT + "/warehouses";
 
-export default API_BASE_URL;
-export { WAREHOUSE_BASE_URL };
+export default APP_API_ENDPOINT;
+export { WAREHOUSE_API_ENDPOINT };

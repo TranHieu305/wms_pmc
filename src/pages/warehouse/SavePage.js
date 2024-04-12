@@ -1,4 +1,4 @@
-import { FormCreate } from "../../components/warehouse";
+import { WarehouseFormCreate } from "../../components/warehouse";
 import { Space, Button } from "antd";
 import "../../styles/pages/savepage.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -15,7 +15,7 @@ function WarehouseSavePage() {
 
 			<Space size={20} direction="vertical" className="page-container">
 				<div className="page-title">Add New Warehouse</div>
-				<FormCreate />
+				<WarehouseFormCreate />
 			</Space>
 		</div>
 	);

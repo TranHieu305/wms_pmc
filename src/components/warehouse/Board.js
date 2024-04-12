@@ -1,12 +1,12 @@
-import { Button, Dropdown, Menu, Table } from "antd";
-import { API_BASE_URL } from "../../apis";
+import { Table } from "antd";
+import { APP_API_ENDPOINT } from "../../apis";
 import { useFetch } from "../../custom_hooks";
 import addKeyToArrayData from "../../utils/addKeyToData";
-import { EllipsisOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import WarehouseActions from "./Actions";
 
 export default function WarehouseBoard() {
-	let { data: warehouses, loading } = useFetch(`${API_BASE_URL}/warehouses`);
+	let { data: warehouses, loading } = useFetch(`${APP_API_ENDPOINT}/warehouses`);
 
 	if (!loading && warehouses) {
 		warehouses = addKeyToArrayData(warehouses);
@@ -21,6 +21,7 @@ export default function WarehouseBoard() {
 					key: "name",
 					title: "Warehouse name",
 					dataIndex: "name",
+					render: (text, record) => <Link to={`${record.id}`}>{text}</Link>,
 				},
 				{ key: "description", title: "Description", dataIndex: "description" },
 				{ key: "address", title: "Address", dataIndex: "address" },
@@ -28,26 +29,7 @@ export default function WarehouseBoard() {
 				{
 					key: "actions",
 					title: "Action",
-					render: () => (
-						<Dropdown
-							overlay={
-								<Menu>
-									<Menu.Item key="0">
-										<Link>Edit</Link>
-									</Menu.Item>
-
-									<Menu.Divider />
-									<Menu.Item key="3">
-										<Link>
-											<p className="red">Delete</p>
-										</Link>
-									</Menu.Item>
-								</Menu>
-							}
-						>
-							<Button icon={<EllipsisOutlined />} type="dash"></Button>
-						</Dropdown>
-					),
+					render: (title, record) => <WarehouseActions warehouse={record} />,
 				},
 			]}
 		></Table>

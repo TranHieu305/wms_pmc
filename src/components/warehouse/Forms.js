@@ -3,26 +3,30 @@ import { useFormik } from "formik";
 import InputGlobal from "../ui/input";
 import { notificationError, notificationSuccess } from "../../utils/notification";
 import axios from "axios";
-import { WAREHOUSE_BASE_URL } from "../../apis/config";
+import { WAREHOUSE_API_ENDPOINT } from "../../apis/config";
 import { validationWarehouseSchema } from "../../validations/warehouse";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 export default function FormCreate() {
 	const navigate = useNavigate();
+	const data = useLoaderData();
+	const warehouse = data?.data;
 
 	const initialValues = {
-		name: "",
-		description: "",
-		address: "",
-		supervisor: "",
-		longitude: 0,
-		latitude: 0,
-		status: "active",
+		id: warehouse?.id || 0,
+		name: warehouse?.name || "",
+		description: warehouse?.description || "",
+		address: warehouse?.address || "",
+		supervisor: warehouse?.supervisor || "",
+		longitude: warehouse?.longitude || 0,
+		latitude: warehouse?.latitude || 0,
+		status: warehouse?.status || "active",
 	};
 
+	const axiosMethod = warehouse ? axios.put : axios.post;
+
 	function handleCreate(values) {
-		axios
-			.post(WAREHOUSE_BASE_URL, values)
+		axiosMethod(WAREHOUSE_API_ENDPOINT, values)
 			.then((response) => {
 				notificationSuccess({ description: "Successfully created warehouse" });
 				setTimeout(() => navigate("/warehouses"), 1000);
