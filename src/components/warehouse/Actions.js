@@ -9,7 +9,7 @@ function WarehouseActions({ warehouse }) {
 			overlay={
 				<Menu>
 					<Menu.Item key="0">
-						<Link to={`${warehouse.id}/edit`}>Edit</Link>
+						<Link to={`/warehouses/${warehouse.id}/edit`}>Edit</Link>
 					</Menu.Item>
 
 					<Menu.Divider />
