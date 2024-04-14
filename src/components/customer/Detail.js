@@ -1,52 +1,56 @@
-import { Typography } from "antd";
 import "../../styles/pages/detailpage.css";
-import WarehouseActions from "./Actions";
+import CustomerActions from "./Actions";
+import { Typography } from "antd";
 import convertTimestamp from "../../utils/convertTimestamp";
 
-function WarehouseDetail({ warehouse }) {
-	if (!warehouse) {
+function CustomerDetail({ customer }) {
+	if (!customer) {
 		return;
 	}
 	return (
 		<article className="detail-wrapper">
 			<div className="action">
-				<WarehouseActions warehouse={warehouse} />
+				<CustomerActions customer={customer} />
 			</div>
 
 			<div className="field">
 				<Typography.Title level={4}>Name:</Typography.Title>
-				<p>{warehouse.name}</p>
+				<p>{customer.name}</p>
 			</div>
 			<div className="field">
 				<Typography.Title level={4}>Description:</Typography.Title>
-				<p>{warehouse.description}</p>
+				<p>{customer.description}</p>
 			</div>
 			<div className="field">
 				<Typography.Title level={4}>Address:</Typography.Title>
-				<p>{warehouse.address}</p>
+				<p>{customer.address}</p>
 			</div>
 			<div className="field">
-				<Typography.Title level={4}>Supervisor:</Typography.Title>
-				<p>{warehouse.supervisor || "---"}</p>
+				<Typography.Title level={4}>Email:</Typography.Title>
+				<p>{customer.email}</p>
+			</div>
+			<div className="field">
+				<Typography.Title level={4}>Phone number:</Typography.Title>
+				<p>{customer.phone}</p>
 			</div>
 			<div className="field">
 				<Typography.Title level={4}>Longitude:</Typography.Title>
-				<p>{warehouse.longitude}</p>
+				<p>{customer.longitude}</p>
 			</div>
 			<div className="field">
 				<Typography.Title level={4}>Latitude:</Typography.Title>
-				<p>{warehouse.latitude}</p>
+				<p>{customer.latitude}</p>
 			</div>
 			<div className="field">
 				<Typography.Title level={4}>Created at:</Typography.Title>
-				<p>{warehouse.createdAt ? convertTimestamp(warehouse.createdAt) : "---"}</p>
+				<p>{customer.createdAt ? convertTimestamp(customer.createdAt) : "---"}</p>
 			</div>
 			<div className="field">
 				<Typography.Title level={4}>Last modified at:</Typography.Title>
-				<p>{warehouse.modifiedAt ? convertTimestamp(warehouse.modifiedAt) : "---"}</p>
+				<p>{customer.modifiedAt ? convertTimestamp(customer.modifiedAt) : "---"}</p>
 			</div>
 		</article>
 	);
 }
 
-export default WarehouseDetail;
+export default CustomerDetail;

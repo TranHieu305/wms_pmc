@@ -1,12 +1,12 @@
 import { Table } from "antd";
-import { APP_API_ENDPOINT } from "../../apis";
 import { useFetch } from "../../custom_hooks";
 import addKeyToArrayData from "../../utils/addKeyToData";
 import { Link } from "react-router-dom";
 import WarehouseActions from "./Actions";
+import { WAREHOUSE_API_ENDPOINT } from "../../apis/config";
 
 export default function WarehouseBoard() {
-	let { data: warehouses, loading } = useFetch(`${APP_API_ENDPOINT}/warehouses`);
+	let { data: warehouses, loading } = useFetch(WAREHOUSE_API_ENDPOINT);
 
 	if (!loading && warehouses) {
 		warehouses = addKeyToArrayData(warehouses);

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LuWarehouse } from "react-icons/lu";
 import { AiOutlineMenu } from "react-icons/ai";
-import { AppstoreOutlined } from "@ant-design/icons";
+import { TeamOutlined } from "@ant-design/icons";
 import "../../styles/layout.css";
 
 function SideMenu() {
@@ -28,8 +28,8 @@ function SideMenu() {
 				selectedKeys={[selectedKeys]}
 				items={[
 					{ label: "Warehouse", key: "/warehouses", icon: <LuWarehouse /> },
-					{ label: "Warehouse", key: "/warehouse2", icon: <AppstoreOutlined /> },
-					{ label: "Warehouse", key: "/warehouse3", icon: <AppstoreOutlined /> },
+					{ label: "Supplier", key: "/suppliers", icon: <TeamOutlined /> },
+					{ label: "Customer", key: "/customers", icon: <TeamOutlined /> },
 				]}
 			></Menu>
 		</div>
