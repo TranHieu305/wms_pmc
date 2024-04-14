@@ -18,9 +18,9 @@ function SideMenu() {
 
 	return (
 		<div className="sidemenu">
-			<div className="sidemenu-header">
+			{/* <div className="sidemenu-header">
 				<Button icon={<AiOutlineMenu />}></Button>
-			</div>
+			</div> */}
 			<Menu
 				className="sidemenu-vertical"
 				mode="vertical"
@@ -28,7 +28,7 @@ function SideMenu() {
 				selectedKeys={[selectedKeys]}
 				items={[
 					{ label: "Warehouse", key: "/warehouses", icon: <LuWarehouse /> },
-					{ label: "Supplier", key: "/suppliers", icon: <TeamOutlined /> },
+					// { label: "Supplier", key: "/suppliers", icon: <TeamOutlined /> },
 					{ label: "Customer", key: "/customers", icon: <TeamOutlined /> },
 				]}
 			></Menu>
