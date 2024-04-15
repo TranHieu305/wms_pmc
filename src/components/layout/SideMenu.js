@@ -1,7 +1,7 @@
 import { Avatar, Button, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LuWarehouse } from "react-icons/lu";
+import { LiaWarehouseSolid } from "react-icons/lia";
 import { AiOutlineMenu, AiOutlineSetting } from "react-icons/ai";
 import { TeamOutlined } from "@ant-design/icons";
 import { BiLogOutCircle } from "react-icons/bi";
@@ -45,7 +45,7 @@ function SideMenu() {
 					onClick={(item) => navigate(item.key)}
 					selectedKeys={[selectedKeys]}
 					items={[
-						{ label: "Warehouse", key: "/warehouses", icon: <LuWarehouse /> },
+						{ label: "Warehouse", key: "/warehouses", icon: <LiaWarehouseSolid /> },
 						// { label: "Supplier", key: "/suppliers", icon: <TeamOutlined /> },
 						{ label: "Customer", key: "/customers", icon: <TeamOutlined /> },
 					]}

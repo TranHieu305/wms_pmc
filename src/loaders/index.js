@@ -1,2 +1,2 @@
-export { warehouseDetailLoader } from "./warehouse";
+export { warehouseDetailLoader, warehouseListLoader } from "./warehouse";
 export { customerDetailLoader } from "./customer";
