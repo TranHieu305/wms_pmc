@@ -1,11 +1,9 @@
-import { Space, Input, Button } from "antd";
+import { Space, Button } from "antd";
 import "../../styles/board.css";
 import { PlusOutlined } from "@ant-design/icons";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { WarehouseBoard } from "../../components/warehouse";
 import { LiaWarehouseSolid } from "react-icons/lia";
-
-const { Search } = Input;
 
 function WarehouseBoardPage() {
 	const loaderData = useLoaderData();
