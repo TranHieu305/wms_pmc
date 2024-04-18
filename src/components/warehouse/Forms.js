@@ -24,15 +24,18 @@ export default function FormCreate() {
 	};
 
 	const axiosMethod = warehouse ? axios.put : axios.post;
+	const api_endpoint = warehouse
+		? WAREHOUSE_API_ENDPOINT + `/${warehouse.id}`
+		: WAREHOUSE_API_ENDPOINT;
 
 	function handleCreate(values) {
-		axiosMethod(WAREHOUSE_API_ENDPOINT, values)
+		axiosMethod(api_endpoint, values)
 			.then((response) => {
 				notificationSuccess({ description: "Successfully created warehouse" });
 				setTimeout(() => navigate("/warehouses"), 1000);
 			})
 			.catch((err) => {
-				notificationError({ description: "Cannot create warehouse" });
+				notificationError({ description: "Cannot created warehouse" });
 			});
 	}
 
