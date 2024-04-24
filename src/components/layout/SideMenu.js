@@ -46,7 +46,8 @@ function SideMenu() {
 					selectedKeys={[selectedKeys]}
 					items={[
 						{ label: "Warehouse", key: "/warehouses", icon: <LiaWarehouseSolid /> },
-						{ label: "Customer", key: "/customers", icon: <TeamOutlined /> },
+						// { label: "Customer", key: "/customers", icon: <TeamOutlined /> },
+						{ label: "Supplier", key: "/suppliers", icon: <TeamOutlined /> },
 						{ label: "Order", key: "/material-order/create", icon: <TeamOutlined /> },
 					]}
 				></Menu>

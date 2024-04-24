@@ -3,12 +3,18 @@ import { RootLayout } from "../pages/layout";
 import warehouseRouter from "./warehouse";
 import customerRouter from "./customer";
 import materialOrderRouter from "./materialOrder";
+import supplierRouter from "./supplier";
 
 const appRouter = createBrowserRouter([
 	{
 		index: "/",
 		element: <RootLayout />,
-		children: [...warehouseRouter, ...customerRouter, ...materialOrderRouter],
+		children: [
+			...warehouseRouter,
+			...customerRouter,
+			...materialOrderRouter,
+			...supplierRouter,
+		],
 	},
 ]);
 
