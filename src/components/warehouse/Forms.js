@@ -73,7 +73,6 @@ export default function FormCreate() {
 					value={formik.values.description}
 					error={formik.touched.description && formik.errors.description}
 				/>
-
 				<InputGlobal
 					label="Address"
 					key="address"
