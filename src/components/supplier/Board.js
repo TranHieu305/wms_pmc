@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import { CUSTOMER_API_ENDPOINT, SUPPLIER_API_ENDPOINT } from "../../apis/config";
+import { SUPPLIER_API_ENDPOINT } from "../../apis/config";
 import { useFetch } from "../../custom_hooks";
 import addKeyToArrayData from "../../utils/addKeyToData";
 import { Link } from "react-router-dom";
