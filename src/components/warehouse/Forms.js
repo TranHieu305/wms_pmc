@@ -52,33 +52,33 @@ export default function FormCreate() {
 		<div className="form-wrapper">
 			<form onSubmit={formik.handleSubmit} className="form">
 				<InputGlobal
-					label="Name"
+					label="Name*"
 					key="name"
 					id="name"
 					name="name"
-					placeholder="Warehouse name"
+					placeholder="Warehouse name*"
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
 					value={formik.values.name}
 					error={formik.touched.name && formik.errors.name}
 				/>
 				<InputGlobal
-					label="Description"
+					label="Description*"
 					key="description"
 					id="description"
 					name="description"
-					placeholder="Warehouse description"
+					placeholder="Warehouse description*"
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
 					value={formik.values.description}
 					error={formik.touched.description && formik.errors.description}
 				/>
 				<InputGlobal
-					label="Address"
+					label="Address*"
 					key="address"
 					id="address"
 					name="address"
-					placeholder="Warehouse address"
+					placeholder="Warehouse address*"
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
 					value={formik.values.address}

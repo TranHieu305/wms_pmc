@@ -35,7 +35,11 @@ function DeleteSupplierButton({ supplier }) {
 	return (
 		<ModalConfirmGlobal
 			title="Confirm delete"
-			content={"Do you really want to delete supplier? " + supplier.name}
+			content={
+				<p>
+					Confirm to delete supplier: <b>{supplier.name}</b>
+				</p>
+			}
 			onConfirm={handleConfirm}
 		>
 			Delete

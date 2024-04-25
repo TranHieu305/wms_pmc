@@ -35,7 +35,11 @@ function DeleteWarehouseButton({ warehouse }) {
 	return (
 		<ModalConfirmGlobal
 			title="Confirm delete"
-			content="Do you really want to delete warehouse? "
+			content={
+				<p>
+					Confirm to delete warehouse: <b>{warehouse.name}</b>
+				</p>
+			}
 			onConfirm={handleConfirm}
 		>
 			Delete
