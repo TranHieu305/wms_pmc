@@ -26,7 +26,32 @@ const productCategorySlice = createSlice({
 			state.error = action.error.message;
 		});
 	},
-	reducers: {},
+	reducers: {
+		add(state, action) {
+			const category = action.payload;
+			return {
+				...state,
+				productCategories: [category, ...state.productCategories],
+			};
+		},
+		update(state, action) {
+			return {
+				...state,
+				productCategories: state.productCategories.map((category) =>
+					category.id === action.payload.id ? action.payload : category
+				),
+			};
+		},
+		delete(state, action) {
+			return {
+				...state,
+				productCategories: state.productCategories.filter(
+					(category) => category.id !== action.payload.id
+				),
+			};
+		},
+	},
 });
 
+export const productCategoryActions = productCategorySlice.actions;
 export default productCategorySlice.reducer;

@@ -1,6 +1,6 @@
 import { Table } from "antd";
 import addKeyToArrayData from "../../utils/addKeyToData";
-import SupplierActions from "../supplier/Actions";
+import ProductCategoryActions from "./Actions";
 
 function ProductCategoryBoard({ loading, categories }) {
 	if (!loading && categories) {
@@ -17,14 +17,11 @@ function ProductCategoryBoard({ loading, categories }) {
 					dataIndex: "name",
 				},
 				{
-					key: "description",
-					title: "Description",
-					dataIndex: "description",
-				},
-				{
 					key: "actions",
-					title: "Action",
-					render: (title, record) => <SupplierActions supplier={record} />,
+					title: "Actions",
+					width: 10,
+					align: "right",
+					render: (title, record) => <ProductCategoryActions productCategory={record} />,
 				},
 			]}
 		></Table>

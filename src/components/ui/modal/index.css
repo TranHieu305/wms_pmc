@@ -1,0 +1,22 @@
+.form-modal .form-wrapper .form .action-wrapper {
+    display: flex;
+    gap: 5px;
+    flex-direction: row-reverse;
+    margin-top: 20px;
+
+}
+
+.form-modal .form-wrapper .form {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    
+}
+
+.form-modal .form-wrapper .form .input-global-wrapper {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
