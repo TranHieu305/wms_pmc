@@ -49,6 +49,11 @@ function SideMenu() {
 						// { label: "Customer", key: "/customers", icon: <TeamOutlined /> },
 						{ label: "Supplier", key: "/suppliers", icon: <TeamOutlined /> },
 						{ label: "Order", key: "/material-order/create", icon: <TeamOutlined /> },
+						{
+							label: "Product Category",
+							key: "/product-categories",
+							icon: <TeamOutlined />,
+						},
 					]}
 				></Menu>
 			</div>
