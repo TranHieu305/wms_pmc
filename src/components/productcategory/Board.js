@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import addKeyToArrayData from "../../utils/addKeyToData";
 import ProductCategoryActions from "./Actions";
+import { ButtonDetail } from "./Buttons";
 
 function ProductCategoryBoard({ loading, categories }) {
 	if (!loading && categories) {
@@ -15,6 +16,7 @@ function ProductCategoryBoard({ loading, categories }) {
 					key: "name",
 					title: "Category name",
 					dataIndex: "name",
+					render: (title, record) => <ButtonDetail productCategory={record} />,
 				},
 				{
 					key: "actions",

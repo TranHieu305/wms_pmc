@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { BoardLayout, BoardLayoutAction, BoardLayoutContent } from "../../components/layout";
-import { ProductCategoryBoard, ProductCategoryFormSave } from "../../components/productcategory";
+import { ButtonSave, ProductCategoryBoard } from "../../components/productcategory";
 import { useEffect } from "react";
 import { fetchProductCategories } from "../../redux/slices/productCategory";
 
@@ -22,7 +22,7 @@ function ProductCategoryBoardPage() {
 	return (
 		<BoardLayout title="Product Categories">
 			<BoardLayoutAction>
-				<ProductCategoryFormSave />
+				<ButtonSave label="Create New" type="primary" />
 			</BoardLayoutAction>
 			<BoardLayoutContent>
 				<ProductCategoryBoard

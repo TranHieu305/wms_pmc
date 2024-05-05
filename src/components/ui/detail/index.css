@@ -1,0 +1,13 @@
+.detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.detail-section .detail-field .detail-field-title {
+    size: 14px;
+    line-height: 22px;
+    color: rgba(0, 28, 68, 1);
+    font-weight: 700;
+    margin-bottom: 5px;
+}

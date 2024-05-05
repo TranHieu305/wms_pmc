@@ -2,6 +2,7 @@ import { Button, Modal } from "antd";
 
 function ModalGlobal({
 	children,
+	type,
 	open,
 	onOk,
 	onCancel,
