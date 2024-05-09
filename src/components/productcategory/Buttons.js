@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { validationProductCategorySchema } from "../../validations";
 import InputGlobal from "../ui/input";
 import { Button, Drawer } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormModal } from "../ui/modal";
 import { ButtonModalConfirm } from "../ui/button";
 import { notificationError, notificationSuccess } from "../../utils/notification";
@@ -12,17 +12,25 @@ import { useDispatch } from "react-redux";
 import { productCategoryActions } from "../../redux/slices/productCategory";
 import ProductCategoryDetail from "./Detail";
 
-function ButtonSave({ label, productCategory, update = false, ...props }) {
+function ButtonSave({ label, productCategory, ...props }) {
 	console.log(productCategory);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const dispatch = useDispatch();
 
-	const initialValues = {
+	const [initialValues, setInitialValues] = useState({
 		id: productCategory?.id || 0,
 		name: productCategory?.name || "",
 		description: productCategory?.description || "",
-	};
+	});
+
+	useEffect(() => {
+		setInitialValues({
+			id: productCategory?.id || 0,
+			name: productCategory?.name || "",
+			description: productCategory?.description || "",
+		});
+	}, [productCategory]);
 
 	const axiosMethod = productCategory ? axios.put : axios.post;
 
@@ -36,7 +44,7 @@ function ButtonSave({ label, productCategory, update = false, ...props }) {
 		try {
 			const response = await axiosMethod(PRODUCT_CATEGORY_API_ENDPOINT, values); // call api
 			const { data: productCategory } = response.data;
-			if (!update) {
+			if (!productCategory) {
 				dispatch(productCategoryActions.add(productCategory));
 				notificationSuccess({
 					message: "Create sucessfully",
@@ -47,6 +55,7 @@ function ButtonSave({ label, productCategory, update = false, ...props }) {
 					message: "Update sucessfully",
 				});
 			}
+			formik.resetForm();
 			setIsModalOpen(false);
 		} catch (error) {
 			notificationError({
@@ -157,10 +166,15 @@ function ButtonDetail({ productCategory }) {
 
 	return (
 		<>
-			<Button type="link" onClick={showDrawer}>
+			<Button key={productCategory.name} type="link" onClick={showDrawer}>
 				{productCategory.name}
 			</Button>
-			<Drawer title="Product Category Detail" onClose={onClose} open={open}>
+			<Drawer
+				key={productCategory.name}
+				title="Product Category Detail"
+				onClose={onClose}
+				open={open}
+			>
 				<ProductCategoryDetail productCategory={productCategory} />
 			</Drawer>
 		</>
