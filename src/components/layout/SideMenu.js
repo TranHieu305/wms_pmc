@@ -1,21 +1,82 @@
 import { Avatar, Button, Menu } from "antd";
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { LiaWarehouseSolid } from "react-icons/lia";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineSetting } from "react-icons/ai";
 import { TeamOutlined } from "@ant-design/icons";
 import { BiLogOutCircle } from "react-icons/bi";
 import "../../styles/layout.css";
 
 function SideMenu() {
-	const location = useLocation();
 	const navigate = useNavigate();
-	const [selectedKeys, setSelectedKeys] = useState("/");
 
-	useEffect(() => {
-		const pathname = location.pathname;
-		setSelectedKeys(pathname);
-	}, [location.pathname]);
+	// Menu Items
+	const menuItems = [
+		{
+			key: "warehouse",
+			label: "Warehouse",
+			icon: <TeamOutlined />,
+			children: [
+				{
+					key: "/",
+					label: "Product Warehouse",
+					danger: true,
+				},
+				{
+					key: "/",
+					label: "Warehouse",
+					danger: true,
+				},
+			],
+		},
+		{
+			key: "inventory",
+			label: "Inventory ",
+			icon: <TeamOutlined />,
+			children: [
+				{
+					key: "/",
+					label: "Inventory Item",
+					danger: true,
+				},
+				{
+					key: "/",
+					label: "Inventory Item Detail",
+					danger: true,
+				},
+			],
+		},
+		{
+			key: "partner",
+			label: "Partner",
+			icon: <TeamOutlined />,
+			children: [
+				{
+					key: "/suppliers",
+					label: "Supplier",
+				},
+				{
+					key: "/",
+					label: "Customer",
+					danger: true,
+				},
+			],
+		},
+		{
+			key: "product",
+			label: "Product",
+			icon: <TeamOutlined />,
+			children: [
+				{
+					key: "/suppliers",
+					label: "Product",
+					danger: true,
+				},
+				{
+					key: "/product-categories",
+					label: "Category",
+				},
+			],
+		},
+	];
 
 	return (
 		<div className="sidemenu">
@@ -41,21 +102,12 @@ function SideMenu() {
 			<div className="sidemenu-main">
 				<Menu
 					className="sidemenu-vertical"
-					mode="vertical"
 					onClick={(item) => navigate(item.key)}
-					selectedKeys={[selectedKeys]}
-					items={[
-						{ label: "Warehouse", key: "/warehouses", icon: <LiaWarehouseSolid /> },
-						// { label: "Customer", key: "/customers", icon: <TeamOutlined /> },
-						{ label: "Supplier", key: "/suppliers", icon: <TeamOutlined /> },
-						{ label: "Order", key: "/material-order/create", icon: <TeamOutlined /> },
-						{
-							label: "Product Category",
-							key: "/product-categories",
-							icon: <TeamOutlined />,
-						},
-					]}
-				></Menu>
+					mode="inline"
+					defaultSelectedKeys={["1"]}
+					defaultOpenKeys={["sub1"]}
+					items={menuItems}
+				/>
 			</div>
 
 			{/* Logout and setting */}
