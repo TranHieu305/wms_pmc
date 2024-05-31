@@ -16,12 +16,12 @@ function SideMenu() {
 			icon: <TeamOutlined />,
 			children: [
 				{
-					key: "/",
+					key: "/4",
 					label: "Product Warehouse",
 					danger: true,
 				},
 				{
-					key: "/",
+					key: "/5",
 					label: "Warehouse",
 					danger: true,
 				},
@@ -33,12 +33,12 @@ function SideMenu() {
 			icon: <TeamOutlined />,
 			children: [
 				{
-					key: "/",
+					key: "/1",
 					label: "Inventory Item",
 					danger: true,
 				},
 				{
-					key: "/",
+					key: "/2",
 					label: "Inventory Item Detail",
 					danger: true,
 				},
@@ -54,7 +54,7 @@ function SideMenu() {
 					label: "Supplier",
 				},
 				{
-					key: "/",
+					key: "/3",
 					label: "Customer",
 					danger: true,
 				},
@@ -66,9 +66,8 @@ function SideMenu() {
 			icon: <TeamOutlined />,
 			children: [
 				{
-					key: "/suppliers",
+					key: "/products",
 					label: "Product",
-					danger: true,
 				},
 				{
 					key: "/product-categories",

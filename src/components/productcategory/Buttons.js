@@ -2,7 +2,7 @@ import axios from "axios";
 import { PRODUCT_CATEGORY_API_ENDPOINT } from "../../apis/config";
 import { useFormik } from "formik";
 import { validationProductCategorySchema } from "../../validations";
-import InputGlobal from "../ui/input";
+import InputGlobal, { SelectGlobal } from "../ui/input";
 import { Button, Drawer } from "antd";
 import { useEffect, useState } from "react";
 import { FormModal } from "../ui/modal";
@@ -11,9 +11,9 @@ import { notificationError, notificationSuccess } from "../../utils/notification
 import { useDispatch } from "react-redux";
 import { productCategoryActions } from "../../redux/slices/productCategory";
 import ProductCategoryDetail from "./Detail";
+import { productTypeOptions } from "../../utils/constants";
 
 function ButtonSave({ label, productCategory, ...props }) {
-	console.log(productCategory);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const dispatch = useDispatch();
@@ -22,6 +22,7 @@ function ButtonSave({ label, productCategory, ...props }) {
 		id: productCategory?.id || 0,
 		name: productCategory?.name || "",
 		description: productCategory?.description || "",
+		productType: productCategory?.productType || productTypeOptions[0].value,
 	});
 
 	useEffect(() => {
@@ -29,6 +30,7 @@ function ButtonSave({ label, productCategory, ...props }) {
 			id: productCategory?.id || 0,
 			name: productCategory?.name || "",
 			description: productCategory?.description || "",
+			productType: productCategory?.productType || undefined,
 		});
 	}, [productCategory]);
 
@@ -110,6 +112,13 @@ function ButtonSave({ label, productCategory, ...props }) {
 					onBlur={formik.handleBlur}
 					value={formik.values.description}
 					error={formik.touched.description && formik.errors.description}
+				/>
+				<SelectGlobal
+					label="Product Type"
+					key="type"
+					value={formik.values.productType}
+					onChange={(value) => formik.setFieldValue("productType", value)}
+					options={productTypeOptions}
 				/>
 			</FormModal>
 		</>

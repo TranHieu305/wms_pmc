@@ -5,6 +5,7 @@ import customerRouter from "./customer";
 import materialOrderRouter from "./materialOrder";
 import supplierRouter from "./supplier";
 import productCategoryRouter from "./productCategory";
+import productRouter from "./product";
 
 const appRouter = createBrowserRouter([
 	{
@@ -16,6 +17,7 @@ const appRouter = createBrowserRouter([
 			...materialOrderRouter,
 			...supplierRouter,
 			...productCategoryRouter,
+			...productRouter,
 		],
 	},
 ]);
