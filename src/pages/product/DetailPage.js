@@ -2,10 +2,12 @@ import { Button, Space, Tabs } from "antd";
 import { Link, useLoaderData } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { ProductDetail } from "../../components/product";
+import { ProductPriceBoard } from "../../components/productprice";
 
 export default function ProductDetailPage() {
 	const data = useLoaderData();
-	const { product, categories } = data;
+	const { product, categories, productPrices } = data;
+	console.log(data);
 
 	const tabItems = [
 		{
@@ -16,7 +18,7 @@ export default function ProductDetailPage() {
 		{
 			key: "price",
 			label: "Price",
-			children: <ProductDetail product={product} />,
+			children: <ProductPriceBoard product={product} />,
 		},
 	];
 	return (

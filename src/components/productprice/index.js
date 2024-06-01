@@ -1,0 +1,1 @@
+export { ProductPriceBoard } from "./Boards";
