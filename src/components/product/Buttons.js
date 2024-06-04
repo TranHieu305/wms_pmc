@@ -17,7 +17,7 @@ function ButtonSave({ label, product, categories, ...props }) {
 	const isCreate = product ? false : true;
 	const categoryOptions = DataHelper.getOptionsFromArr(
 		categories,
-		(label = "---Please select product category---")
+		"---Please select product category---"
 	);
 
 	function handleOpen() {
