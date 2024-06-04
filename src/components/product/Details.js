@@ -1,3 +1,6 @@
+import { Tag } from "antd";
+import { PRODUCT_TYPE } from "../../utils/constants";
+
 function ProductDetail({ product }) {
 	if (!product) {
 		return;
@@ -5,4 +8,10 @@ function ProductDetail({ product }) {
 	return <p>Hello</p>;
 }
 
-export { ProductDetail };
+function ProductTypeTag({ type }) {
+	if (type === PRODUCT_TYPE.MATERIAL) {
+		return <Tag color="orange">Material</Tag>;
+	} else return <Tag color="geekblue">Production</Tag>;
+}
+
+export { ProductDetail, ProductTypeTag };

@@ -3,3 +3,7 @@
     gap: 9px;
     flex-direction: column;
 }
+
+.ant-table .input-global-wrapper {
+    gap: 0px;
+}

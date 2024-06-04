@@ -3,7 +3,7 @@ function addKeyToArrayData(dataArray) {
 		return;
 	}
 	const dataArrayWithKey = dataArray.map((item, index) => {
-		return { ...item, key: index };
+		return { ...item, key: item.id };
 	});
 
 	return dataArrayWithKey;

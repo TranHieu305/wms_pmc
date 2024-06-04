@@ -16,7 +16,7 @@
 
 .board .board-action {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-between;
 }
 

@@ -12,12 +12,7 @@ function ProductCategoryActions({ productCategory }) {
 			overlay={
 				<Menu>
 					<Menu.Item key="0">
-						<ButtonSave
-							productCategory={productCategory}
-							update
-							label="Edit"
-							type="text"
-						/>
+						<ButtonSave productCategory={productCategory} label="Edit" type="text" />
 					</Menu.Item>
 					<Menu.Divider />
 					<Menu.Item key="3">

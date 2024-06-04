@@ -21,7 +21,7 @@ function SideMenu() {
 					danger: true,
 				},
 				{
-					key: "/5",
+					key: "/warehouses",
 					label: "Warehouse",
 					danger: true,
 				},
@@ -33,9 +33,24 @@ function SideMenu() {
 			icon: <TeamOutlined />,
 			children: [
 				{
-					key: "/1",
+					key: "/inventory-items",
 					label: "Inventory Item",
+				},
+				{
+					key: "/2",
+					label: "Inventory Item Detail",
 					danger: true,
+				},
+			],
+		},
+		{
+			key: "order",
+			label: "Order management ",
+			icon: <TeamOutlined />,
+			children: [
+				{
+					key: "/material-orders",
+					label: "Material order",
 				},
 				{
 					key: "/2",

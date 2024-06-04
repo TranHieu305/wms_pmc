@@ -2,7 +2,7 @@ import axios from "axios";
 import { PRODUCT_CATEGORY_API_ENDPOINT } from "../../apis/config";
 import { useFormik } from "formik";
 import { validationProductCategorySchema } from "../../validations";
-import InputGlobal, { SelectGlobal } from "../ui/input";
+import InputGlobal, { SelectGlobal, TextAreaGlobal } from "../ui/input";
 import { Button, Drawer } from "antd";
 import { useEffect, useState } from "react";
 import { FormModal } from "../ui/modal";
@@ -17,6 +17,7 @@ function ButtonSave({ label, productCategory, ...props }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const dispatch = useDispatch();
+	const isUpdate = productCategory ? true : false;
 
 	const [initialValues, setInitialValues] = useState({
 		id: productCategory?.id || 0,
@@ -34,7 +35,7 @@ function ButtonSave({ label, productCategory, ...props }) {
 		});
 	}, [productCategory]);
 
-	const axiosMethod = productCategory ? axios.put : axios.post;
+	const axiosMethod = isUpdate ? axios.put : axios.post;
 
 	function handleOpen() {
 		setIsModalOpen(true);
@@ -42,19 +43,18 @@ function ButtonSave({ label, productCategory, ...props }) {
 
 	async function handleSave(values) {
 		setConfirmLoading(true);
-
 		try {
 			const response = await axiosMethod(PRODUCT_CATEGORY_API_ENDPOINT, values); // call api
-			const { data: productCategory } = response.data;
-			if (!productCategory) {
-				dispatch(productCategoryActions.add(productCategory));
-				notificationSuccess({
-					message: "Create sucessfully",
-				});
-			} else {
-				dispatch(productCategoryActions.update(productCategory));
+			const { data: responseCategory } = response.data;
+			if (isUpdate) {
+				dispatch(productCategoryActions.update(responseCategory));
 				notificationSuccess({
 					message: "Update sucessfully",
+				});
+			} else {
+				dispatch(productCategoryActions.add(responseCategory));
+				notificationSuccess({
+					message: "Create sucessfully",
 				});
 			}
 			formik.resetForm();
@@ -91,6 +91,15 @@ function ButtonSave({ label, productCategory, ...props }) {
 				onCancel={handleCancel}
 				onSubmit={formik.handleSubmit}
 			>
+				<SelectGlobal
+					label="Product Type"
+					key="type"
+					disabled={isUpdate ? true : undefined}
+					value={formik.values.productType}
+					onChange={(value) => formik.setFieldValue("productType", value)}
+					options={productTypeOptions}
+				/>
+
 				<InputGlobal
 					label="Product Category Name*"
 					key="name"
@@ -102,7 +111,7 @@ function ButtonSave({ label, productCategory, ...props }) {
 					value={formik.values.name}
 					error={formik.touched.name && formik.errors.name}
 				/>
-				<InputGlobal
+				<TextAreaGlobal
 					label="Product Category Description"
 					key="description"
 					id="description"
@@ -112,13 +121,6 @@ function ButtonSave({ label, productCategory, ...props }) {
 					onBlur={formik.handleBlur}
 					value={formik.values.description}
 					error={formik.touched.description && formik.errors.description}
-				/>
-				<SelectGlobal
-					label="Product Type"
-					key="type"
-					value={formik.values.productType}
-					onChange={(value) => formik.setFieldValue("productType", value)}
-					options={productTypeOptions}
 				/>
 			</FormModal>
 		</>
@@ -184,7 +186,10 @@ function ButtonDetail({ productCategory }) {
 				onClose={onClose}
 				open={open}
 			>
-				<ProductCategoryDetail productCategory={productCategory} />
+				<ProductCategoryDetail
+					key={productCategory.name}
+					productCategory={productCategory}
+				/>
 			</Drawer>
 		</>
 	);

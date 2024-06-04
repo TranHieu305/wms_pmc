@@ -6,6 +6,7 @@ import materialOrderRouter from "./materialOrder";
 import supplierRouter from "./supplier";
 import productCategoryRouter from "./productCategory";
 import productRouter from "./product";
+import inventoryItemRouter from "./inventoryItem";
 
 const appRouter = createBrowserRouter([
 	{
@@ -18,6 +19,7 @@ const appRouter = createBrowserRouter([
 			...supplierRouter,
 			...productCategoryRouter,
 			...productRouter,
+			...inventoryItemRouter,
 		],
 	},
 ]);

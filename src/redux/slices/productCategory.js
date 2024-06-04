@@ -29,6 +29,7 @@ const productCategorySlice = createSlice({
 	reducers: {
 		add(state, action) {
 			const category = action.payload;
+			console.log("response:", category);
 			return {
 				...state,
 				productCategories: [category, ...state.productCategories],

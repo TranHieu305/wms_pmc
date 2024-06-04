@@ -11,3 +11,41 @@
     font-weight: 700;
     margin-bottom: 5px;
 }
+
+.detail-tilte-box {
+    margin-bottom: 20px;
+}
+
+.detail-tilte-box .headline {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 0px;
+}
+
+.detail-tilte-box .des {
+    font-size: 14px;
+    color: gray;
+    font-weight: 800;
+}
+
+.detail-tilte-box .detail-field {
+    font-size: 14px;
+    color: gray;
+    font-weight: 700;
+}
+
+.detail-row .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: grey;
+} 
+
+.detail-row .title-main {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.detail-row .data {
+    font-size: 14px;
+    font-weight: 600;
+}

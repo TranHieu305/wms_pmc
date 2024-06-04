@@ -1,0 +1,1 @@
+export { MaterialOrderDetailPage } from "./DetailPage";
