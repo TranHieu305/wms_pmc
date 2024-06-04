@@ -1,4 +1,3 @@
-import Title from "antd/es/typography/Title";
 import "./index.css";
 import { Col, Row } from "antd";
 

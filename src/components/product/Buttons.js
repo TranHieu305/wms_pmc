@@ -8,18 +8,17 @@ import { Button } from "antd";
 import { FormModal } from "../ui/modal";
 import InputGlobal, { SelectGlobal } from "../ui/input";
 import { ButtonModalConfirm } from "../ui/button";
+import DataHelper from "../../utils/DataHelper";
 
 function ButtonSave({ label, product, categories, ...props }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 
 	const isCreate = product ? false : true;
-	const categoryOptions = categories
-		? categories.map((category) => {
-				return { label: category.name, value: category.id };
-		  })
-		: [];
-	categoryOptions.push({ label: "---Please select category---", value: 0 });
+	const categoryOptions = DataHelper.getOptionsFromArr(
+		categories,
+		(label = "---Please select product category---")
+	);
 
 	function handleOpen() {
 		setIsModalOpen(true);
@@ -66,7 +65,7 @@ function ButtonSave({ label, product, categories, ...props }) {
 		name: product?.name || "",
 		description: product?.description || "",
 		uom: product?.uom || "",
-		categoryId: product?.categoryId || categoryOptions[0].value,
+		categoryId: product?.categoryId || 0,
 		code: 0,
 	};
 
@@ -88,6 +87,15 @@ function ButtonSave({ label, product, categories, ...props }) {
 				onCancel={handleCancel}
 				onSubmit={formik.handleSubmit}
 			>
+				<SelectGlobal
+					label="Product Category"
+					key="categoryId"
+					value={formik.values.categoryId}
+					onChange={(value) => formik.setFieldValue("categoryId", value)}
+					options={categoryOptions}
+					onBlur={formik.handleBlur}
+					error={formik.touched.categoryId && formik.errors.categoryId}
+				/>
 				<InputGlobal
 					label="Product Name*"
 					key="name"
@@ -110,15 +118,7 @@ function ButtonSave({ label, product, categories, ...props }) {
 					value={formik.values.uom}
 					error={formik.touched.uom && formik.errors.uom}
 				/>
-				<SelectGlobal
-					label="Product Category"
-					key="categoryId"
-					value={formik.values.categoryId}
-					onChange={(value) => formik.setFieldValue("categoryId", value)}
-					options={categoryOptions}
-					onBlur={formik.handleBlur}
-					error={formik.touched.categoryId && formik.errors.categoryId}
-				/>
+
 				<InputGlobal
 					label="Product Description"
 					key="description"

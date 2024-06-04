@@ -37,6 +37,8 @@ function OrderItemBoardInOrderDetail({ itemList }) {
 			render: (text, record) => <div>{FormatHelper.formatCurrency(record.totalCost)}</div>,
 		},
 	];
-	return <Table className="order-item-board" dataSource={itemList} columns={columns} />;
+	return (
+		<Table className="order-item-board" dataSource={itemList} columns={columns} rowKey="key" />
+	);
 }
 export { OrderItemBoardInOrderDetail };

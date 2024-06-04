@@ -10,7 +10,7 @@ const validationProductSchema = Yup.object().shape({
 		.trim()
 		.required("Product uom is required")
 		.max(63, "Product uom must be under 64 characters"),
-	categoryId: Yup.number().min(1, "Please select category"),
+	categoryId: Yup.number().min(1, "Please select product category"),
 });
 
 export { validationProductSchema };

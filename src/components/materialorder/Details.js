@@ -1,14 +1,12 @@
 import "../../styles/pages/detailpage.css";
 import "./index.css";
-import { Col, Divider, Input, Progress, Row, Steps, Table, Tag, Typography } from "antd";
+import { Col, Divider, Row, Steps, Tag } from "antd";
 import { DetailRow, DetailTitleBox } from "../ui/detail";
 import FormatHelper from "../../utils/FormatHelper";
 import { OrderItemBoardInOrderDetail } from "../orderitem/Boards";
 import { MATERIAL_ORDER_STATUS } from "../../utils/constants/order";
 
 function MaterialOrderDetail({ detail }) {
-	console.log(detail);
-
 	return (
 		<article className="material-order-detail-page">
 			<Row gutter={[24, 24]}>

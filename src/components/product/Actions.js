@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu, Space } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import { ButtonDelete, ButtonSave } from "./Buttons";
 import { EllipsisOutlined } from "@ant-design/icons";
 

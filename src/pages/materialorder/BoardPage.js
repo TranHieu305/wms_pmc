@@ -1,10 +1,9 @@
-import { Space, Button } from "antd";
+import { Space } from "antd";
 import "../../styles/board.css";
 import { PlusOutlined } from "@ant-design/icons";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { LiaWarehouseSolid } from "react-icons/lia";
 import { MaterialOrderBoard } from "../../components/materialorder";
-import Search from "antd/es/transfer/search";
 import { ButtonSave } from "../../components/materialorder/Buttons";
 
 function MaterialOrderBoardPage() {

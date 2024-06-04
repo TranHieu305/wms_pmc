@@ -1,72 +1,44 @@
 import "../../styles/pages/detailpage.css";
 import "./index.css";
-import { Breadcrumb, Button, Flex, message, Popconfirm, Tabs } from "antd";
+import { Breadcrumb, Button, Flex } from "antd";
 import { MaterialOrderDetail } from "../../components/materialorder";
-import {
-	DeleteOutlined,
-	EditOutlined,
-	HomeOutlined,
-	PrinterOutlined,
-	ProductOutlined,
-	RollbackOutlined,
-} from "@ant-design/icons";
-import { useLoaderData } from "react-router-dom";
+import { ArrowLeftOutlined, HomeOutlined, ProductOutlined } from "@ant-design/icons";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import MaterialOrderActions from "../../components/materialorder/Actions";
 
 export function MaterialOrderDetailPage() {
 	const order = useLoaderData();
-	const tabItems = [
-		{
-			key: "orderOverview",
-			label: "Order overview",
-			children: <MaterialOrderDetail detail={order} />,
-		},
-		{
-			key: "actionLogs",
-			label: "Action Logs",
-			children: <>Action Logs</>,
-		},
-	];
+	const navigate = useNavigate();
+	// const tabItems = [
+	// 	{
+	// 		key: "orderOverview",
+	// 		label: "Order overview",
+	// 		children: <MaterialOrderDetail detail={order} />,
+	// 	},
+	// 	{
+	// 		key: "actionLogs",
+	// 		label: "Action Logs",
+	// 		children: <>Action Logs</>,
+	// 	},
+	// ];
 
-	const confirm = (e) => {
-		console.log(e);
-		message.success("Deleted");
-	};
-	const cancel = (e) => {
-		console.log(e);
-		message.error("Cancel");
-	};
 	return (
 		<>
 			<div>
-				<Button style={{ marginBottom: 20 }}>
-					<RollbackOutlined /> Back
-				</Button>
+				<Link to="/material-orders">
+					<Button type="link" icon={<ArrowLeftOutlined />} style={{ paddingLeft: "0px" }}>
+						Material Orders
+					</Button>
+				</Link>
 				<Flex gap="small" wrap justify="space-between" align="center">
-					<h1 style={{ margin: 0 }}>
-						#{order.id} - {order.name}
-					</h1>
+					<h1 style={{ margin: 0 }}>{order.name}</h1>
 					<Flex gap="small">
-						<Popconfirm
-							title="Delete this order"
-							description="Are you sure to delete this order?"
-							onConfirm={confirm}
-							onCancel={cancel}
-							okText="Yes"
-							cancelText="No"
-						>
-							<Button danger>
-								<DeleteOutlined />
-								Delete
-							</Button>
-						</Popconfirm>
-						<Button>
-							<PrinterOutlined />
-							Print
-						</Button>
-						<Button type="primary" href={"/add-edit-order/" + order.id}>
-							<EditOutlined />
-							Edit
-						</Button>
+						<MaterialOrderActions
+							order={order}
+							type="primary"
+							label="Edit"
+							onClick={() => navigate("/material-orders/" + order.id + "/edit")}
+						/>
 					</Flex>
 				</Flex>
 			</div>
@@ -74,11 +46,9 @@ export function MaterialOrderDetailPage() {
 				<Breadcrumb
 					items={[
 						{
-							href: "/",
 							title: <HomeOutlined />,
 						},
 						{
-							href: "/material-order",
 							title: (
 								<>
 									<ProductOutlined />
@@ -87,13 +57,14 @@ export function MaterialOrderDetailPage() {
 							),
 						},
 						{
-							title: "Material Order",
+							title: "Material Order Detail",
 						},
 					]}
 				/>
 			</div>
 
-			<Tabs defaultActiveKey="info" items={tabItems} />
+			{/* <Tabs defaultActiveKey="info" items={tabItems} /> */}
+			<MaterialOrderDetail detail={order} />
 		</>
 	);
 }

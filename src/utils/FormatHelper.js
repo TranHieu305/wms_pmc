@@ -45,4 +45,9 @@ export default class FormatHelper {
 
 		return formattedDate;
 	}
+
+	static formatQuantity(quantity) {
+		console.log(quantity);
+		return quantity ? quantity.toFixed(2) : null;
+	}
 }
