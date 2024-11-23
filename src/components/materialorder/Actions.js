@@ -1,4 +1,5 @@
-import { Dropdown, Menu } from "antd";
+import { EllipsisOutlined } from "@ant-design/icons";
+import { Button, Dropdown, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 
 export default function MaterialOrderActions({ order, label, ...props }) {
@@ -12,6 +13,11 @@ export default function MaterialOrderActions({ order, label, ...props }) {
 			label: "Edit",
 			onClick: () => navigate("/material-orders/" + order.id + "/edit"),
 		},
+		{
+			key: "2",
+			label: "Add lot for order",
+			onClick: () => navigate("/lots/create/material-order/" + order.id),
+		},
 	];
 	const menu = (
 		<Menu>
@@ -22,9 +28,17 @@ export default function MaterialOrderActions({ order, label, ...props }) {
 			))}
 		</Menu>
 	);
+
+	if (label) {
+		return (
+			<Dropdown.Button overlay={menu} {...props}>
+				{label}
+			</Dropdown.Button>
+		);
+	}
 	return (
-		<Dropdown.Button overlay={menu} {...props}>
-			{label}
-		</Dropdown.Button>
+		<Dropdown overlay={menu}>
+			<Button icon={<EllipsisOutlined />} {...props} type="dash"></Button>
+		</Dropdown>
 	);
 }

@@ -4,15 +4,19 @@ import { PRODUCT_API_ENDPOINT } from "../../utils/constants";
 import { notificationError, notificationSuccess } from "../../utils/notification";
 import { useFormik } from "formik";
 import { validationProductSchema } from "../../validations";
-import { Button } from "antd";
+import { Button, Upload } from "antd";
 import { FormModal } from "../ui/modal";
 import InputGlobal, { SelectGlobal } from "../ui/input";
 import { ButtonModalConfirm } from "../ui/button";
 import DataHelper from "../../utils/DataHelper";
+import { useSelector } from "react-redux";
+import { UploadOutlined } from "@ant-design/icons";
 
-function ButtonSave({ label, product, categories, ...props }) {
+function ButtonSave({ label, product, ...props }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
+	const categoryStore = useSelector((state) => state.productCategory);
+	const categories = categoryStore.productCategories;
 
 	const isCreate = product ? false : true;
 	const categoryOptions = DataHelper.getOptionsFromArr(
@@ -28,11 +32,25 @@ function ButtonSave({ label, product, categories, ...props }) {
 		setConfirmLoading(true);
 
 		try {
+			const formData = new FormData();
+			if (values.image) {
+				formData.append("image", values.image.file);
+			}
+			values.image = null;
+			formData.append("model", JSON.stringify(values));
 			// Call api
 			if (isCreate) {
-				await axios.post(PRODUCT_API_ENDPOINT, values);
+				await axios.post(PRODUCT_API_ENDPOINT, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
 			} else {
-				await axios.put(PRODUCT_API_ENDPOINT, values);
+				await axios.put(PRODUCT_API_ENDPOINT, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
 			}
 			// Handle success
 			if (isCreate) {
@@ -66,6 +84,7 @@ function ButtonSave({ label, product, categories, ...props }) {
 		description: product?.description || "",
 		uom: product?.uom || "",
 		categoryId: product?.categoryId || 0,
+		image: product?.images || null,
 		code: 0,
 	};
 
@@ -130,6 +149,16 @@ function ButtonSave({ label, product, categories, ...props }) {
 					value={formik.values.description}
 					error={formik.touched.description && formik.errors.description}
 				/>
+				{/* <label>
+					<strong>Product Image</strong>
+				</label>
+				<Upload
+					listType="picture"
+					beforeUpload={() => false} // Prevent automatic upload
+					onChange={(info) => formik.setFieldValue("image", info)}
+				>
+					<Button icon={<UploadOutlined />}>Upload</Button>
+				</Upload> */}
 			</FormModal>
 		</>
 	);

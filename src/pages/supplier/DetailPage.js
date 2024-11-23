@@ -1,25 +1,50 @@
 import { useLoaderData } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Space, Button } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Space, Button, Flex, Breadcrumb } from "antd";
+import { ArrowLeftOutlined, HomeOutlined, ProductOutlined } from "@ant-design/icons";
 import { SupplierDetail } from "../../components/supplier";
+import SupplierActions from "../../components/supplier/Actions";
 
 function SupplierDetailPage() {
-	const data = useLoaderData();
-	const supplier = data.data;
+	const { supplier, productPrices, orders } = useLoaderData();
 	return (
-		<div className="save-page">
-			<Link to="/suppliers">
-				<Button type="dash" icon={<ArrowLeftOutlined />} className="back-button">
-					Suppliers
-				</Button>
-			</Link>
+		<>
+			<div>
+				<Link to="/suppliers">
+					<Button type="link" icon={<ArrowLeftOutlined />} style={{ paddingLeft: "0px" }}>
+						Suppliers
+					</Button>
+				</Link>
+				<Flex gap="small" wrap justify="space-between" align="center">
+					<h1 style={{ margin: 0 }}>Supplier: {supplier.name}</h1>
+					<Flex gap="small">
+						<SupplierActions supplier={supplier} type="primary" label="Actions" />
+					</Flex>
+				</Flex>
+			</div>
+			<div>
+				<Breadcrumb
+					items={[
+						{
+							title: <HomeOutlined />,
+						},
+						{
+							title: (
+								<>
+									<ProductOutlined />
+									<span>Suppliers</span>
+								</>
+							),
+						},
+						{
+							title: "Supplier Detail",
+						},
+					]}
+				/>
+			</div>
 
-			<Space size={20} direction="vertical" className="page-container">
-				<div className="page-title">Supplier: {supplier.name}</div>
-				<SupplierDetail supplier={supplier} />
-			</Space>
-		</div>
+			<SupplierDetail supplier={supplier} productPrices={productPrices} orders={orders} />
+		</>
 	);
 }
 

@@ -30,22 +30,14 @@ const initialOrderItemValues = {
 	key: 0,
 };
 
-function MaterialOrderSavePage() {
-	// Get currentPrices from Router loader
-	const { currentPrices, detailOrder } = useLoaderData();
-	const navigate = useNavigate();
+function LotMaterialSavePage() {
+	const { order, warehouse, lot } = useLoaderData();
+	console.log(warehouse);
 
-	const isUpdate = detailOrder ? true : false;
+	const isUpdate = lot ? true : false;
 
-	const productStore = useSelector((state) => state.product);
-	const allProducts = productStore.products;
-	const productOptions = DataHelper.getOptionsFromArr(allProducts, "---Please select product---");
+	const warehouseOptions = DataHelper.getOptionsFromArr(warehouse, "---Please select warehouse---");
 
-	const supplierStore = useSelector((state) => state.supplier);
-	const supplierOptions = DataHelper.getOptionsFromArr(
-		supplierStore.suppliers,
-		"---Please select supplier---"
-	);
 
 	const initialValues = {
 		id: detailOrder?.id || 0,
@@ -418,4 +410,4 @@ function MaterialOrderSavePage() {
 	);
 }
 
-export default MaterialOrderSavePage;
+export { LotMaterialSavePage };

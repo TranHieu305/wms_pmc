@@ -31,7 +31,7 @@ export function MaterialOrderDetailPage() {
 					</Button>
 				</Link>
 				<Flex gap="small" wrap justify="space-between" align="center">
-					<h1 style={{ margin: 0 }}>{order.name}</h1>
+					<h1 style={{ margin: 0 }}>Order: {order.name}</h1>
 					<Flex gap="small">
 						<MaterialOrderActions
 							order={order}
@@ -52,7 +52,7 @@ export function MaterialOrderDetailPage() {
 							title: (
 								<>
 									<ProductOutlined />
-									<span>Material Order</span>
+									<span>Material Orders</span>
 								</>
 							),
 						},

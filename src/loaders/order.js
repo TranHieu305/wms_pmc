@@ -18,7 +18,19 @@ async function materialOrderDetailLoader({ request, params }) {
 
 async function orderCreateLoader() {
 	const currentPrices = await axios.get(PRODUCT_PRICE_API_ENDPOINT + "/current-prices");
-	return { currentPrices: currentPrices.data.data };
+	return { currentPrices: currentPrices.data.data, detailOrder: null };
 }
 
-export { materialOrderDetailLoader, materialOrderLoader, orderCreateLoader };
+async function materialOrderEditLoader({ request, params }) {
+	const orderId = params.orderId;
+	const orderResponse = await axios.get(MATERIAL_ORDER_API_ENDPOINT + `/${orderId}`);
+	const currentPrices = await axios.get(PRODUCT_PRICE_API_ENDPOINT + "/current-prices");
+	return { currentPrices: currentPrices.data.data, detailOrder: orderResponse.data.data };
+}
+
+export {
+	materialOrderDetailLoader,
+	materialOrderLoader,
+	orderCreateLoader,
+	materialOrderEditLoader,
+};

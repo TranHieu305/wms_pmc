@@ -37,7 +37,7 @@ export default function MaterialOrderBoard({ orders }) {
 			onFilter: (value, record) => record.partnerName.includes(value),
 			filterSearch: true,
 			render: (title, record) => (
-				<Link to={"/suppliers/" + record.partnerName}>{record.partnerName}</Link>
+				<Link to={"/suppliers/" + record.supplierId}>{record.partnerName}</Link>
 			),
 		},
 		{

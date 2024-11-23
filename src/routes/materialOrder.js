@@ -1,5 +1,6 @@
 import {
 	materialOrderDetailLoader,
+	materialOrderEditLoader,
 	materialOrderLoader,
 	orderCreateLoader,
 } from "../loaders/order";
@@ -17,7 +18,7 @@ const materialOrderRouter = [
 	{
 		path: "/material-orders/:orderId/edit",
 		element: <MaterialOrderSavePage />,
-		loader: materialOrderDetailLoader,
+		loader: materialOrderEditLoader,
 	},
 	{
 		path: "/material-orders/:orderId",

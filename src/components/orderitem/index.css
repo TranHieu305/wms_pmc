@@ -1,7 +1,7 @@
-.order-item-board .ant-table .ant-table-tbody .ant-table-cell {
+.detail-page .ant-table .ant-table-tbody .ant-table-cell {
     border-right: 1px ridge rgba(244, 246, 248, 1);
 }
 
-.order-item-board .ant-table .ant-table-thead .ant-table-cell {
+.detail-page .ant-table .ant-table-thead .ant-table-cell {
     border-right: 1px ridge rgba(244, 246, 248, 1);
 }

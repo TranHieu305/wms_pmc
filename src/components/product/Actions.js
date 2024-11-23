@@ -2,7 +2,7 @@ import { Button, Dropdown, Menu } from "antd";
 import { ButtonDelete, ButtonSave } from "./Buttons";
 import { EllipsisOutlined } from "@ant-design/icons";
 
-export default function ProductActions({ product }) {
+export default function ProductActions({ product, label, ...props }) {
 	if (!product) {
 		return;
 	}
@@ -18,9 +18,16 @@ export default function ProductActions({ product }) {
 			</Menu.Item>
 		</Menu>
 	);
+	if (label) {
+		return (
+			<Dropdown.Button overlay={menu} {...props}>
+				{label}
+			</Dropdown.Button>
+		);
+	}
 	return (
 		<Dropdown overlay={menu}>
-			<Button icon={<EllipsisOutlined />} type="dash"></Button>
+			<Button icon={<EllipsisOutlined />} {...props} type="dash"></Button>
 		</Dropdown>
 	);
 }

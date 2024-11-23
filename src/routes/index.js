@@ -7,6 +7,7 @@ import supplierRouter from "./supplier";
 import productCategoryRouter from "./productCategory";
 import productRouter from "./product";
 import inventoryItemRouter from "./inventoryItem";
+import lotRouter from "./lot";
 
 const appRouter = createBrowserRouter([
 	{
@@ -20,6 +21,7 @@ const appRouter = createBrowserRouter([
 			...productCategoryRouter,
 			...productRouter,
 			...inventoryItemRouter,
+			...lotRouter,
 		],
 	},
 ]);

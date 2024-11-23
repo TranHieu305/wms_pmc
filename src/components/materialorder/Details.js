@@ -8,7 +8,7 @@ import { MATERIAL_ORDER_STATUS } from "../../utils/constants/order";
 
 function MaterialOrderDetail({ detail }) {
 	return (
-		<article className="material-order-detail-page">
+		<article className="detail-page">
 			<Row gutter={[24, 24]}>
 				<Col span={16}>
 					<div className="wrapper">

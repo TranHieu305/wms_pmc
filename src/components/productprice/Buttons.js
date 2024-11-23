@@ -4,23 +4,20 @@ import { PRODUCT_PRICE_API_ENDPOINT } from "../../utils/constants/apiEndpoint";
 import { notificationError, notificationSuccess } from "../../utils/notification";
 import { useFormik } from "formik";
 import { validationProductPriceSchema } from "../../validations";
-import { Button } from "antd";
+import { Button, DatePicker } from "antd";
 import { FormModal } from "../ui/modal";
 import InputGlobal, { SelectGlobal } from "../ui/input";
-import { ButtonModalConfirm } from "../ui/button";
+import DataHelper from "../../utils/DataHelper";
+import moment from "moment-timezone";
+import FormatHelper from "../../utils/FormatHelper";
 
-function ButtonSave({ label, product, productPrice, partners, ...props }) {
+function ButtonSaveProductPrice({ label, product, productPrice, partners, ...props }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 
 	const isCreate = productPrice ? false : true;
 
-	const partnerOptions = partners
-		? partners.map((partner) => {
-				return { label: partner.name, value: partner.id };
-		  })
-		: [];
-	partnerOptions.push({ label: "---Please select partner---", value: 0 });
+	const partnerOptions = DataHelper.getOptionsFromArr(partners);
 
 	function handleOpen() {
 		setIsModalOpen(true);
@@ -47,6 +44,7 @@ function ButtonSave({ label, product, productPrice, partners, ...props }) {
 				});
 			}
 			formik.resetForm();
+			// window.location.reload();
 			setIsModalOpen(false);
 		} catch (error) {
 			notificationError({
@@ -64,10 +62,11 @@ function ButtonSave({ label, product, productPrice, partners, ...props }) {
 
 	const initialValues = {
 		id: productPrice?.id || 0,
-		productId: product.id,
-		partnerId: productPrice.partnerId || 0,
-		price: productPrice.price || 0,
+		productId: product?.id || 0,
+		partnerId: productPrice?.partnerId || 0,
+		price: productPrice?.price || 0,
 		description: product?.description || "",
+		dateApply: null,
 	};
 
 	const formik = useFormik({
@@ -104,6 +103,17 @@ function ButtonSave({ label, product, productPrice, partners, ...props }) {
 					options={partnerOptions}
 				/>
 				<InputGlobal
+					label="Unit Price"
+					key="price"
+					id="price"
+					name="price"
+					placeholder="Product Unit Price"
+					type="number"
+					value={formik.values.price}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				{/* <InputGlobal
 					label="Product Price Description"
 					key="description"
 					id="description"
@@ -113,8 +123,27 @@ function ButtonSave({ label, product, productPrice, partners, ...props }) {
 					onBlur={formik.handleBlur}
 					value={formik.values.description}
 					error={formik.touched.description && formik.errors.description}
+				/> */}
+				<label>
+					<strong>Apply Date</strong>
+				</label>
+				<DatePicker
+					key="applyDate"
+					id="applyDate"
+					format="DD/MM/YYYY"
+					value={
+						formik.values.applyDate
+							? moment(formik.values.applyDate, "DD/MM/YYYY")
+							: null
+					}
+					style={{ width: "100%" }}
+					onChange={(date, dateString) =>
+						formik.setFieldValue("dateApply", date ? date.format("DD/MM/YYYY") : null)
+					}
 				/>
 			</FormModal>
 		</>
 	);
 }
+
+export default ButtonSaveProductPrice;

@@ -16,7 +16,6 @@ export default class FormatHelper {
 	}
 
 	static formatDate(datetime) {
-		console.log(datetime);
 		if (!datetime) {
 			return "---";
 		}
