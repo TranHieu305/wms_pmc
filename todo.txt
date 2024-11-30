@@ -2,3 +2,6 @@ Folder keep:
 /routes 
 /services
 /utils
+
+todo:
+- remove /styles

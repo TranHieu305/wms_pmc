@@ -1,0 +1,21 @@
+.sidebar-menu {
+	background-color: #212b36;
+}
+
+.sidebar-menu span {
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+}
+
+.sidebar-menu span svg {
+	color: #fff;
+}
+
+.sidebar-menu .ant-menu-submenu-active {
+	background-color: rgba(34, 197, 94, 0.16);
+}
+
+.sidebar-menu .ant-menu-item-active {
+	background-color: rgba(34, 197, 94, 0.16);
+}

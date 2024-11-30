@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { RootLayout } from "../pages/layout";
 import LoginPage from "../services/Auth/pages/LoginPage";
 import warehouseRouter from "./warehouse";
 import customerRouter from "./customer";
@@ -10,6 +9,7 @@ import productRouter from "./product";
 import inventoryItemRouter from "./inventoryItem";
 import lotRouter from "./lot";
 import ProtectedRoute from "../shared/components/ProtectedRoute";
+import PageLayout from "../shared/components/PageLayout";
 
 const appRouter = createBrowserRouter([
 	{
@@ -20,18 +20,18 @@ const appRouter = createBrowserRouter([
 		index: "/",
 		element: (
 			<ProtectedRoute>
-				<RootLayout />
+				<PageLayout />
 			</ProtectedRoute>
 		),
 		children: [
-			...warehouseRouter,
-			...customerRouter,
-			...materialOrderRouter,
-			...supplierRouter,
-			...productCategoryRouter,
-			...productRouter,
-			...inventoryItemRouter,
-			...lotRouter,
+			// ...warehouseRouter,
+			// ...customerRouter,
+			// ...materialOrderRouter,
+			// ...supplierRouter,
+			// ...productCategoryRouter,
+			// ...productRouter,
+			// ...inventoryItemRouter,
+			// ...lotRouter,
 		],
 	},
 ]);

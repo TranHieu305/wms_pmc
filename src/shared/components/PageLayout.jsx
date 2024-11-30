@@ -1,18 +1,20 @@
 import { Outlet } from "react-router-dom";
 import { Header, SideMenu } from "../../components/layout";
+import SidebarMenu from "./SidebarMenu";
 
-function RootLayout() {
+function PageLayout() {
 	return (
 		<>
-			<SideMenu />
-			<div className="page-content">
+			{/* <SideMenu /> */}
+            <SidebarMenu />
+			{/* <div className="page-content">
 				<Header />
 				<div className="main-content">
 					<Outlet />
 				</div>
-			</div>
+			</div> */}
 		</>
 	);
 }
 
-export default RootLayout;
+export default PageLayout;
