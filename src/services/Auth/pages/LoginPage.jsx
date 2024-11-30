@@ -1,3 +1,4 @@
+import { useModal } from "../../../shared/components/ModalProvider";
 import FormLogin from "../components/FormLogin";
 
 const LoginPage = () => {
@@ -19,5 +20,6 @@ const LoginPage = () => {
         </div>
     )
 }
+
 
 export default LoginPage;

@@ -1,5 +1,4 @@
 import { Input } from "antd";
-import SharedIcon from "./Icon";
 
 function Text({...props}) {
     return (

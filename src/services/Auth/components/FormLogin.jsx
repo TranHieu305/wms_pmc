@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import SharedInput from "../../../shared/components/Input";
+import SharedInput from "../../../shared/components/common/Input";
 import validationLoginSchema from "../utils/validation";
 import authApi from "../api/authApi";
 import { NotificationHelper } from "../../../shared/utils/NotificationHelper";
