@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import SidebarMenu, { SiderMenu } from "./SidebarMenu";
+import { SiderMenu } from "./SidebarMenu";
 import MainHeader from "./MainHeader";
 import { Layout } from "antd";
 import { Header } from "antd/es/layout/layout";
@@ -7,7 +7,7 @@ import { Header } from "antd/es/layout/layout";
 function PageLayout() {
 	return (
 		<>
-            {/* <Layout class="min-h-screen">
+            <Layout class="h-screen">
                 <SiderMenu />
                 <Layout>
                     <Header
@@ -16,16 +16,11 @@ function PageLayout() {
                             background: "#FFFFFF",
                         }}
                     />
+                    <div className="main-content">
+                        <Outlet />
+                    </div>
                 </Layout>
-           
-            </Layout> */}
-            <SidebarMenu />
-			<div className="page-content">
-				<MainHeader />
-				<div className="main-content">
-					<Outlet />
-				</div>
-			</div>
+            </Layout>
 		</>
 	);
 }
