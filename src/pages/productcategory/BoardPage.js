@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { BoardLayout, BoardLayoutAction, BoardLayoutContent } from "../../components/layout";
+// import { BoardLayout, BoardLayoutAction, BoardLayoutContent } from "../../components/layout";
 import { ButtonSave, ProductCategoryBoard } from "../../components/productcategory";
 import addKeyToArrayData from "../../utils/addKeyToData";
 
@@ -10,14 +10,15 @@ function ProductCategoryBoardPage() {
 	const categories = addKeyToArrayData(productCategoryStore.productCategories);
 
 	return (
-		<BoardLayout title="Product Categories">
-			<BoardLayoutAction>
-				<ButtonSave label="Create New" type="primary" />
-			</BoardLayoutAction>
-			<BoardLayoutContent>
-				<ProductCategoryBoard categories={categories} />
-			</BoardLayoutContent>
-		</BoardLayout>
+		<></>
+		// <BoardLayout title="Product Categories">
+		// 	<BoardLayoutAction>
+		// 		<ButtonSave label="Create New" type="primary" />
+		// 	</BoardLayoutAction>
+		// 	<BoardLayoutContent>
+		// 		<ProductCategoryBoard categories={categories} />
+		// 	</BoardLayoutContent>
+		// </BoardLayout>
 	);
 }
 

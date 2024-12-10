@@ -1,4 +1,4 @@
-import { BoardLayoutAction, BoardLayoutContent } from "../../components/layout";
+// import { BoardLayoutAction, BoardLayoutContent } from "../../components/layout";
 import { ProductPriceBoard } from "../../components/productprice";
 
 /**
@@ -10,8 +10,8 @@ import { ProductPriceBoard } from "../../components/productprice";
 export default function ProductPriceBoardPage({ productPrices, partners, product }) {
 	return (
 		<>
-			<BoardLayoutAction>
-				{/* <ButtonSave label="Create New" categories={categories} type="primary" /> */}
+			{/* <BoardLayoutAction>
+				<ButtonSave label="Create New" categories={categories} type="primary" />
 			</BoardLayoutAction>
 			<BoardLayoutContent>
 				<ProductPriceBoard
@@ -19,7 +19,7 @@ export default function ProductPriceBoardPage({ productPrices, partners, product
 					partners={partners}
 					product={product}
 				/>
-			</BoardLayoutContent>
+			</BoardLayoutContent> */}
 		</>
 	);
 }

@@ -1,18 +1,17 @@
 import { Outlet } from "react-router-dom";
-import { Header, SideMenu } from "../../components/layout";
 import SidebarMenu from "./SidebarMenu";
+import MainHeader from "./MainHeader";
 
 function PageLayout() {
 	return (
 		<>
-			{/* <SideMenu /> */}
             <SidebarMenu />
-			{/* <div className="page-content">
-				<Header />
+			<div className="page-content">
+				<MainHeader />
 				<div className="main-content">
 					<Outlet />
 				</div>
-			</div> */}
+			</div>
 		</>
 	);
 }

@@ -1,10 +1,10 @@
-import { productDetailLoader, productsLoader } from "../loaders/product";
-import ProductBoardPage from "../pages/product/BoardPage";
-import ProductDetailPage from "../pages/product/DetailPage";
+import ProductCategoryBoardPage from "../services/Product/pages/ProductCategoryBoardPage";
 
 const productRouter = [
-	{ path: "/products", element: <ProductBoardPage />, loader: productsLoader },
-	{ path: "/products/:productId", element: <ProductDetailPage />, loader: productDetailLoader },
+	// { path: "/products", element: <ProductBoardPage />, loader: productsLoader },
+	// { path: "/products/:productId", element: <ProductDetailPage />, loader: productDetailLoader },
+
+	{ path: "/product-categories", element: <ProductCategoryBoardPage /> },
 ];
 
 export default productRouter;

@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import SharedInput from "../../../shared/components/common/Input";
 import validationLoginSchema from "../utils/validation";
 import authApi from "../api/authApi";
-import { NotificationHelper } from "../../../shared/utils/NotificationHelper";
+import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 
 const FormLogin = () => {
@@ -16,7 +16,7 @@ const FormLogin = () => {
     const handleLogin = (values) => {
         authApi.login(values.email, values.password)
             .then((res) => {
-                NotificationHelper.showSuccessNotification({description: res.message})
+                notificationHelper.showSuccessNotification({description: res.message})
                 setTimeout(() => navigate("/"), 1000); 
             })
     };

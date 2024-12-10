@@ -1,9 +1,8 @@
 import { Badge } from "antd";
-import "../../styles/layout.css";
 import { BellFilled } from "@ant-design/icons";
 
-function Header() {
-	return (
+function MainHeader() {
+    return (
 		<div className="header">
 			<div className="notification">
 				<Badge count={1}>
@@ -15,4 +14,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default MainHeader;

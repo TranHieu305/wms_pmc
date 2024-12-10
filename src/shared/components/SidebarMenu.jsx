@@ -9,7 +9,7 @@ function SidebarMenu() {
 	// Menu Items
 	const menuItems = [
 		{
-			key: "warehouse",
+			key: "warehouses",
 			label: "Warehouses",
 			icon: <SharedIcon.Warehouse />,
 		
@@ -21,7 +21,7 @@ function SidebarMenu() {
 			
 		},
 		{
-			key: "partner",
+			key: "partners",
 			label: "Partners",
 			icon: <SharedIcon.Partner />,
 			
@@ -34,7 +34,7 @@ function SidebarMenu() {
 			children: [
 				{
 					key: "/products",
-					label: "Product",
+					label: "All Product",
 				},
 				{
 					key: "/product-categories",

@@ -8,7 +8,7 @@ function showErrorNotification({ message = "Error", description, duration = 3 })
 	return notification.error({ message, description, duration });
 }
 
-export const NotificationHelper = {
+export const notificationHelper = {
 	showSuccessNotification,
 	showErrorNotification,
 };

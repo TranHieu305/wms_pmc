@@ -1,21 +1,18 @@
-import { warehouseDetailLoader, warehouseListLoader } from "../loaders";
-import WarehouseBoardPage from "../pages/warehouse/BoardPage";
-import WarehouseDetailPage from "../pages/warehouse/DetailPage";
-import WarehouseSavePage from "../pages/warehouse/SavePage";
+import WarehouseBoardPage from "../services/Warehouse/pages/WarehouseBoardPage";
 
 const warehouseRouter = [
-	{ path: "/warehouses", element: <WarehouseBoardPage />, loader: warehouseListLoader },
-	{ path: "/warehouses/create", element: <WarehouseSavePage /> },
-	{
-		path: "/warehouses/:warehouseId/edit",
-		element: <WarehouseSavePage />,
-		loader: warehouseDetailLoader,
-	},
-	{
-		path: "/warehouses/:warehouseId",
-		element: <WarehouseDetailPage />,
-		loader: warehouseDetailLoader,
-	},
+	{ path: "/warehouses", element: <WarehouseBoardPage /> },
+	// { path: "/warehouses/create", element: <WarehouseSavePage /> },
+	// {
+	// 	path: "/warehouses/:warehouseId/edit",
+	// 	element: <WarehouseSavePage />,
+	// 	loader: warehouseDetailLoader,
+	// },
+	// {
+	// 	path: "/warehouses/:warehouseId",
+	// 	element: <WarehouseDetailPage />,
+	// 	loader: warehouseDetailLoader,
+	// },
 ];
 
 export default warehouseRouter;
