@@ -1,4 +1,5 @@
 import { Input, Select } from "antd";
+import TextArea from "antd/es/input/TextArea";
 
 function Label({forName, children}) {
     return (
@@ -12,6 +13,15 @@ function Text({...props}) {
     return (
         <>
             <Input {...props}/>
+            {props.error && <InputError message={props.error}/>}
+        </>
+    )
+}
+
+function TextAreaCustom({...props}) {
+    return (
+        <>
+            <TextArea rows={4} {...props}/>
             {props.error && <InputError message={props.error}/>}
         </>
     )
@@ -44,6 +54,7 @@ function InputError({ message }) {
 
 const SharedInput = {
     Text,
+    TextAreaCustom,
     Label,
     SelectInput
 }

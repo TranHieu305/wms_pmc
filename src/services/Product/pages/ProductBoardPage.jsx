@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
-import productCategoryApi from "../api/productCategoryApi";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import SharedIcon from "../../../shared/components/common/Icon";
-import ProductCategoryBoard from "../components/ProductCategoryBoard";
-import { ProductCategoryBtnSave } from "../components/ProductCategoryButton";
+import productApi from "../api/productApi";
 import { SubheaderBoardPage } from "../../../shared/components/SubHeader";
+import ProductBoard from "../components/ProductBoard";
+import { ProductBtnSave } from "../components/ProductButton";
 
-
-function ProductCategoryBoardPage() {
-    const [categories, setCategories] = useState([]);
+function ProductBoardPage() {
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     
-    // Get all categories
+    // Get all partners
     useEffect(() => {
-        const fetchCategories = async () => {
+        const fetchProducts = async () => {
           try {
-            const response = await productCategoryApi.getAllProductCategory();
-            setCategories(response.data.data); 
+            const response = await productApi.getAllProducts();
+            setProducts(response.data.data); 
           } catch (err) {
             notificationHelper.showErrorNotification({description : err.response.data.message})
           } finally {
@@ -24,23 +23,23 @@ function ProductCategoryBoardPage() {
           }
         };
     
-        fetchCategories();
+        fetchProducts();
     }, []);
 
     return (
     <>
         {/* Subheader */}
-        <SubheaderBoardPage
+        <SubheaderBoardPage 
             icon={(<SharedIcon.Product width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Product>)}
-            title = "Category"
+            title = "All Product"
         >
-            <ProductCategoryBtnSave />
+            <ProductBtnSave />
         </SubheaderBoardPage>
      
         {/* Table */}
-        <ProductCategoryBoard categories={categories} loading={loading}></ProductCategoryBoard>
+        <ProductBoard products={products} loading={loading}></ProductBoard>
     </>)
 
 }
 
-export default ProductCategoryBoardPage;
+export default ProductBoardPage;

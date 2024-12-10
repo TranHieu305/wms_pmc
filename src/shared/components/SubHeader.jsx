@@ -15,4 +15,4 @@ function SubheaderBoardPage({icon, title, children}) {
 
 
 
-export default SubheaderBoardPage;
+export {SubheaderBoardPage};

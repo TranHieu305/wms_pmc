@@ -17,3 +17,7 @@ export const WAREHOUSE_API = {
 export const PRODUCT_CATEGORY_API = {
 	BASE: `${API_BASE_URL}/product-categories`,
 };
+
+export const PRODUCT_API = {
+	BASE: `${API_BASE_URL}/products`,
+};

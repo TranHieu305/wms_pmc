@@ -4,7 +4,7 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import SharedIcon from "../../../shared/components/common/Icon";
 import WarehouseBoard from "../components/WarehouseBoard";
 import BtnSaveWarehouse from "../components/BtnSaveWarehouse";
-import SubheaderBoardPage from "../../../shared/components/SubHeaderBoardPage";
+import { SubheaderBoardPage } from "../../../shared/components/SubHeader";
 
 function WarehouseBoardPage() {
     const [warehouses, setWarehouses] = useState([]);
@@ -37,7 +37,7 @@ function WarehouseBoardPage() {
         </SubheaderBoardPage>
      
         {/* Table */}
-        <WarehouseBoard warehouses={warehouses} loading={loading}></WarehouseBoard>;
+        <WarehouseBoard warehouses={warehouses} loading={loading}></WarehouseBoard>
     </>)
 }
 

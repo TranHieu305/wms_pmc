@@ -15,8 +15,6 @@ function ProductCategoryBtnSave({category, ...props}) {
     const navigate = useNavigate();
 
     const handleSave = (data) => {
-
-
         productCategoryApi.saveProductCategory(data)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created category" });
@@ -87,7 +85,6 @@ function FormBodySaveProductCategory({category}) {
     }, [formik.values, setModalData]);
 
     const typeOptions = inputHelper.convertEnumToSelectOption(PRODUCT_CATEGORY_TYPE);
-    console.log(typeOptions)
 
     return (
         <SharedForm.FormBody>
@@ -137,8 +134,6 @@ function ProductCategoryBtnDelete({category}) {
     const navigate = useNavigate();
 
     const onDelete = (category) => {
-        console.log(category)
-
         productCategoryApi.deleteProductCategory(category)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully delete category" });

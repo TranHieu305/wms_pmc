@@ -8,8 +8,23 @@ function convertEnumToSelectOption(emum) {
 	}));
 }
 
+function convertArrToSelectOption(arr) {
+	if (!Array.isArray(arr)) {
+		return null;
+	}
+	const optionsArr = arr.map((item) => {
+		return {
+			value: item.id,
+			label: item.name,
+		};
+	});
+
+	return optionsArr;
+}
+
 const inputHelper = {
 	convertEnumToSelectOption,
+	convertArrToSelectOption,
 };
 
 export default inputHelper;

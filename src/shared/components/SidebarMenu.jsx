@@ -2,6 +2,9 @@ import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import SharedIcon from "./common/Icon";
 import "../styles/SidebarMenu.css";
+import { useState } from "react";
+import Sider from "antd/es/layout/Sider";
+import { UserOutlined } from "@ant-design/icons";
 
 function SidebarMenu() {
 	const navigate = useNavigate();
@@ -67,4 +70,36 @@ function SidebarMenu() {
 	);
 }
 
+function SiderMenu() {
+    const [collapsed, setCollapsed] = useState(false);
+    function getItem(label, key, icon, children) {
+        return {
+          key,
+          icon,
+          children,
+          label,
+        };
+      }
+    const items = [
+        getItem('Option 1', '1', <UserOutlined />),
+        getItem('Option 2', '2', <UserOutlined />),
+        getItem('User', 'sub1', <UserOutlined />, [
+          getItem('Tom', '3'),
+          getItem('Bill', '4'),
+          getItem('Alex', '5'),
+        ]),
+        getItem('Team', 'sub2', <UserOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+        getItem('Files', '9', <UserOutlined />),
+    ];
+
+    return (      
+    <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} class="min-h-screen">
+        <div className="demo-logo-vertical" />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+    </Sider>
+  )
+}
+
 export default SidebarMenu;
+
+export {SiderMenu}
