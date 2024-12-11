@@ -36,11 +36,20 @@ const Partner = ({width, height, fill}) => {
     )
 }
 
+const Back = ({width, height, fill}) => {
+    return (
+        <svg width={width || "20"} height={height || "20"} viewBox="0 0 36 36" fstyle={{ color: fill || "white" }} xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.5247 23.8337C19.2726 23.8346 19.0336 23.7212 18.8747 23.5254L14.8497 18.5254C14.597 18.2179 14.597 17.7746 14.8497 17.4671L19.0164 12.4671C19.3109 12.1127 19.837 12.0642 20.1914 12.3587C20.5458 12.6533 20.5943 13.1794 20.2997 13.5337L16.5747 18.0004L20.1747 22.4671C20.3828 22.7168 20.4266 23.0648 20.287 23.3584C20.1474 23.652 19.8498 23.8375 19.5247 23.8337Z" fill="#637381"/>
+        </svg>
+    )
+}
+
 const SharedIcon = {
     InputError,
     Warehouse,
     Product,
-    Partner
+    Partner,
+    Back
 }
 
 export default SharedIcon;

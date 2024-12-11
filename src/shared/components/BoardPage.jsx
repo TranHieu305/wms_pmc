@@ -1,4 +1,4 @@
-function SubheaderBoardPage({icon, title, children}) {
+function Subheader({icon, title, children}) {
     return(
         <div className="flex justify-between items-center p-4">
             <div className="flex items-center space-x-2">
@@ -14,5 +14,8 @@ function SubheaderBoardPage({icon, title, children}) {
 }
 
 
+const BoardPage = {
+    Subheader
+}
 
-export {SubheaderBoardPage};
+export default BoardPage

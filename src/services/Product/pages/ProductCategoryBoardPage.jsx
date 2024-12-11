@@ -4,7 +4,7 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import SharedIcon from "../../../shared/components/common/Icon";
 import ProductCategoryBoard from "../components/ProductCategoryBoard";
 import { ProductCategoryBtnSave } from "../components/ProductCategoryButton";
-import { SubheaderBoardPage } from "../../../shared/components/SubHeader";
+import BoardPage from "../../../shared/components/BoardPage";
 
 
 function ProductCategoryBoardPage() {
@@ -30,12 +30,12 @@ function ProductCategoryBoardPage() {
     return (
     <>
         {/* Subheader */}
-        <SubheaderBoardPage
+        <BoardPage.Subheader
             icon={(<SharedIcon.Product width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Product>)}
             title = "Category"
         >
             <ProductCategoryBtnSave />
-        </SubheaderBoardPage>
+        </BoardPage.Subheader >
      
         {/* Table */}
         <ProductCategoryBoard categories={categories} loading={loading}></ProductCategoryBoard>

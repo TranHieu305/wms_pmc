@@ -40,7 +40,7 @@ function SiderMenu() {
 		},
 	];
     return (      
-    <Sider class="h-screen bg-[#212B36]">
+    <Sider className="h-screen bg-[#212B36]">
          {/* Logo Section */}
          <div className="flex items-center bg-[#212B36] p-[1.25rem]">
                 <img

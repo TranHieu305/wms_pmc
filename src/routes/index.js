@@ -8,7 +8,7 @@ import productRouter from "./product";
 import inventoryItemRouter from "./inventoryItem";
 import lotRouter from "./lot";
 import ProtectedRoute from "../shared/components/ProtectedRoute";
-import PageLayout from "../shared/components/PageLayout";
+import AppLayout from "../shared/components/AppLayout";
 import partnerRouter from "./partner";
 
 const appRouter = createBrowserRouter([
@@ -20,7 +20,7 @@ const appRouter = createBrowserRouter([
 		index: "/",
 		element: (
 			<ProtectedRoute>
-				<PageLayout />
+				<AppLayout />
 			</ProtectedRoute>
 		),
 		children: [

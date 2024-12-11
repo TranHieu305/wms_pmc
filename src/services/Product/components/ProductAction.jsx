@@ -2,7 +2,7 @@ import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
 import { ProductBtnDelete, ProductBtnEdit } from "./ProductButton";
 
-function ProductAction({product}) {
+function ProductAction({product, ...props}) {
     const items = [
             {
                 key: '1',
@@ -20,6 +20,7 @@ function ProductAction({product}) {
                 items,
             }}
             placement="bottomRight"
+            {...props}
         >
             <SharedBtn.BtnAction />
         </Dropdown>

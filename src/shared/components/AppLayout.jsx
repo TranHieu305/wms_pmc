@@ -4,10 +4,10 @@ import MainHeader from "./MainHeader";
 import { Layout } from "antd";
 import { Header } from "antd/es/layout/layout";
 
-function PageLayout() {
+function AppLayout() {
 	return (
 		<>
-            <Layout class="h-screen">
+            <Layout className="h-screen">
                 <SiderMenu />
                 <Layout>
                     <Header
@@ -25,4 +25,10 @@ function PageLayout() {
 	);
 }
 
-export default PageLayout;
+function DetailPageLayout({children}) {
+    return (<div>{children}</div>)
+}
+
+export default AppLayout;
+
+export {DetailPageLayout};
