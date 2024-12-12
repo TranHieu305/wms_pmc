@@ -18,8 +18,8 @@ function ProductBtnSave({product, ...props}) {
         productApi.saveProduct(data)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created product" });
-                setTimeout(() => navigate(0), 1000);
-                window.open("/" + response.data.id, "_blank", "noopener,noreferrer");
+                navigate(0);
+                window.open("/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot create product" });

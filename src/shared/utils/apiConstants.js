@@ -10,8 +10,7 @@ export const PARTNER_API = {
 };
 
 export const WAREHOUSE_API = {
-	GET_ALL: `${API_BASE_URL}/warehouses`,
-	CREATE: `${API_BASE_URL}/warehouses`,
+	BASE: `${API_BASE_URL}/warehouses`,
 };
 
 export const PRODUCT_CATEGORY_API = {

@@ -14,7 +14,7 @@ function ProductAction({product, ...props}) {
             },
         ];
 
-        return (
+    return (
         <Dropdown
             menu={{
                 items,
@@ -24,7 +24,7 @@ function ProductAction({product, ...props}) {
         >
             <SharedBtn.BtnAction />
         </Dropdown>
-        );
+    );
 }
 
 export default ProductAction;

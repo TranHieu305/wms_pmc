@@ -6,8 +6,9 @@ import { useEffect } from "react";
 import warehouseApi from "../api/warehouseApi";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "antd";
 
-function BtnSaveWarehouse({warehouse}) {
+function WarehouseBtnSave({warehouse}) {
     const { showModal } = useModal(); 
     const navigate = useNavigate();
 
@@ -15,8 +16,8 @@ function BtnSaveWarehouse({warehouse}) {
         warehouseApi.saveWarehouse(data)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created warehouse" });
-                console.log(response.data.data.id);
-                setTimeout(() => navigate("/warehouses" + response.data.data.id), 1000);
+                navigate(0);
+                window.open("/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot created warehouse" });
@@ -31,7 +32,33 @@ function BtnSaveWarehouse({warehouse}) {
         })
     }
 
-    return <SharedBtn.BtnSave handleClick={handleClick}/>
+    return <SharedBtn.BtnSave label="Add new" onClick={handleClick}/>
+}
+
+function WarehouseBtnEdit({warehouse, ...props}) {
+    const { showModal } = useModal(); 
+    const navigate = useNavigate();
+
+    const handleSave = (data) => {
+        warehouseApi.editWarehouse(data)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully updated warehouse" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot update warehouse" });
+            });
+    }
+
+    const handleClick = () => {
+        showModal({
+            title: <div>Edit warehouse: {warehouse.name}</div>,
+            body: (<FormBodySaveWarehouse warehouse={warehouse}/>),
+            onSave: handleSave
+        })
+    }
+
+    return <SharedBtn.BtnEdit label="Edit" onClick={handleClick} {...props}/>
 }
 
 function FormBodySaveWarehouse({warehouse, onSave}) {
@@ -72,18 +99,6 @@ function FormBodySaveWarehouse({warehouse, onSave}) {
                         error={formik.touched.name && formik.errors.name}
                     />
             </SharedForm.FormBodyItem>
-            
-            <SharedForm.FormBodyItem>
-                <SharedInput.Label forName="description">Description*</SharedInput.Label>
-                <SharedInput.Text
-					name="description"
-					placeholder="Warehouse description*"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.description}
-					error={formik.touched.description && formik.errors.description}
-				/>
-            </SharedForm.FormBodyItem>
 				
             <SharedForm.FormBodyItem>
                 <SharedInput.Label forName="address">Address*</SharedInput.Label>
@@ -95,9 +110,51 @@ function FormBodySaveWarehouse({warehouse, onSave}) {
 					value={formik.values.address}
 					error={formik.touched.address && formik.errors.address}
 				/>
-            </SharedForm.FormBodyItem>				
+            </SharedForm.FormBodyItem>			
+
+             <SharedForm.FormBodyItem>
+                <SharedInput.Label forName="description">Description*</SharedInput.Label>
+                <SharedInput.TextAreaCustom
+					name="description"
+					placeholder="Warehouse description*"
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					value={formik.values.description}
+					error={formik.touched.description && formik.errors.description}
+				/>
+            </SharedForm.FormBodyItem>	
         </SharedForm.FormBody>
     )
 }
 
-export default BtnSaveWarehouse;
+
+function WarehousetBtnDelete({warehouse}) {
+    const navigate = useNavigate();
+
+    const onDelete = (warehouse) => {
+        warehouseApi.deleteWarehouse(warehouse)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully delete warehouse" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot delete warehouse" });
+            });
+    }
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm delete",
+			content: <div>Do you really want to delete warehouse: <b>{warehouse.name}</b> ?</div>,
+			onOk: () => onDelete(warehouse),
+		});
+    }
+
+    return <SharedBtn.BtnDelete onClick={openConfirmModal}/>
+}
+
+export {
+    WarehouseBtnSave, 
+    WarehouseBtnEdit, 
+    WarehousetBtnDelete
+};

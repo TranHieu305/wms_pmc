@@ -29,8 +29,6 @@ function ProductDetailPage() {
         fetchProducts();
     }, [productId, navigate]);
 
-
-
     return (
     <DetailPage.Layout>
         {

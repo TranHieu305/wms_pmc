@@ -49,7 +49,7 @@ function DetailsPanel({product}) {
 
     return (
         <DetailPage.DetailContainer>
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
         </DetailPage.DetailContainer>
     )
 }

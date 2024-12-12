@@ -3,7 +3,7 @@ import warehouseApi from "../api/warehouseApi";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import SharedIcon from "../../../shared/components/common/Icon";
 import WarehouseBoard from "../components/WarehouseBoard";
-import BtnSaveWarehouse from "../components/BtnSaveWarehouse";
+import { WarehouseBtnSave } from "../components/WarehouseButton";
 import BoardPage from "../../../shared/components/BoardPage";
 
 function WarehouseBoardPage() {
@@ -33,7 +33,7 @@ function WarehouseBoardPage() {
             icon={(<SharedIcon.Warehouse width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Warehouse>)}
             title = "Warehouse"
         >
-            <BtnSaveWarehouse />
+            <WarehouseBtnSave />
         </BoardPage.Subheader >
      
         {/* Table */}
