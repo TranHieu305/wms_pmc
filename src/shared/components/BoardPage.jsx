@@ -13,9 +13,14 @@ function Subheader({icon, title, children}) {
     );
 }
 
+function BoardContainer({children}) {
+    return <div>{children}</div>
+}
+
 
 const BoardPage = {
-    Subheader
+    Subheader,
+    BoardContainer
 }
 
 export default BoardPage

@@ -6,7 +6,7 @@ export const AUTH_API = {
 };
 
 export const PARTNER_API = {
-	GET_ALL: `${API_BASE_URL}/partners`,
+	BASE: `${API_BASE_URL}/partners`,
 };
 
 export const WAREHOUSE_API = {

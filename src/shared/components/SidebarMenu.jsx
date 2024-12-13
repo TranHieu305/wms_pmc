@@ -42,7 +42,7 @@ function SiderMenu() {
     return (      
     <Sider className="h-screen bg-[#212B36]">
          {/* Logo Section */}
-         <div className="flex items-center bg-[#212B36] p-[1.25rem]">
+         <div className="flex items-center p-[1.25rem]">
                 <img
                     src="/svgs/logo.svg"
                     alt="Logo"
@@ -50,7 +50,7 @@ function SiderMenu() {
                 />
         </div>
         <Menu theme="dark" 
-            defaultSelectedKeys={['1']} 
+            defaultSelectedKeys={['warehouses']} 
             mode="inline" 
             onClick={(item) => navigate(item.key)} 
             items={menuItems}

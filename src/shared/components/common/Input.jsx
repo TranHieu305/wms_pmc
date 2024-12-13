@@ -12,7 +12,10 @@ function Label({forName, children}) {
 function Text({...props}) {
     return (
         <>
-            <Input {...props}/>
+            <Input 
+                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none"
+                {...props}
+            />
             {props.error && <InputError message={props.error}/>}
         </>
     )
@@ -21,7 +24,11 @@ function Text({...props}) {
 function TextAreaCustom({...props}) {
     return (
         <>
-            <TextArea rows={4} {...props}/>
+            <TextArea 
+                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none"
+                rows={4} 
+                {...props}
+            />
             {props.error && <InputError message={props.error}/>}
         </>
     )

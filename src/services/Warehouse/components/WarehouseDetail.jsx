@@ -43,7 +43,7 @@ function Inventory({warehouse, productWarehouses, loading}) {
         { key: "unit", title: "Unit", dataIndex: "uom", width: "20%",
             render: (text, record) => (<div>{record.product.uom}</div>)
         },
-		{ key: "quantity", title: "Quantity", dataIndex: ["product","quantity"], width: "20%",
+		{ key: "quantity", title: "Quantity on hand", dataIndex: ["product","quantity"], width: "20%",
             render: (text, record) => (<div>{record.quantityOnHand}</div>)
         },
 	];

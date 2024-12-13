@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import partnerApi from "../api/partnerApi";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
-import PartnerTable from "../components/PartnerTable.jsx";
+import PartnerTable from "../components/PartnerBoard.jsx";
 import SharedIcon from "../../../shared/components/common/Icon.jsx";
-import BtnSavePartner from "../components/BtnSavePartner.jsx";
+import BtnSavePartner from "../components/PartnerButton.jsx";
+import BoardPage from "../../../shared/components/BoardPage.jsx";
 
 function PartnerBoardPage() {
     const [partners, setPartners] = useState([]);
@@ -28,18 +29,15 @@ function PartnerBoardPage() {
     return (
     <>
         {/* Subheader */}
-        <div className="flex justify-between items-center p-4">
-            <div className="flex items-center space-x-2">
-                <SharedIcon.Partner width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Partner>
-                <span className="text-lg font-semibold text-gray-800">Partner</span>
-             </div>
-
-            <div className="flex items-center space-x-2">
+        <BoardPage.Subheader 
+            icon={(<SharedIcon.Partner width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Partner>)}
+            title = "All Partner"
+        >
             <BtnSavePartner />
-            </div>
-    </div>
+        </BoardPage.Subheader >
+       
         {/* Table */}
-        <PartnerTable partners={partners} loading={loading}></PartnerTable>;
+        <PartnerTable partners={partners} loading={loading}></PartnerTable>
     </>)
 }
 

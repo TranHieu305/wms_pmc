@@ -1,61 +1,61 @@
 .board .board-container {
-    width: 100%;
+	width: 100%;
 }
 
 .board .board-header {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .board .board-title {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 36px;
-    color: #8E8E8E;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 36px;
+	color: #8e8e8e;
 }
 
 .board .board-action {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
 }
 
 .board .board-action .board-search {
-    width: 380px;
-    height: 34px;
-    border-width: 0px, 0px, 0px, 0px;
-    border-style: solid;
-    border-color: rgba(236, 239, 243, 1);
+	width: 380px;
+	height: 34px;
+	border-width: 0px, 0px, 0px, 0px;
+	border-style: solid;
+	border-color: rgba(236, 239, 243, 1);
 }
 
 .board .board-summary {
-    background-color: rgba(255, 255, 255, 1);
-    padding: 30px 30px 20px 30px;
-    border-radius: 5px;
+	background-color: rgba(255, 255, 255, 1);
+	padding: 30px 30px 20px 30px;
+	border-radius: 5px;
 }
 
 .board .board-summary .summary-header {
-    font-size: 26px;
-    font-weight: 600;
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    gap: 10px;
+	font-size: 26px;
+	font-weight: 600;
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+	gap: 10px;
 }
 
 .board .board-summary .summary-content {
-    padding-top: 20px;
-    padding-left: 40px;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+	padding-top: 20px;
+	padding-left: 40px;
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
 }
 
 .board .board-summary .summary-content .content-item {
-    font-weight: bold;
-    color: rgba(48, 144, 255, 1);
+	font-weight: bold;
+	color: rgba(48, 144, 255, 1);
 }
 
 .board .ant-table {
-    padding: 20px 20px 0px 20px;
+	padding: 20px 20px 0px 20px;
 }
