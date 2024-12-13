@@ -1,6 +1,7 @@
 import { Divider, Tabs } from "antd";
 import DetailPage from "../../../shared/components/DetailPage";
 import ProductCategoryTypeTag from "./ProductCategoryTypeTag";
+import ProductWarehouseForProductBoard from "./ProductWarehouseBoard";
 
 function Infor({product}) {
     return (
@@ -26,14 +27,11 @@ function Infor({product}) {
 }
 
 function DetailsPanel({product}) {
-    const onChange = (key) => {
-        console.log(key);
-    };
     const items = [
         {
           key: '1',
-          label: 'Tab 1',
-          children: 'Content of Tab Pane 1',
+          label: 'Inventory',
+          children: <ProductWarehouseForProductBoard product={product}/>,
         },
         {
           key: '2',
@@ -49,7 +47,7 @@ function DetailsPanel({product}) {
 
     return (
         <DetailPage.DetailContainer>
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+            <Tabs defaultActiveKey="1" items={items} />
         </DetailPage.DetailContainer>
     )
 }

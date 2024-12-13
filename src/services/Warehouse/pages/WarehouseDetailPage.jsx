@@ -7,6 +7,7 @@ import WarehouseAction from "../components/WarehouseAction";
 import LoadingPage from "../../../shared/components/LoadingPage";
 import { Col, Row, Tabs } from "antd";
 import WarehouseDetail from "../components/WarehouseDetail";
+import productWarehouseApi from "../../Product/api/productWarehouseApi";
 
 function WarehouseDetailPage() {
     const { warehouseId } = useParams();
@@ -31,13 +32,13 @@ function WarehouseDetailPage() {
     const items = [
         {
           key: '1',
-          label: 'Overview',
-          children: <WarehouseOverview  warehouse={warehouse}/>,
+          label: 'Inventory',
+          children: <WarehouseInventory  warehouse={warehouse}/>,
         },
         {
           key: '2',
-          label: 'Inventory',
-          children: <WarehouseInventory warehouse={warehouse}/>,
+          label: 'History',
+          children: <WarehouseHistory warehouse={warehouse}/>,
         },
     ];
 
@@ -66,20 +67,44 @@ function WarehouseDetailPage() {
         );
 }
 
-function WarehouseOverview ({warehouse}) {
+function WarehouseInventory ({warehouse}) {
+    const [productWarehouses, setProductWarehouses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
+
+    // Get product warehouses
+    useEffect(() => {
+        const fetchProductWarehouse = async (warehouse) => {
+          try {
+            const response = await productWarehouseApi.getByWarehouseId(warehouse.id);
+            setProductWarehouses(response.data.data); 
+          } catch (err) {
+            notificationHelper.showErrorNotification({description : err.response.data.message})
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchProductWarehouse(warehouse);
+    }, [warehouse]);
+
     return (
         <Row gutter={24}>
-            <Col span={14}>
-                <WarehouseDetail.Infor warehouse={warehouse}/>
+            <Col span={18}>
+                <WarehouseDetail.Inventory 
+                    warehouse={warehouse} 
+                    productWarehouses={productWarehouses} 
+                    loading={loading}
+                />
             </Col>
-            <Col span={10}>
-                {/* <ProductDetail.DetailsPanel product={product}/> */}
+            <Col span={6}>
+                <WarehouseDetail.Infor warehouse={warehouse}/>
             </Col>
         </Row>
     )
 }
 
-function WarehouseInventory ({warehouse}) {
+function WarehouseHistory ({warehouse}) {
 
 }
 

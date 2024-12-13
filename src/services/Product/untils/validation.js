@@ -27,4 +27,11 @@ const productValidationSchema = Yup.object().shape({
 	categoryId: Yup.number().min(1, "Please select product category"),
 });
 
-export { productCategoryValidationSchema, productValidationSchema };
+const pwhValidationSchema = Yup.object().shape({
+	description: Yup.string()
+		.trim()
+		.required("Description is required")
+		.max(255, "Description must be under 256 characters"),
+});
+
+export { productCategoryValidationSchema, productValidationSchema, pwhValidationSchema };

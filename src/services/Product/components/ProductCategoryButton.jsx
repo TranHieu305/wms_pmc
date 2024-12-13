@@ -5,10 +5,10 @@ import { useEffect } from "react";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import productCategoryApi from "../api/productCategoryApi";
-import { PRODUCT_CATEGORY_TYPE } from "../untils/enum";
 import { productCategoryValidationSchema } from "../untils/validation";
 import inputHelper from "../../../shared/utils/inputHelper";
 import { Modal } from "antd";
+import Enum from "../../../shared/utils/enum";
 
 function ProductCategoryBtnSave({category, ...props}) {
     const { showModal } = useModal(); 
@@ -70,7 +70,7 @@ function FormBodySaveProductCategory({category}) {
 		id: category?.id || 0,
 		name: category?.name || "",
 		description: category?.description || "",
-		categoryType: category?.categoryType || PRODUCT_CATEGORY_TYPE.MATERIAL
+		categoryType: category?.categoryType || Enum.CategoryType.MATERIAL
 	};
 
     const formik = useFormik({
@@ -84,7 +84,7 @@ function FormBodySaveProductCategory({category}) {
         setModalData(formik.values);
     }, [formik.values, setModalData]);
 
-    const typeOptions = inputHelper.convertEnumToSelectOption(PRODUCT_CATEGORY_TYPE);
+    const typeOptions = inputHelper.convertEnumToSelectOption(Enum.CategoryType);
 
     return (
         <SharedForm.FormBody>

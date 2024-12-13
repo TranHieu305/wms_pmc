@@ -1,14 +1,14 @@
 import { Tag } from "antd";
-import { PRODUCT_CATEGORY_TYPE } from "../untils/enum";
+import Enum from "../../../shared/utils/enum";
 
 function ProductCategoryTypeTag({category}) {
     if (!category) {
         return;
     }
-    if (category.categoryType === PRODUCT_CATEGORY_TYPE.MATERIAL) {
-        return <Tag color="gold">{PRODUCT_CATEGORY_TYPE.MATERIAL}</Tag>
+    if (category.categoryType === Enum.CategoryType.MATERIAL) {
+        return <Tag color="gold">{Enum.CategoryType.MATERIAL}</Tag>
     }
-    return <Tag color="blue">{PRODUCT_CATEGORY_TYPE.PRODUCTION}</Tag>
+    return <Tag color="blue">{Enum.CategoryType.PRODUCTION}</Tag>
 }
 
 export default ProductCategoryTypeTag;

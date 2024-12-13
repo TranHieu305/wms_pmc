@@ -20,3 +20,11 @@ export const PRODUCT_CATEGORY_API = {
 export const PRODUCT_API = {
 	BASE: `${API_BASE_URL}/products`,
 };
+
+export const PRODUCT_WAREHOUSE_API = {
+	BASE: `${API_BASE_URL}/product-warehouses`,
+};
+
+export const PRODUCT_WAREHOUSE_HISTORY_API = {
+	BASE: `${API_BASE_URL}/pw-histories`,
+};
