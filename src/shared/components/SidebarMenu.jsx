@@ -42,6 +42,18 @@ function SiderMenu() {
 			label: "Orders",
 			icon: <SharedIcon.Order />,
 		},
+        {
+			key: "shipments",
+			label: "Shipments",
+			icon: <SharedIcon.Shipment />,
+            children: [
+				{
+					key: "/batches",
+					label: "All Batch",
+				},
+				
+			],
+		},
 	];
     return (      
     <Sider className="h-screen bg-[#212B36]">

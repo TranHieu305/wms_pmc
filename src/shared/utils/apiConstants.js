@@ -32,3 +32,7 @@ export const PRODUCT_WAREHOUSE_HISTORY_API = {
 export const ORDER_API = {
 	BASE: `${API_BASE_URL}/orders`,
 };
+
+export const APP_API = {
+	BATCH: `${API_BASE_URL}/batches`,
+};

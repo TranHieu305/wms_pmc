@@ -1,5 +1,4 @@
 import { RouterProvider } from "react-router-dom";
-import "./styles/index.css";
 import appRouter from "./routes";
 import { ModalProvider } from "./shared/components/ModalProvider";
 

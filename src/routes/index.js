@@ -6,6 +6,7 @@ import ProtectedRoute from "../shared/components/ProtectedRoute";
 import AppLayout from "../shared/components/AppLayout";
 import partnerRouter from "./partner";
 import orderRouter from "./order";
+import batchRouter from "./batch";
 
 const appRouter = createBrowserRouter([
 	{
@@ -24,11 +25,8 @@ const appRouter = createBrowserRouter([
 			...warehouseRouter,
 			...productRouter,
 			...orderRouter,
-			// ...customerRouter,
-			// ...materialOrderRouter,
-			// ...supplierRouter,
+			...batchRouter,
 			// ...inventoryItemRouter,
-			// ...lotRouter,
 		],
 	},
 ]);
