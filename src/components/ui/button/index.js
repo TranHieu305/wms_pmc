@@ -1,1 +1,0 @@
-export { ButtonModalConfirm } from "./ButtonModal";

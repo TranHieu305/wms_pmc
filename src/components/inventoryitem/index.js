@@ -1,1 +1,0 @@
-export { InventoryItemBoard } from "./Boards";
