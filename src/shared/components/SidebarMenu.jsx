@@ -36,7 +36,11 @@ function SiderMenu() {
 			key: "partners",
 			label: "Partners",
 			icon: <SharedIcon.Partner />,
-			
+		},
+        {
+			key: "orders",
+			label: "Orders",
+			icon: <SharedIcon.Order />,
 		},
 	];
     return (      

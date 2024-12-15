@@ -1,4 +1,4 @@
-import { Input, Select } from "antd";
+import { DatePicker, Input, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
 function Label({forName, children}) {
@@ -41,10 +41,24 @@ function SelectInput({value, onChange, options,...props}) {
                 value={value} 
                 onChange={(value) => onChange(value)} 
                 options={options}
-                {...props} />
+                {...props} 
+            />
             {props.error && <InputError message={props.error}/>}
         </>
 	);
+}
+
+function DatePickerCustom({value, onChange, options,...props}) {
+    return (
+        <> 
+            <DatePicker key={"date-picker" + value}
+                value={value} 
+                onChange={(value) => onChange(value)} 
+                {...props}
+            />
+            {props.error && <InputError message={props.error}/>}
+        </>
+    )
 }
 
 function InputError({ message }) {
@@ -63,7 +77,8 @@ const SharedInput = {
     Text,
     TextAreaCustom,
     Label,
-    SelectInput
+    SelectInput, 
+    DatePickerCustom
 }
 
 export default SharedInput;

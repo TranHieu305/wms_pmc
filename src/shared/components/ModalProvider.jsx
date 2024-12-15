@@ -42,8 +42,16 @@ export const ModalProvider = ({ children }) => {
     const [modalConfig, setModalConfig] = useState(null);
     const [modalData, setModalData] = useState(null); // Shared state for form data
 
-    const showModal = ({ title, body, onSave, onCancel, onSaveText, onCancelText }) => {
-      setModalConfig({ title, body, onSave, onCancel, onSaveText, onCancelText });
+    const showModal = ({ 
+        title, 
+        body, 
+        onSave, 
+        onCancel, 
+        onSaveText, 
+        onCancelText,
+        widthModal = "small", 
+    }) => {
+      setModalConfig({ title, body, onSave, onCancel, onSaveText, onCancelText, widthModal });
     };
   
     const hideModal = () => {   
@@ -64,7 +72,13 @@ export const ModalProvider = ({ children }) => {
             createPortal(
                 <div className="modal">
                 <div className="modal-overlay"></div>
-                <div className="modal-content">
+                <div  className={`modal-content ${
+                        modalConfig.widthModal === "small"
+                        ? "w-1/4"
+                        : modalConfig.widthModal === "large"
+                        ? "w-3/4"
+                        : "w-1/2"
+                }`}>
                     <div className="modal-header">
                     <h3>{modalConfig.title}</h3>
                     </div>

@@ -28,3 +28,7 @@ export const PRODUCT_WAREHOUSE_API = {
 export const PRODUCT_WAREHOUSE_HISTORY_API = {
 	BASE: `${API_BASE_URL}/pw-histories`,
 };
+
+export const ORDER_API = {
+	BASE: `${API_BASE_URL}/orders`,
+};

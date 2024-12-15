@@ -19,7 +19,7 @@ function ProductBtnSave({product, ...props}) {
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created product" });
                 navigate(0);
-                window.open("/" + response.data.data.id, "_blank", "noopener,noreferrer");
+                window.open("/products/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot create product" });
