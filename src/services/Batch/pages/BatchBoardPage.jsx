@@ -26,7 +26,7 @@ function BatchBoardPage() {
     }, []);
 
     return (
-        <>
+        <BoardPage.ContentContainer>
             {/* Subheader */}
             <BoardPage.Subheader 
                 icon={(<SharedIcon.Shipment width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Shipment>)}
@@ -36,8 +36,10 @@ function BatchBoardPage() {
             </BoardPage.Subheader >
          
             {/* Table */}
-            <BatchBoard batches={batchs} loading={loading}></BatchBoard>
-        </>)
+            <BoardPage.BoardContainer>
+                <BatchBoard batches={batchs} loading={loading}></BatchBoard>
+            </BoardPage.BoardContainer>
+        </BoardPage.ContentContainer>)
 }
 
 export default BatchBoardPage;

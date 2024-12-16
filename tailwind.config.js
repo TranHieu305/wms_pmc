@@ -13,8 +13,9 @@ module.exports = {
 					boxShadow:
 						"0px 0px 2px 0px rgba(145, 158, 171, 0.20), 0px 12px 24px -4px rgba(145, 158, 171, 0.12)",
 				},
-				".board-border": {
+				".board-container": {
 					borderRadius: "16px",
+					backgroundColor: "#FFF",
 					border: "1px solid #DFE3E8",
 				},
 			});

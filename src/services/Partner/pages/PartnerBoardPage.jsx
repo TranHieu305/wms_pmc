@@ -27,7 +27,7 @@ function PartnerBoardPage() {
     }, []);
 
     return (
-    <>
+    <BoardPage.ContentContainer>
         {/* Subheader */}
         <BoardPage.Subheader 
             icon={(<SharedIcon.Partner width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Partner>)}
@@ -37,8 +37,11 @@ function PartnerBoardPage() {
         </BoardPage.Subheader >
        
         {/* Table */}
-        <PartnerTable partners={partners} loading={loading}></PartnerTable>
-    </>)
+        <BoardPage.BoardContainer>
+            <PartnerTable partners={partners} loading={loading}></PartnerTable>
+
+        </BoardPage.BoardContainer>
+    </BoardPage.ContentContainer>)
 }
 
 export default PartnerBoardPage;

@@ -8,6 +8,7 @@ import LoadingPage from "../../../shared/components/LoadingPage";
 import { Col, Row, Tabs } from "antd";
 import WarehouseDetail from "../components/WarehouseDetail";
 import productWarehouseApi from "../../Product/api/productWarehouseApi";
+import WarehouseStatusTag from "../components/WarehouseStatusTag";
 
 function WarehouseDetailPage() {
     const { warehouseId } = useParams();
@@ -49,7 +50,14 @@ function WarehouseDetailPage() {
                     <>
                         {/* Header */}
                         <DetailPage.Subheader 
-                            title={warehouse.name}
+                            title={
+                                <div className="flex flex-row">
+                                    {warehouse.name}
+                                    <div className="px-2">
+                                        <WarehouseStatusTag warehouse={warehouse}/>
+                                    </div>
+                                </div>
+                            }
                             id={warehouse.id}
                             backLink="/warehouses"
                         >

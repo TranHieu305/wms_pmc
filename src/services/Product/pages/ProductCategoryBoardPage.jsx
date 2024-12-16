@@ -28,7 +28,7 @@ function ProductCategoryBoardPage() {
     }, []);
 
     return (
-    <>
+    <BoardPage.ContentContainer>
         {/* Subheader */}
         <BoardPage.Subheader
             icon={(<SharedIcon.Product width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Product>)}
@@ -38,8 +38,10 @@ function ProductCategoryBoardPage() {
         </BoardPage.Subheader >
      
         {/* Table */}
-        <ProductCategoryBoard categories={categories} loading={loading}></ProductCategoryBoard>
-    </>)
+        <BoardPage.BoardContainer>
+            <ProductCategoryBoard categories={categories} loading={loading}></ProductCategoryBoard>
+        </BoardPage.BoardContainer>
+    </BoardPage.ContentContainer>)
 
 }
 

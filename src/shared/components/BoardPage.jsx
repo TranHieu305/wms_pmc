@@ -13,13 +13,17 @@ function Subheader({icon, title, children}) {
     );
 }
 
-function BoardContainer({children}) {
-    return <div>{children}</div>
+function ContentContainer({children}) {
+    return <div className="p-6">{children}</div>
 }
 
+function BoardContainer({children}) {
+    return <div className="board-container">{children}</div>
+}
 
 const BoardPage = {
     Subheader,
+    ContentContainer,
     BoardContainer
 }
 

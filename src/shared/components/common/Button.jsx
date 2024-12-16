@@ -4,8 +4,8 @@ import { Button } from "antd";
 function BtnSave({label, ...props}) {
     return(
         <Button 
-            className="bg-green-500 hover:bg-green-600 text-white border-none rounded-md"
             icon={<PlusOutlined />}
+            type="primary"
             {...props}
         >
             {label}

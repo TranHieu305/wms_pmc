@@ -18,7 +18,7 @@ function OrderItemBoard({order}) {
 
     return (
         <DetailPage.DetailContainer>
-            <h2 className="text-base font-semibold text-gray-800 mb-4">Order item</h2>
+            <DetailPage.InforCardTitle>Order item</DetailPage.InforCardTitle>
             <Table dataSource={orderItems} columns={columns} rowKey="id"></Table>
         </DetailPage.DetailContainer>
     );
@@ -28,7 +28,7 @@ function Infor({order}) {
     return (
         <DetailPage.DetailContainer>
             <DetailPage.InforCard>
-                <h2 className="text-base font-semibold text-gray-800 mb-4">Information</h2>
+                <DetailPage.InforCardTitle>Information</DetailPage.InforCardTitle>
                 <Divider />
 
                 {/* Info Items */}

@@ -16,7 +16,7 @@ function AppLayout() {
                             boxShadow: "0px 4px 8px 0px rgba(145, 158, 171, 0.16)",
                         }}
                     />
-                    <div className="main-content">
+                    <div>
                         <Outlet />
                     </div>
                 </Layout>

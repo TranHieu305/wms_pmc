@@ -33,6 +33,7 @@
 import { createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import "../styles/ModalProvider.css";
+import { Button } from "antd";
 
 export const ModalContext = createContext();
 
@@ -84,11 +85,12 @@ export const ModalProvider = ({ children }) => {
                     </div>
                     <div className="modal-body">{modalConfig.body}</div>
                     <div className="modal-footer">
-                    <button onClick={modalConfig.onCancel || hideModal}>
-                        {modalConfig.onCancelText || "Cancel"}
-                    </button>
-                    <button onClick={handleSave}>
-                        {modalConfig.onSaveText || "Save"}</button>
+                        <Button onClick={modalConfig.onCancel || hideModal}>
+                            {modalConfig.onCancelText || "Cancel"}
+                        </Button>
+                        <Button onClick={handleSave} type="primary">
+                            {modalConfig.onSaveText || "Save"}
+                        </Button>
                     </div>
                 </div>
                 </div>,

@@ -44,7 +44,7 @@ function ProductWarehouseForProductBoard({product}) {
     return (
     <>    
         <div>
-            <h2 className="text-base font-semibold text-gray-800 p-6">Inventory</h2>
+            <h2 className="text-base font-semibold text-gray-800 p-4">Inventory</h2>
         </div>
         <Table loading={loading} dataSource={productWarehouses} columns={columns} rowKey="id"></Table>
     </>);

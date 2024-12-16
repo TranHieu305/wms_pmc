@@ -39,7 +39,7 @@ function PWHBtnImport({warehouse, ...props}) {
         })
     }
 
-    return <Button onClick={handleClick} {...props}>Import</Button>
+    return <Button onClick={handleClick} type="dash" {...props}>Import</Button>
 }
 
 function PWHBtnExport({warehouse, ...props}) {
@@ -70,7 +70,7 @@ function PWHBtnExport({warehouse, ...props}) {
         })
     }
 
-    return <Button onClick={handleClick} {...props}>Import</Button>
+    return <Button onClick={handleClick} type="dash" {...props}>Export</Button>
 }
 
 function FormBodyManageProductForWarehouse({warehouse, inventoryAction}) {

@@ -27,7 +27,7 @@ function OrderBoardPage() {
     }, []);
 
     return (
-    <>
+    <BoardPage.ContentContainer>
         {/* Subheader */}
         <BoardPage.Subheader 
             icon={(<SharedIcon.Order width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Order>)}
@@ -37,8 +37,10 @@ function OrderBoardPage() {
         </BoardPage.Subheader >
      
         {/* Table */}
-        <OrderBoard orders={orders} loading={loading}></OrderBoard>
-    </>)
+        <BoardPage.BoardContainer>
+            <OrderBoard orders={orders} loading={loading}></OrderBoard>
+        </BoardPage.BoardContainer>
+    </BoardPage.ContentContainer>)
 }
 
 export default OrderBoardPage;

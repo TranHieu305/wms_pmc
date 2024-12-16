@@ -27,7 +27,7 @@ function WarehouseBoardPage() {
     }, []);
 
     return (
-    <>
+    <BoardPage.ContentContainer>
         {/* Subheader */}
         <BoardPage.Subheader 
             icon={(<SharedIcon.Warehouse width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Warehouse>)}
@@ -37,8 +37,10 @@ function WarehouseBoardPage() {
         </BoardPage.Subheader >
      
         {/* Table */}
-        <WarehouseBoard warehouses={warehouses} loading={loading}></WarehouseBoard>
-    </>)
+        <BoardPage.BoardContainer>
+            <WarehouseBoard warehouses={warehouses} loading={loading}></WarehouseBoard>
+        </BoardPage.BoardContainer>
+    </BoardPage.ContentContainer>)
 }
 
 export default WarehouseBoardPage;

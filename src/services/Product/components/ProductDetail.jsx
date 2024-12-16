@@ -7,7 +7,7 @@ function Infor({product}) {
     return (
         <DetailPage.DetailContainer>
             <DetailPage.InforCard>
-                <h2 className="text-base font-semibold text-gray-800 mb-4">Information</h2>
+                <DetailPage.InforCardTitle>Information</DetailPage.InforCardTitle>
                 <Divider />
 
                 {/* Info Items */}
