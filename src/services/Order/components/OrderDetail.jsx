@@ -19,7 +19,9 @@ function OrderItemBoard({order}) {
 
     return (
         <DetailPage.DetailContainer>
-            <DetailPage.InforCardTitle>Order item</DetailPage.InforCardTitle>
+            <DetailPage.InforCardTitle>
+                <div className="p-4">Order item</div>
+            </DetailPage.InforCardTitle>
             <Table dataSource={orderItems} columns={columns} rowKey="id"></Table>
         </DetailPage.DetailContainer>
     );

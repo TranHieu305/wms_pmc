@@ -1,5 +1,4 @@
 import { useModal } from "../../../shared/components/ModalProvider";
-import { SharedBtn} from "../../../shared/components/common";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import batchApi from "../api/batchApi";
@@ -33,7 +32,7 @@ function BatchBtnCreateFromOrder({order, ...props}) {
         })
     }
 
-    return <SharedBtn.BtnSave onClick={handleClick} {...props}/>
+    return <Button onClick={handleClick} {...props}>Create batch</Button>
 }
 
 function BatchBtnMarkAsDelivered({batch}) {

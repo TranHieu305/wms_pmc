@@ -3,7 +3,7 @@ import TextArea from "antd/es/input/TextArea";
 
 function Label({forName, children}) {
     return (
-    <label className="block text-[rgba(33,43,54,1)] text-[14px] font-normal leading-[22px] "
+    <label className="block text-[rgba(33,43,54,1)] text-[14px] font-normal leading-[22px] pb-1"
             htmlFor={forName}>
         {children}
     </label>)
@@ -13,7 +13,6 @@ function Text({...props}) {
     return (
         <>
             <Input 
-                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none"
                 {...props}
             />
             {props.error && <InputError message={props.error}/>}

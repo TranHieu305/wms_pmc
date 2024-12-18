@@ -6,7 +6,7 @@ import inputHelper from "../../../shared/utils/inputHelper";
 import productApi from "../../Product/api/productApi";
 import Enum from "../../../shared/utils/enum";
 import { useFormik } from "formik";
-import orderValidationShema from "../untils/validation";
+import orderValidationShema, { orderUpdateValidationSchema } from "../untils/validation";
 import { SharedBtn, SharedForm, SharedInput } from "../../../shared/components/common";
 import { Button, Col, Divider, Row } from "antd";
 import moment from "moment-timezone";
@@ -292,6 +292,7 @@ function FormSaveOrder({order}) {
                 ))
             }
             <SharedBtn.BtnSave 
+                type="link"
                 label="Add more item"
                 onClick={handleAddItem}
             />
@@ -300,4 +301,96 @@ function FormSaveOrder({order}) {
 
 }
 
-export {FormSaveOrder}
+function FormUpdateOrder({order}) {
+    const {setModalData} = useModal();
+
+
+    const initialValues = {
+		id: order?.id || 0,
+		name: order?.name || null,
+		orderDate: order?.orderDate ? moment(order?.orderDate) : null,
+        expectedDeliveryDate: order?.expectedDeliveryDate
+        ? moment(order?.expectedDeliveryDate)
+        : null,
+	};
+
+    const formik = useFormik({
+		initialValues: initialValues,
+		validationSchema: orderUpdateValidationSchema,
+		onSubmit: (values) => {},
+	});
+
+    // Sync form data with ModalProvider
+    useEffect(() => {
+        setModalData(formik.values);
+    }, [formik.values, setModalData]);
+
+    return (
+        <SharedForm.FormBody>
+            {/* Name */}
+            <SharedForm.FormBodyItem>
+                <SharedInput.Label forName="name">Order name*</SharedInput.Label>
+                <SharedInput.Text
+                        name="name"
+                        placeholder="Order name*"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.name}
+                        error={formik.touched.name && formik.errors.name}
+                    />
+            </SharedForm.FormBodyItem>
+            {/* Partner and action */}
+            <Row gutter={24}>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="partnerId">Order partner</SharedInput.Label>
+                        <SharedInput.Text
+                            value={order.partner?.name || "---"}
+                            disabled
+                        />
+                    </SharedForm.FormBodyItem>	
+                </Col>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="inventoryAction">Order type</SharedInput.Label>
+                        <SharedInput.Text
+                            value={order.inventoryAction || "---"}
+                            disabled
+                        />
+                    </SharedForm.FormBodyItem>			
+                </Col>
+            </Row>
+            {/* orderDate & expectedDeliveryDate */}
+            <Row gutter={24}>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="expectedDate">Order date</SharedInput.Label>
+                        <SharedInput.DatePickerCustom 
+                            format="DD/MM/YYYY"
+                            value={formik.values.orderDate}
+                            onChange={(date) => formik.setFieldValue("orderDate", date)}
+                            style={{
+                                width: '100%',
+                            }}
+                        />
+                    </SharedForm.FormBodyItem>
+                </Col>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="expectedDeliveryDate">Expected delivery date</SharedInput.Label>
+                        <SharedInput.DatePickerCustom 
+                            format="DD/MM/YYYY"
+                            value={formik.values.expectedDeliveryDate}
+                            onChange={(date) => formik.setFieldValue("expectedDeliveryDate", date)}
+                            style={{
+                                width: '100%',
+                            }}
+                        />
+                    </SharedForm.FormBodyItem>
+                </Col>
+            </Row>
+        </SharedForm.FormBody>
+    )
+}
+
+export {FormSaveOrder, FormUpdateOrder}

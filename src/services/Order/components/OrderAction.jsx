@@ -1,17 +1,23 @@
 import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
 import { BatchBtnCreateFromOrder } from "../../Batch/components/BatchButton";
+import { OrderBtnDelete, OrderBtnUpdate } from "./OrderButton";
 
 function OrderAction({order, ...props}) {
     const items = [
         {
-            key: '1',
-            label: <BatchBtnCreateFromOrder order={order} label="Create batch" type="dash"/>,
+            key: 'create' + order.id,
+            label: <BatchBtnCreateFromOrder order={order} label="Create batch" type="dash" key={order.id}/>,
         },
-        // {
-        //     key: '2',
-        //     label: <ProductBtnDelete product={product}/>,
-        // },
+        {
+            key: 'update' + order.id,
+            label: <OrderBtnUpdate order={order} key={order.id}/>,
+        },
+        {
+            key: 'delete' + order.id,
+            label: <OrderBtnDelete order={order} key={order.id}/>,
+        },
+
     ];
 
     return (
