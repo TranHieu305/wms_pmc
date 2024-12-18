@@ -8,8 +8,15 @@ const save = (data) => {
 	});
 };
 
+const getByWarehouseId = (warehouseId) => {
+	return axios.get(PRODUCT_WAREHOUSE_HISTORY_API.BASE + `/warehouse/${warehouseId}`, {
+		headers: authHeader(),
+	});
+};
+
 const productWarehouseHistoryApi = {
 	save,
+	getByWarehouseId,
 };
 
 export default productWarehouseHistoryApi;

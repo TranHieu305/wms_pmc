@@ -9,6 +9,7 @@ import { Col, Row, Tabs } from "antd";
 import WarehouseDetail from "../components/WarehouseDetail";
 import productWarehouseApi from "../../Product/api/productWarehouseApi";
 import WarehouseStatusTag from "../components/WarehouseStatusTag";
+import productWarehouseHistoryApi from "../../Product/api/productWarehouseHistoryApi";
 
 function WarehouseDetailPage() {
     const { warehouseId } = useParams();
@@ -113,7 +114,27 @@ function WarehouseInventory ({warehouse}) {
 }
 
 function WarehouseHistory ({warehouse}) {
+    const [histories, setHistories] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        const fetchData = async (warehouse) => {
+          try {
+            const response = await productWarehouseHistoryApi.getByWarehouseId(warehouse.id);
+            setHistories(response.data.data); 
+          } catch (err) {
+            notificationHelper.showErrorNotification({description : err.response.data.message})
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchData(warehouse);
+    }, [warehouse]);
+
+    return (
+        <WarehouseDetail.History histories={histories} loading={loading}/>
+    )
 }
 
 export default WarehouseDetailPage;

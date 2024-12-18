@@ -59,6 +59,11 @@ function SiderMenu() {
 				
 			],
 		},
+        {
+			key: "settings",
+			label: "Settings",
+			icon: <SharedIcon.Setting />,
+		},
 	];
     return (      
     <Sider className="h-screen bg-[#212B36]">

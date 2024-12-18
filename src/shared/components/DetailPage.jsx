@@ -42,8 +42,7 @@ function InforItem({label, value, children}) {
     return (
         <div>
             <p className=" text-gray-800 font-medium">{label}</p>
-            <p className=" text-gray-500">
-            
+            <p className=" text-gray-500 font-normal">
                 {value}
                 {children}
             </p>

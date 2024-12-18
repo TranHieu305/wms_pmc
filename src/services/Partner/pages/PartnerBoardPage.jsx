@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import partnerApi from "../api/partnerApi";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import PartnerTable from "../components/PartnerBoard.jsx";
-import SharedIcon from "../../../shared/components/common/Icon.jsx";
+import SharedIcon from "../../../shared/components/common/Icon.js";
 import BtnSavePartner from "../components/PartnerButton.jsx";
 import BoardPage from "../../../shared/components/BoardPage.jsx";
 
