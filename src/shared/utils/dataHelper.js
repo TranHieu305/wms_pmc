@@ -45,7 +45,6 @@ function formatDateTime(datetime) {
 }
 
 function formatQuantity(quantity) {
-	console.log(quantity);
 	return quantity ? quantity.toFixed(2) : null;
 }
 

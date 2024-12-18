@@ -10,7 +10,6 @@ function OrderBtnSave({...props}) {
     const navigate = useNavigate();
 
     const handleSave = (data) => {
-        console.log(data);
         orderApi.saveOrder(data)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created order" });

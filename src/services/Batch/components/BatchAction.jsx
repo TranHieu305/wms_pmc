@@ -1,12 +1,12 @@
 import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
-import { BatchBtnCreateFromOrder } from "../../Batch/components/BatchButton";
+import { BatchBtnMarkAsDelivered } from "./BatchButton";
 
-function OrderAction({order, ...props}) {
+function BatchAction({batch, ...props}) {
     const items = [
         {
             key: '1',
-            label: <BatchBtnCreateFromOrder order={order} label="Create batch" type="dash"/>,
+            label: <BatchBtnMarkAsDelivered batch={batch} type="dash"/>,
         },
         // {
         //     key: '2',
@@ -27,4 +27,4 @@ function OrderAction({order, ...props}) {
     );
 }
 
-export default OrderAction;
+export default BatchAction;

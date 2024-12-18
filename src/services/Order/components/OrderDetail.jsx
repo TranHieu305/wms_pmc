@@ -4,6 +4,7 @@ import dataHelper from "../../../shared/utils/dataHelper";
 import { Link } from "react-router-dom";
 
 function OrderItemBoard({order}) {
+    console.log(order);
     const orderItems = order.orderItems || [];
 
     const columns = [
