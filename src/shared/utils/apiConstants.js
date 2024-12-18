@@ -35,4 +35,5 @@ export const ORDER_API = {
 
 export const APP_API = {
 	BATCH: `${API_BASE_URL}/batches`,
+	INVENTORY_ITEM: `${API_BASE_URL}/inventory-items`,
 };

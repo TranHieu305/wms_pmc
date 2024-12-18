@@ -38,6 +38,11 @@ function SiderMenu() {
 			icon: <SharedIcon.Partner />,
 		},
         {
+			key: "inventoryitems",
+			label: "Inventory items",
+			icon: <SharedIcon.InventoryItem />,
+		},
+        {
 			key: "orders",
 			label: "Orders",
 			icon: <SharedIcon.Order />,
