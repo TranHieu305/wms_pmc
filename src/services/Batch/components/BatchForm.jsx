@@ -6,9 +6,10 @@ import { useFormik } from "formik";
 import { Button, Col, Divider, Row } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import warehouseApi from "../../Warehouse/api/warehouseApi";
-import batchValidationSchema from "../untils/validation";
+import batchValidationSchema, { batchUpdateValidationSchema } from "../untils/validation";
 import inputHelper from "../../../shared/utils/inputHelper";
 import { SharedForm, SharedInput } from "../../../shared/components/common";
+import moment from "moment-timezone";
 
 
 function FormCreateFromOrder({order}) {
@@ -27,6 +28,8 @@ function FormCreateFromOrder({order}) {
         }
         fetchWarehouses();
     }, []);
+
+    console.log(order);
 
     // Map orderitems to batchitems
     const initialBatchItems = order.orderItems.map(item => {
@@ -260,4 +263,53 @@ function FormCreateFromOrder({order}) {
     )
 }
 
-export {FormCreateFromOrder}
+function FormUpdateBatch({batch}) {
+    const {setModalData} = useModal();
+
+    const initialValues = {
+		id: batch.id,
+		name: batch.name,
+		batchDate: batch.batchDate ? moment(batch.batchDate) : null,
+	};
+
+    const formik = useFormik({
+		initialValues: initialValues,
+		validationSchema: batchUpdateValidationSchema,
+		onSubmit: (values) => {},
+	});
+
+    // Sync form data with ModalProvider
+    useEffect(() => {
+        setModalData(formik.values);
+    }, [formik.values, setModalData]);
+
+    return (
+        <SharedForm.FormBodyItem>
+            <SharedForm.FormBodyItem>
+            <SharedInput.Label forName="name">Batch name*</SharedInput.Label>
+                <SharedInput.Text
+                        name="name"
+                        placeholder="Batch name*"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.name}
+                        error={formik.touched.name && formik.errors.name}
+                    />
+            </SharedForm.FormBodyItem>
+
+            <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="batchDate">Batch date*</SharedInput.Label>
+                        <SharedInput.DatePickerCustom
+                             format="DD/MM/YYYY"
+                             value={formik.values.batchDate}
+                             onChange={(date) => formik.setFieldValue("batchDate", date)}
+                             style={{
+                                 width: '100%',
+                             }}
+                        />
+                    </SharedForm.FormBodyItem>	
+        </SharedForm.FormBodyItem>
+    )
+}
+
+export {FormCreateFromOrder, FormUpdateBatch}

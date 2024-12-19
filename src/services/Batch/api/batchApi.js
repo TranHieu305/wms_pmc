@@ -20,11 +20,21 @@ const markAsDelivered = (batchId) => {
 	});
 };
 
+const updateBatch = (data) => {
+	return axios.put(APP_API.BATCH, data, { headers: authHeader() });
+};
+
+const deleteBatch = (batch) => {
+	return axios.delete(APP_API.BATCH + `/${batch.batchId}`, { headers: authHeader() });
+};
+
 const batchApi = {
 	getAllBatches,
 	createFromOrder,
 	getBatchDetail,
 	markAsDelivered,
+	updateBatch,
+	deleteBatch,
 };
 
 export default batchApi;

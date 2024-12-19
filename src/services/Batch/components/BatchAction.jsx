@@ -1,17 +1,21 @@
 import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
-import { BatchBtnMarkAsDelivered } from "./BatchButton";
+import { BatchBtnDelete, BatchBtnMarkAsDelivered, BatchBtnUpdate } from "./BatchButton";
 
 function BatchAction({batch, ...props}) {
     const items = [
         {
-            key: '1',
+            key: "mark-as-deliverd" + batch.id,
             label: <BatchBtnMarkAsDelivered batch={batch} type="dash"/>,
         },
-        // {
-        //     key: '2',
-        //     label: <ProductBtnDelete product={product}/>,
-        // },
+        {
+            key: 'udpate' + batch.id,
+            label: <BatchBtnUpdate batch={batch}/>,
+        },
+        {
+            key: 'delete' + batch.id,
+            label: <BatchBtnDelete batch={batch}/>,
+        },
     ];
 
     return (

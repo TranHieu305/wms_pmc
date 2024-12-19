@@ -1,5 +1,7 @@
 import { Table } from "antd";
 import { Link } from "react-router-dom";
+import BatchAction from "./BatchAction";
+import dataHelper from "../../../shared/utils/dataHelper";
 
 function BatchBoard({batches, loading}) {
     const columns = [
@@ -19,11 +21,13 @@ function BatchBoard({batches, loading}) {
             render: (_, {inventoryAction}) => (<div>{inventoryAction}</div>)
         },
         { key: "status", title: "Status", dataIndex: "status", width: "10%" },
-		{ key: "batchDate", title: "Date", dataIndex: "batchDate", width: "10%" },
+		{ key: "batchDate", title: "Date", dataIndex: "batchDate", width: "10%",
+            render: (_,{batchDate}) => (<div>{dataHelper.formatDate(batchDate)}</div>)
+        },
 		{
 		    key: "actions",
 		    title: "Action",
-		    // render: (_, record) => <BatchAction batch={record} />,
+		    render: (_, record) => <BatchAction batch={record} />,
 		},
 	];
 

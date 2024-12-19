@@ -4,22 +4,22 @@ import { SharedBtn, SharedForm, SharedInput } from "../../../shared/components/c
 import { useEffect } from "react";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "antd";
-import orderItemApi from "../api/orderItemApi";
-import { orderItemUpdateValidationSchema } from "../untils/validation";
+import { Button, Modal } from "antd";
+import batchItemApi from "../api/batchItemApi";
+import { batchItemUpdateValidationSchema } from "../untils/validation";
 
-function OrderItemBtnUpdate({item, ...props}) {
+function BatchItemBtnUpdate({item, ...props}) {
     const { showModal } = useModal(); 
     const navigate = useNavigate();
 
     const handleSave = (data) => {
-        orderItemApi.updateItem(data)
+        batchItemApi.updateItem(data)
             .then((response) => {
-                notificationHelper.showSuccessNotification({ description: "Successfully updated order item" });
+                notificationHelper.showSuccessNotification({ description: "Successfully updated batch item" });
                 setTimeout(() => navigate(0), 1000);
             })
             .catch((err) => {
-                notificationHelper.showErrorNotification({ description: "Cannot update order item" });
+                notificationHelper.showErrorNotification({ message: "Cannot update batch item", description: err.response.data.message });
             });
     }
 
@@ -35,16 +35,19 @@ function OrderItemBtnUpdate({item, ...props}) {
 }
 
 function FormEditItem({item}) {
+    console.log(item);
+
     const {setModalData} = useModal();
 
     const initialValues = {
-		id: item?.id || 0,
-        quantity: item?.quantity || 0
+		id: item.id,
+        quantity: item.quantity,
+        weight: item.weight || 0,
 	};
 
     const formik = useFormik({
 		initialValues: initialValues,
-		validationSchema: orderItemUpdateValidationSchema,
+		validationSchema: batchItemUpdateValidationSchema,
 		onSubmit: (values) => {},
 	});
 
@@ -62,7 +65,7 @@ function FormEditItem({item}) {
                         value={item.product?.name || "---"}
                         disabled
                     />
-            </SharedForm.FormBodyItem>
+           </SharedForm.FormBodyItem>
 
             <SharedForm.FormBodyItem>
                 <SharedInput.Label forName="name">Unit</SharedInput.Label>
@@ -72,7 +75,7 @@ function FormEditItem({item}) {
                     />
             </SharedForm.FormBodyItem>
 
-            <SharedForm.FormBodyItem>
+            <SharedForm.FormBodyItem>               
                 <SharedInput.Label forName="quantity">Quantity</SharedInput.Label>
                 <SharedInput.Text
                         type="number"
@@ -83,15 +86,27 @@ function FormEditItem({item}) {
                         error={formik.touched.quantity && formik.errors.quantity}
                     />
             </SharedForm.FormBodyItem>
+
+            <SharedForm.FormBodyItem>               
+                <SharedInput.Label forName="weight">Weight(Kg)</SharedInput.Label>
+                <SharedInput.Text
+                        type="number"
+                        name="weight"
+                        value={formik.values.weight}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.weight && formik.errors.weight}
+                    />
+            </SharedForm.FormBodyItem>
         </SharedForm.FormBody>
     )
 }
 
-function OrderItemBtnDelete({item}) {
+function BatchItemBtnDelete({item}) {
     const navigate = useNavigate();
 
     const onDelete = (item) => {
-        orderItemApi.deleteItem(item)
+        batchItemApi.deleteItem(item)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully delete item" });
                 setTimeout(() => navigate(0), 1000);
@@ -112,7 +127,39 @@ function OrderItemBtnDelete({item}) {
     return <SharedBtn.BtnDelete onClick={openConfirmModal}/>
 }
 
+function BatchItemBtnMarkComplete({item, batch, ...props}) {
+    const navigate = useNavigate();
+
+    if (!item.quantity || item.quantity === 0) {
+        notificationHelper.showErrorNotification({ message: "Cannot delete item", description: "Please update item weight" });
+    }
+
+    const onProcess = (item) => {
+        batchItemApi.markAsCompleted(batch.id, item.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully delete item" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ message: "Cannot delete item", description: err.response.data.message });
+            });
+    }
+
+    const openConfirmModal = () => {
+    console.log(item);
+
+        Modal.confirm({
+			title: "Confirm delete",
+			content: <div>Do you really want to mark item: <b>{item.product?.name}</b> as completed ?</div>,
+			onOk: () => onProcess(item),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Mark as completed</Button>
+}
+
 export {
-    OrderItemBtnDelete,
-    OrderItemBtnUpdate
+    BatchItemBtnUpdate, 
+    BatchItemBtnDelete,
+    BatchItemBtnMarkComplete
 }
