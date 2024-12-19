@@ -60,7 +60,7 @@ function ProductBtnEdit({product, ...props}) {
         })
     }
 
-    return <SharedBtn.BtnEdit label="Edit" onClick={handleClick} {...props}/>
+    return <SharedBtn.BtnEdit onClick={handleClick} {...props}/>
 }
 
 

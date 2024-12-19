@@ -22,12 +22,17 @@ const deleteOrder = (order) => {
 	return axios.delete(ORDER_API.BASE + `/${order.id}`, { headers: authHeader() });
 };
 
+const addOrderItem = (order, data) => {
+	return axios.post(ORDER_API.BASE + `/${order.id}`, data, { headers: authHeader() });
+};
+
 const orderApi = {
 	getAllOrders,
 	saveOrder,
 	getOrderDetail,
 	updateOrder,
 	deleteOrder,
+	addOrderItem,
 };
 
 export default orderApi;

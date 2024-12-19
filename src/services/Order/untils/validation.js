@@ -11,19 +11,32 @@ const orderValidationShema = Yup.object().shape({
 		Yup.object().shape({
 			quantity: Yup.number()
 				.required("Quantity is required")
-				.min(0, "Quantity must be at least 0"),
+				.moreThan(0, "Quantity must be more than 0"),
 		})
 	),
 });
 
 const orderUpdateValidationSchema = Yup.object().shape({
-	name: Yup.string()
-		.trim()
-		.required("Order Name is required")
-		.max(255, "Order name must be between 1 and 255 characters"),
-	orderDate: Yup.string().required("Order date is required"),
-	expectedDeliveryDate: Yup.string().required("Order expexted delivery date is required"),
+	quantity: Yup.number().required("Quantity is required").min(0, "Quantity must be at least 0"),
 });
+
+const orderItemUpdateValidationSchema = Yup.object().shape({
+	quantity: Yup.number()
+		.required("Quantity is required")
+		.moreThan(0, "Quantity must be more than 0"),
+});
+
+const orderItemAddValidationSchema = Yup.object().shape({
+	quantity: Yup.number()
+		.required("Quantity is required")
+		.moreThan(0, "Quantity must be more than 0"),
+	productId: Yup.number().required("Product is required"),
+});
+
 export default orderValidationShema;
 
-export { orderUpdateValidationSchema };
+export {
+	orderUpdateValidationSchema,
+	orderItemUpdateValidationSchema,
+	orderItemAddValidationSchema,
+};

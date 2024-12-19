@@ -3,7 +3,7 @@ import { SharedBtn} from "../../../shared/components/common";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import orderApi from "../api/orderApi";
-import { FormSaveOrder, FormUpdateOrder } from "./OrderForm";
+import { FormAddOrderItem, FormSaveOrder, FormUpdateOrder } from "./OrderForm";
 import { Modal } from "antd";
 
 function OrderBtnSave({...props}) {
@@ -62,6 +62,33 @@ function OrderBtnUpdate({order, ...props}) {
     return <SharedBtn.BtnEdit onClick={handleClick} {...props}/>
 }
 
+function OrderBtnAddItem({order, ...props}) {
+    const { showModal } = useModal(); 
+    const navigate = useNavigate();
+
+    const handleSave = (data) => {
+        orderApi.addOrderItem(order, data)
+            .then((response) => {
+                navigate(0);
+                notificationHelper.showSuccessNotification({ description: "Successfully update order" });
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot update order" });
+            });
+    }
+
+    const handleClick = () => {
+        showModal({
+            title: "Add item order",
+            body: (<FormAddOrderItem order={order} />),
+            onSave: handleSave,
+            widthModal: "medium"
+        })
+    }
+
+    return <SharedBtn.BtnSave label="Add item" onClick={handleClick} {...props}/>
+}
+
 function OrderBtnDelete({order}) {
     const navigate = useNavigate();
 
@@ -90,5 +117,6 @@ function OrderBtnDelete({order}) {
 export {
     OrderBtnSave,
     OrderBtnUpdate,
-    OrderBtnDelete
+    OrderBtnDelete,
+    OrderBtnAddItem
 }

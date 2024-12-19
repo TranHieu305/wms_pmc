@@ -6,7 +6,7 @@ import inputHelper from "../../../shared/utils/inputHelper";
 import productApi from "../../Product/api/productApi";
 import Enum from "../../../shared/utils/enum";
 import { useFormik } from "formik";
-import orderValidationShema, { orderUpdateValidationSchema } from "../untils/validation";
+import orderValidationShema, { orderItemAddValidationSchema, orderUpdateValidationSchema } from "../untils/validation";
 import { SharedBtn, SharedForm, SharedInput } from "../../../shared/components/common";
 import { Button, Col, Divider, Row } from "antd";
 import moment from "moment-timezone";
@@ -304,7 +304,6 @@ function FormSaveOrder({order}) {
 function FormUpdateOrder({order}) {
     const {setModalData} = useModal();
 
-
     const initialValues = {
 		id: order?.id || 0,
 		name: order?.name || null,
@@ -393,4 +392,121 @@ function FormUpdateOrder({order}) {
     )
 }
 
-export {FormSaveOrder, FormUpdateOrder}
+function FormAddOrderItem({order}) {
+    const {setModalData} = useModal();
+    const [products, setProducts] = useState([]);
+
+     // Get products for options
+     useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await productApi.getAllProducts();
+                setProducts(response.data.data); 
+            } catch (err) {
+                notificationHelper.showErrorNotification({description : err.response.data.message})
+            };
+        }
+        fetchProducts();
+    }, []);
+
+    const initialValues = {
+		id: 0,
+        productId: null,
+        category: null,
+        uom: null,
+        quantity: null,
+        productName: null
+	};
+
+    const formik = useFormik({
+		initialValues: initialValues,
+		validationSchema: orderItemAddValidationSchema,
+		onSubmit: (values) => {},
+	});
+
+    // Sync form data with ModalProvider
+    useEffect(() => {
+        setModalData(formik.values);
+    }, [formik.values, setModalData]);
+
+    const productOptions = inputHelper.convertArrToSelectOption(products);
+
+    // Handle select product at order item
+    const handleSelectProduct = (productId) => {
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            formik.setFieldValue("productId", product.id);
+            formik.setFieldValue("productName", product.name);
+            formik.setFieldValue("uom", product.uom);
+            formik.setFieldValue("category", product.productCategory?.name);
+        }
+    }
+
+    return  (
+        <SharedForm.FormBody>
+            <SharedForm.FormBodyItem>
+                <SharedInput.Label forName="name">Order name*</SharedInput.Label>
+                <SharedInput.Text
+                        value={order.name}
+                        disabled
+                    />
+            </SharedForm.FormBodyItem>
+
+            <Row gutter={24}>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="productId">Product</SharedInput.Label>
+                        <SharedInput.SelectInput
+                            name="productId"
+                            showSearch
+                            options={productOptions}
+                            style={{
+                                width: '100%',
+                            }}
+                            placeholder="Please choose a product"
+                            onChange={(value) => handleSelectProduct(value)}
+                            value={formik.values.productId}
+                        />
+                 </SharedForm.FormBodyItem>
+                </Col>
+                <Col span={12}>
+                    <SharedInput.Label forName="productId">Category</SharedInput.Label>
+                    <SharedInput.Text
+                        value={formik.values.category}
+                        disabled
+                    />
+                </Col>
+            </Row>
+
+            <Row gutter={24}>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="quantity">Quantity*</SharedInput.Label>
+                        <SharedInput.Text
+                            name="quantity"
+                            type="number"
+                            placeholder="Quangtity*"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.quantity}
+                            error={formik.touched.quantity && formik.errors.quantity}
+                        />
+                </SharedForm.FormBodyItem>
+                </Col>
+                <Col span={12}>
+                    <SharedInput.Label forName="productId">Unit</SharedInput.Label>
+                    <SharedInput.Text
+                        value={formik.values.uom}
+                        disabled
+                    />
+                </Col>
+            </Row>
+        </SharedForm.FormBody>
+    )
+}
+
+export {
+    FormSaveOrder, 
+    FormUpdateOrder,
+    FormAddOrderItem
+}
