@@ -6,7 +6,7 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
 import batchItemApi from "../api/batchItemApi";
-import { batchItemUpdateValidationSchema } from "../untils/validation";
+import { batchItemUpdateValidationSchema } from "../utils/validation";
 
 function BatchItemBtnUpdate({item, ...props}) {
     const { showModal } = useModal(); 

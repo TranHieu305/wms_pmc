@@ -6,7 +6,7 @@ import inputHelper from "../../../shared/utils/inputHelper";
 import productApi from "../../Product/api/productApi";
 import Enum from "../../../shared/utils/enum";
 import { useFormik } from "formik";
-import orderValidationShema, { orderItemAddValidationSchema, orderUpdateValidationSchema } from "../untils/validation";
+import orderValidationShema, { orderItemAddValidationSchema, orderUpdateValidationSchema } from "../utils/validation";
 import { SharedBtn, SharedForm, SharedInput } from "../../../shared/components/common";
 import { Button, Col, Divider, Row } from "antd";
 import moment from "moment-timezone";

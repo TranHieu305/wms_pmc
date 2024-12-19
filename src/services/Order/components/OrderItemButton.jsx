@@ -6,7 +6,7 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
 import orderItemApi from "../api/orderItemApi";
-import { orderItemUpdateValidationSchema } from "../untils/validation";
+import { orderItemUpdateValidationSchema } from "../utils/validation";
 
 function OrderItemBtnUpdate({item, ...props}) {
     const { showModal } = useModal(); 

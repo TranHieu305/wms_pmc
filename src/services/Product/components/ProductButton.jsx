@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import productApi from "../api/productApi";
 import productCategoryApi from "../api/productCategoryApi";
 import { Modal } from "antd";
-import { productValidationSchema } from "../untils/validation";
+import { productValidationSchema } from "../utils/validation";
 import inputHelper from "../../../shared/utils/inputHelper";
 
 function ProductBtnSave({product, ...props}) {

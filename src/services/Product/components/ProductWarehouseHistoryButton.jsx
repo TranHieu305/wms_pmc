@@ -6,7 +6,7 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import productWarehouseHistoryApi from "../api/productWarehouseHistoryApi";
 import { Button } from "antd";
-import { pwhValidationSchema } from "../untils/validation";
+import { pwhValidationSchema } from "../utils/validation";
 import productApi from "../api/productApi";
 import inputHelper from "../../../shared/utils/inputHelper";
 import Enum from "../../../shared/utils/enum";

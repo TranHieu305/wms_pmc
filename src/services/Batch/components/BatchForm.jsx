@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import { Button, Col, Divider, Row } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import warehouseApi from "../../Warehouse/api/warehouseApi";
-import batchValidationSchema, { batchUpdateValidationSchema } from "../untils/validation";
+import batchValidationSchema, { batchUpdateValidationSchema } from "../utils/validation";
 import inputHelper from "../../../shared/utils/inputHelper";
 import { SharedForm, SharedInput } from "../../../shared/components/common";
 import moment from "moment-timezone";

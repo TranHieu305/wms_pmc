@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import productCategoryApi from "../api/productCategoryApi";
-import { productCategoryValidationSchema } from "../untils/validation";
+import { productCategoryValidationSchema } from "../utils/validation";
 import inputHelper from "../../../shared/utils/inputHelper";
 import { Modal } from "antd";
 import Enum from "../../../shared/utils/enum";

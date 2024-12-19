@@ -12,9 +12,16 @@ function Label({forName, children}) {
 function Text({...props}) {
     return (
         <>
-            <Input 
-                {...props}
-            />
+            <Input {...props} />
+            {props.error && <InputError message={props.error}/>}
+        </>
+    )
+}
+
+function TextPassword({...props}) {
+    return(
+        <>
+            <Input.Password {...props} />
             {props.error && <InputError message={props.error}/>}
         </>
     )
@@ -77,7 +84,8 @@ const SharedInput = {
     TextAreaCustom,
     Label,
     SelectInput, 
-    DatePickerCustom
+    DatePickerCustom,
+    TextPassword
 }
 
 export default SharedInput;

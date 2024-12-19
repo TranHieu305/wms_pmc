@@ -1,6 +1,6 @@
 import { useModal } from "../../../shared/components/ModalProvider";
 import { useFormik } from "formik";
-import { validationWarehouseSchema } from "../untils/validation";
+import { validationWarehouseSchema } from "../utils/validation";
 import { SharedBtn, SharedForm, SharedInput } from "../../../shared/components/common";
 import { useEffect } from "react";
 import warehouseApi from "../api/warehouseApi";

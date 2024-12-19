@@ -18,11 +18,18 @@ const PartnerType = {
 	CUSTOMER: "CUSTOMER",
 };
 
+const UserRole = {
+	USER: "USER",
+	ADMIN: "ADMIN",
+	WAREHOUSE_MANAGER: "WAREHOUSE_MANAGER",
+};
+
 const Enum = {
 	InventoryAction,
 	CategoryType,
 	ProcessType,
 	PartnerType,
+	UserRole,
 };
 
 export default Enum;

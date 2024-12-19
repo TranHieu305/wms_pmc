@@ -63,6 +63,12 @@ function SiderMenu() {
 			key: "settings",
 			label: "Settings",
 			icon: <SharedIcon.Setting />,
+            children: [
+				{
+					key: "/users",
+					label: "User",
+				},
+			],
 		},
 	];
     return (      
