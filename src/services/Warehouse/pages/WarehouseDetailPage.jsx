@@ -107,7 +107,7 @@ function WarehouseInventory ({warehouse}) {
                 />
             </Col>
             <Col span={6}>
-                <WarehouseDetail.Infor warehouse={warehouse}/>
+                <WarehouseDetail.Info warehouse={warehouse}/>
             </Col>
         </Row>
     )

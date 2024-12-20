@@ -34,11 +34,11 @@ function DetailContainer({children}) {
     return <div className="rounded-md shadow-md bg-white">{children}</div>
 }
 
-function InforCard({children}) {
+function InfoCard({children}) {
     return <div className="p-6">{children}</div>
 }
 
-function InforItem({label, value, children}) {
+function InfoItem({label, value, children}) {
     return (
         <div>
             <p className=" text-gray-800 font-medium">{label}</p>
@@ -50,7 +50,7 @@ function InforItem({label, value, children}) {
     )
 }
 
-function InforCardTitle({children}) {
+function InfoCardTitle({children}) {
     return <div className="text-base font-semibold text-gray-800">{children}</div>
 }
 
@@ -58,9 +58,9 @@ const DetailPage = {
     Layout,
     Subheader,
     DetailContainer,
-    InforCard,
-    InforItem,
-    InforCardTitle
+    InfoCard,
+    InfoItem,
+    InfoCardTitle
 }
 
 export default DetailPage;

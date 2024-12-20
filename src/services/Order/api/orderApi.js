@@ -26,6 +26,12 @@ const addOrderItem = (order, data) => {
 	return axios.post(ORDER_API.BASE + `/${order.id}`, data, { headers: authHeader() });
 };
 
+const markAsCompleted = (orderId) => {
+	return axios.patch(ORDER_API.BASE + `/${orderId}/status/completed`, null, {
+		headers: authHeader(),
+	});
+};
+
 const orderApi = {
 	getAllOrders,
 	saveOrder,
@@ -33,6 +39,7 @@ const orderApi = {
 	updateOrder,
 	deleteOrder,
 	addOrderItem,
+	markAsCompleted,
 };
 
 export default orderApi;

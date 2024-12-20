@@ -8,20 +8,20 @@ import Enum from "../../../shared/utils/enum";
 import { SharedTag } from "../../../shared/components/common";
 import dataHelper from "../../../shared/utils/dataHelper";
 
-function Infor({warehouse}) {
+function Info({warehouse}) {
     return (
         <DetailPage.DetailContainer>
-            <DetailPage.InforCard>
-                <DetailPage.InforCardTitle>Information</DetailPage.InforCardTitle>
+            <DetailPage.InfoCard>
+                <DetailPage.InfoCardTitle>Information</DetailPage.InfoCardTitle>
                 <Divider />
 
                 {/* Info Items */}
                 <div className="space-y-4">
-                    <DetailPage.InforItem label="Name" value={warehouse.name}></DetailPage.InforItem>
-                    <DetailPage.InforItem label="Address" value={warehouse.address}></DetailPage.InforItem>
-                    <DetailPage.InforItem label="Description" value={warehouse.description}></DetailPage.InforItem>
+                    <DetailPage.InfoItem label="Name" value={warehouse.name}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Address" value={warehouse.address}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Description" value={warehouse.description}></DetailPage.InfoItem>
                 </div>
-            </DetailPage.InforCard>
+            </DetailPage.InfoCard>
         </DetailPage.DetailContainer>
     )
 }
@@ -43,11 +43,11 @@ function Inventory({warehouse, productWarehouses, loading}) {
 		{ key: "productCategory", title: "Category", dataIndex: ["product","productCategory"], width: "20%",
             render: (text, record) => (<div>{record.product.productCategory.name}</div>)
         },
-        { key: "unit", title: "Unit", dataIndex: "uom", width: "10%",
-            render: (text, record) => (<div>{record.product.uom}</div>)
-        },
 		{ key: "quantity", title: "Quantity on hand", dataIndex: ["product","quantity"], width: "20%",
             render: (text, record) => (<div>{record.quantityOnHand}</div>)
+        },
+        { key: "unit", title: "Unit", dataIndex: "uom", width: "10%",
+            render: (text, record) => (<div>{record.product.uom}</div>)
         },
 	];
 
@@ -67,7 +67,6 @@ function Inventory({warehouse, productWarehouses, loading}) {
 }
 
 function History({histories, loading}) {
-    console.log(histories);
     return (
         <DetailPage.DetailContainer>
             <List 
@@ -109,7 +108,7 @@ function History({histories, loading}) {
 }
 
 const WarehouseDetail = {
-    Infor,
+    Info,
     Inventory,
     History
 }

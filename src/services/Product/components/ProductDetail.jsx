@@ -2,26 +2,28 @@ import { Divider, Tabs } from "antd";
 import DetailPage from "../../../shared/components/DetailPage";
 import ProductCategoryTypeTag from "./ProductCategoryTypeTag";
 import ProductWarehouseForProductBoard from "./ProductWarehouseBoard";
+import ProductOrderItemBoard from "./ProductOrderItemBoard";
+import ProductBatchItemBoard from "./ProductBatchItemBoard";
 
-function Infor({product}) {
+function Info({product}) {
     return (
         <DetailPage.DetailContainer>
-            <DetailPage.InforCard>
-                <DetailPage.InforCardTitle>Information</DetailPage.InforCardTitle>
+            <DetailPage.InfoCard>
+                <DetailPage.InfoCardTitle>Information</DetailPage.InfoCardTitle>
                 <Divider />
 
                 {/* Info Items */}
                 <div className="space-y-4">
-                    <DetailPage.InforItem label="Name" value={product.name}></DetailPage.InforItem>
-                    <DetailPage.InforItem label="Code" value={product.code}></DetailPage.InforItem>
-                    <DetailPage.InforItem label="Category">
+                    <DetailPage.InfoItem label="Name" value={product.name}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Code" value={product.code}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Category">
                         {product.productCategory.name} - <ProductCategoryTypeTag category={product.productCategory}/>
-                    </DetailPage.InforItem>
-                    <DetailPage.InforItem label="Quantity" value={product.quantity}></DetailPage.InforItem>
-                    <DetailPage.InforItem label="Unit" value={product.uom}></DetailPage.InforItem>
-                    <DetailPage.InforItem label="Description" value={product.description}></DetailPage.InforItem>
+                    </DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Quantity" value={product.quantity}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Unit" value={product.uom}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Description" value={product.description}></DetailPage.InfoItem>
                 </div>
-            </DetailPage.InforCard>
+            </DetailPage.InfoCard>
         </DetailPage.DetailContainer>
     )
 }
@@ -35,13 +37,13 @@ function DetailsPanel({product}) {
         },
         {
           key: '2',
-          label: 'Tab 2',
-          children: 'Content of Tab Pane 2',
+          label: 'Order',
+          children: <ProductOrderItemBoard product={product}/>,
         },
         {
           key: '3',
-          label: 'Tab 3',
-          children: 'Content of Tab Pane 3',
+          label: 'Batch',
+          children: <ProductBatchItemBoard product={product}/>,
         },
     ];
 
@@ -54,7 +56,7 @@ function DetailsPanel({product}) {
 
 
 const ProductDetail = {
-    Infor,
+    Info,
     DetailsPanel
 }
 

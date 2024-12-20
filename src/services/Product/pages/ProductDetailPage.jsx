@@ -46,7 +46,7 @@ function ProductDetailPage() {
                     {/* Content */}
                     <Row gutter={24}>
                         <Col span={12}>
-                            <ProductDetail.Infor product={product}/>
+                            <ProductDetail.Info product={product}/>
                         </Col>
                         <Col span={12}>
                             <ProductDetail.DetailsPanel product={product}/>

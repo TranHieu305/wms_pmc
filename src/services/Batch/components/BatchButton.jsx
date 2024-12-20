@@ -12,7 +12,6 @@ function BatchBtnCreateFromOrder({order, ...props}) {
     const navigate = useNavigate();
 
     const handleSave = (data) => {
-        console.log(data);
         batchApi.createFromOrder(data)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created batch" });
@@ -95,7 +94,6 @@ function BatchBtnUpdate({batch, ...props}) {
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully updated batch" });
                 navigate(0);
-                window.open("/batchs/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot update batch" });

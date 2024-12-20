@@ -19,8 +19,13 @@ const login = (email, password) => {
 		});
 };
 
+const logout = () => {
+	localStorage.removeItem("user");
+};
+
 const authApi = {
 	login,
+	logout,
 };
 
 export default authApi;

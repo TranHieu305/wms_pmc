@@ -19,7 +19,7 @@ function ProductBtnSave({product, ...props}) {
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created product" });
                 navigate(0);
-                window.open("/products/" + response.data.data.id, "_blank", "noopener,noreferrer");
+                // window.open("/products/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot create product" });
@@ -30,7 +30,8 @@ function ProductBtnSave({product, ...props}) {
         showModal({
             title: "Create new Product",
             body: (<FormBodySaveProduct />),
-            onSave: handleSave
+            onSave: handleSave,
+            widthModal: "medium"
         })
     }
 
@@ -56,7 +57,8 @@ function ProductBtnEdit({product, ...props}) {
         showModal({
             title: <div>Edit product: {product.name}</div>,
             body: (<FormBodySaveProduct product={product}/>),
-            onSave: handleSave
+            onSave: handleSave,
+            widthModal: "medium"
         })
     }
 
@@ -74,7 +76,7 @@ function FormBodySaveProduct({product}) {
 		description: product?.description || "",
         code: product?.code || "",
         uom: product?.uom || "",
-        categoryId: product?.productCategory.id || 0
+        categoryId: product?.productCategory.id || null
 	};
 
     const formik = useFormik({
@@ -133,6 +135,7 @@ function FormBodySaveProduct({product}) {
                 <SharedInput.Label forName="categoryId">Category</SharedInput.Label>
                 <SharedInput.SelectInput
 					name="categoryId"
+                    placeholder="Please select product category"
 					showSearch
                     options={categoryOption}
                     style={{

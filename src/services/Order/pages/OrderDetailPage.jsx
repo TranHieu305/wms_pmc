@@ -7,6 +7,7 @@ import OrderAction from "../components/OrderAction";
 import { Col, Row } from "antd";
 import LoadingPage from "../../../shared/components/LoadingPage";
 import OrderDetail from "../components/OrderDetail";
+import { OrderStatusTag } from "../components/OrderTag";
 
 function OrderDetailPage() {
     const {orderId} = useParams();
@@ -35,7 +36,14 @@ function OrderDetailPage() {
                     <>
                         {/* Header */}
                         <DetailPage.Subheader 
-                            title={order.name}
+                            title={
+                                <div className="flex flex-row">
+                                    {order.name}
+                                    <div className="px-2">
+                                        <OrderStatusTag status={order.status}/>
+                                    </div>
+                                </div>
+                            }
                             id={order.id}
                             backLink="/orders"
                         >
@@ -48,7 +56,7 @@ function OrderDetailPage() {
                                 <OrderDetail.OrderItemBoard order={order} />
                             </Col>
                             <Col span={6}>
-                                <OrderDetail.Infor order={order} />
+                                <OrderDetail.Info order={order} />
                             </Col>
                         </Row>
                     </>

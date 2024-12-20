@@ -1,8 +1,5 @@
-import { inventoryItemLoader } from "../loaders/inventoryItem";
-import InventoryItemBoardPage from "../pages/inventoryitem/BoardPage";
+import InventoryItemBoardPage from "../services/InventoryItem/pages/InventoryItemBoardPage";
 
-const inventoryItemRouter = [
-	{ path: "/inventory-items", element: <InventoryItemBoardPage />, loader: inventoryItemLoader },
-];
+const inventoryItemRouter = [{ path: "/inventory-items", element: <InventoryItemBoardPage /> }];
 
 export default inventoryItemRouter;

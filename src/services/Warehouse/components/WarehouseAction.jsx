@@ -1,6 +1,6 @@
 import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
-import { WarehouseBtnEdit, WarehousetBtnDelete } from "./WarehouseButton";
+import { WarehouseBtnEdit, WarehouseBtnDelete } from "./WarehouseButton";
 
 function WarehouseAction({warehouse, ...props}) {
     const items = [
@@ -10,7 +10,7 @@ function WarehouseAction({warehouse, ...props}) {
         },
         {
             key: '2',
-            label: <WarehousetBtnDelete warehouse={warehouse}/>,
+            label: <WarehouseBtnDelete warehouse={warehouse}/>,
         },
     ];
 

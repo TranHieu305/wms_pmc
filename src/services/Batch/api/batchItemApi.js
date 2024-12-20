@@ -18,10 +18,15 @@ const markAsCompleted = (batchId, itemId) => {
 	);
 };
 
+const findByProductId = (productId) => {
+	return axios.get(APP_API.BATCH_ITEM + `/product/${productId}`, { headers: authHeader() });
+};
+
 const batchItemApi = {
 	updateItem,
 	deleteItem,
 	markAsCompleted,
+	findByProductId,
 };
 
 export default batchItemApi;

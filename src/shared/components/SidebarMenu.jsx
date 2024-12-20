@@ -38,7 +38,7 @@ function SiderMenu() {
 			icon: <SharedIcon.Partner />,
 		},
         {
-			key: "inventoryitems",
+			key: "inventory-items",
 			label: "Inventory items",
 			icon: <SharedIcon.InventoryItem />,
 		},

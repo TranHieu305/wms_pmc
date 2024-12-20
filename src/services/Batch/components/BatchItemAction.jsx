@@ -1,23 +1,43 @@
 import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
 import { BatchItemBtnDelete, BatchItemBtnMarkComplete, BatchItemBtnUpdate } from "./BatchItemButton";
+import Enum from "../../../shared/utils/enum";
 
 function BatchItemAction({batch, item, ...props}) {
-    const items = [
+    let items = [
         {
-            key: 'mark-complete' + item.id,
-            label: <BatchItemBtnMarkComplete batch={batch} item={item} key={item.id} type="dash" />,
+            key: 'no-action' + item.id,
+            label: "No action",
         },
-        {
-            key: 'update' + item.id,
-            label: <BatchItemBtnUpdate item={item} key={item.id}/>,
-        },
-        {
-            key: 'delete' + item.id,
-            label: <BatchItemBtnDelete item={item} key={item.id}/>,
-        },
-
     ];
+    
+    if (item.status !== Enum.BatchItemStatus.COMPLETED && 
+        batch.status !== Enum.BatchStatus.DELIVERED
+    ) {
+        items = [
+          
+            {
+                key: 'update' + item.id,
+                label: <BatchItemBtnUpdate item={item} key={item.id}/>,
+            },
+            {
+                key: 'delete' + item.id,
+                label: <BatchItemBtnDelete item={item} key={item.id}/>,
+            },
+    
+        ];
+    }
+
+    if (batch.inventoryAction === Enum.InventoryAction.EXPORT &&
+        item.status !== Enum.BatchItemStatus.COMPLETED ) {
+        items.unshift(
+            {
+                key: 'mark-complete' + item.id,
+                label: <BatchItemBtnMarkComplete batch={batch} item={item} key={item.id} type="dash" />,
+            },
+        )
+    } 
+    
 
     return (
         <Dropdown

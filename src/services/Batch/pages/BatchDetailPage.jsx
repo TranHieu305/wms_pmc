@@ -7,6 +7,7 @@ import LoadingPage from "../../../shared/components/LoadingPage";
 import BatchAction from "../components/BatchAction";
 import { Col, Row } from "antd";
 import BatchDetail from "../components/BatchDetail";
+import { BatchStatusTag } from "../components/BatchTag";
 
 
 function BatchDetailPage() {
@@ -36,7 +37,14 @@ function BatchDetailPage() {
                     <>
                      {/* Header */}
                      <DetailPage.Subheader 
-                            title={batch.name}
+                             title={
+                                <div className="flex flex-row">
+                                    {batch.name}
+                                    <div className="px-2">
+                                        <BatchStatusTag status={batch.status}/>
+                                    </div>
+                                </div>
+                            }
                             id={batch.id}
                             backLink="/batches"
                         >
@@ -48,7 +56,7 @@ function BatchDetailPage() {
                                 <BatchDetail.BatchItemBoard batch={batch} />
                             </Col>
                             <Col span={6}>
-                                <BatchDetail.Infor batch={batch} />
+                                <BatchDetail.Info batch={batch} />
                             </Col>
                         </Row>
                     </>

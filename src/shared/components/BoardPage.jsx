@@ -1,6 +1,6 @@
 function Subheader({icon, title, children}) {
     return(
-        <div className="flex justify-between items-center p-4">
+        <div className="flex justify-between items-center p-4 pr-0">
             <div className="flex items-center space-x-2">
                 {icon}
                 <span className="text-lg font-semibold text-gray-800">{title}</span>

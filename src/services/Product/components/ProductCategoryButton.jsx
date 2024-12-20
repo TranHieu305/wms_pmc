@@ -29,7 +29,8 @@ function ProductCategoryBtnSave({category, ...props}) {
         showModal({
             title: "Create new Product category",
             body: (<FormBodySaveProductCategory />),
-            onSave: handleSave
+            onSave: handleSave,
+            widthModal: "medium"
         })
     }
 
@@ -99,19 +100,7 @@ function FormBodySaveProductCategory({category}) {
                         error={formik.touched.name && formik.errors.name}
                     />
             </SharedForm.FormBodyItem>
-            
-            <SharedForm.FormBodyItem>
-                <SharedInput.Label forName="description">Description</SharedInput.Label>
-                <SharedInput.Text
-					name="description"
-					placeholder="Category description"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.description}
-					error={formik.touched.description && formik.errors.description}
-				/>
-            </SharedForm.FormBodyItem>
-				
+
             <SharedForm.FormBodyItem>
                 <SharedInput.Label forName="type">Category type*</SharedInput.Label>
                 <SharedInput.SelectInput
@@ -124,7 +113,19 @@ function FormBodySaveProductCategory({category}) {
                         width: '100%',
                     }}
 				/>
-            </SharedForm.FormBodyItem>				
+            </SharedForm.FormBodyItem>			
+            
+            <SharedForm.FormBodyItem>
+                <SharedInput.Label forName="description">Description</SharedInput.Label>
+                <SharedInput.TextAreaCustom
+					name="description"
+					placeholder="Category description"
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					value={formik.values.description}
+					error={formik.touched.description && formik.errors.description}
+				/>
+            </SharedForm.FormBodyItem>
         </SharedForm.FormBody>
     )
 }

@@ -24,12 +24,33 @@ const UserRole = {
 	WAREHOUSE_MANAGER: "WAREHOUSE_MANAGER",
 };
 
+const OrderStatus = {
+	PENDING: "PENDING",
+	COMPLETED: "COMPLETED",
+};
+
+const BatchStatus = {
+	PENDING: "PENDING",
+	PACKING: "PACKING",
+	COMPLETED: "COMPLETED",
+	IN_TRANSIT: "IN_TRANSIT",
+	DELIVERED: "DELIVERED",
+};
+
+const BatchItemStatus = {
+	PENDING: "PENDING",
+	COMPLETED: "COMPLETED",
+};
+
 const Enum = {
 	InventoryAction,
 	CategoryType,
 	ProcessType,
 	PartnerType,
 	UserRole,
+	OrderStatus,
+	BatchStatus,
+	BatchItemStatus,
 };
 
 export default Enum;

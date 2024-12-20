@@ -146,8 +146,9 @@ function BatchItemBtnMarkComplete({item, batch, ...props}) {
     }
 
     const openConfirmModal = () => {
-    console.log(item);
 
+        console.log(batch.id);
+        console.log(item.id);
         Modal.confirm({
 			title: "Confirm delete",
 			content: <div>Do you really want to mark item: <b>{item.product?.name}</b> as completed ?</div>,

@@ -17,7 +17,7 @@ const FormLogin = () => {
         authApi.login(values.email, values.password)
             .then((res) => {
                 notificationHelper.showSuccessNotification({description: res.message})
-                setTimeout(() => navigate("/"), 1000); 
+                setTimeout(() => navigate("/warehouses"), 1000); 
             })
     };
 

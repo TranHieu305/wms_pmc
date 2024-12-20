@@ -8,6 +8,7 @@ import partnerRouter from "./partner";
 import orderRouter from "./order";
 import batchRouter from "./batch";
 import userRouter from "./user";
+import inventoryItemRouter from "./inventoryItem";
 
 const appRouter = createBrowserRouter([
 	{
@@ -28,7 +29,7 @@ const appRouter = createBrowserRouter([
 			...orderRouter,
 			...batchRouter,
 			...userRouter,
-			// ...inventoryItemRouter,
+			...inventoryItemRouter,
 		],
 	},
 ]);

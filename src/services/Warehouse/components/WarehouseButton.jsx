@@ -17,7 +17,7 @@ function WarehouseBtnSave({warehouse}) {
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created warehouse" });
                 navigate(0);
-                window.open("/" + response.data.data.id, "_blank", "noopener,noreferrer");
+                window.open("/warehouses/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot created warehouse" });
@@ -28,7 +28,8 @@ function WarehouseBtnSave({warehouse}) {
         showModal({
             title: "Create new warehouse",
             body: (<FormBodySaveWarehouse />),
-            onSave: handleSave
+            onSave: handleSave,
+            widthModal: "medium"
         })
     }
 
@@ -128,7 +129,7 @@ function FormBodySaveWarehouse({warehouse, onSave}) {
 }
 
 
-function WarehousetBtnDelete({warehouse}) {
+function WarehouseBtnDelete({warehouse}) {
     const navigate = useNavigate();
 
     const onDelete = (warehouse) => {
@@ -156,5 +157,5 @@ function WarehousetBtnDelete({warehouse}) {
 export {
     WarehouseBtnSave, 
     WarehouseBtnEdit, 
-    WarehousetBtnDelete
+    WarehouseBtnDelete
 };

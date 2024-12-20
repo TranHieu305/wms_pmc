@@ -4,7 +4,7 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import orderApi from "../api/orderApi";
 import { FormAddOrderItem, FormSaveOrder, FormUpdateOrder } from "./OrderForm";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 
 function OrderBtnSave({...props}) {
     const { showModal } = useModal(); 
@@ -15,7 +15,7 @@ function OrderBtnSave({...props}) {
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created order" });
                 navigate(0);
-                window.open("/" + response.data.data.id, "_blank", "noopener,noreferrer");
+                // window.open("/orders/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot create order" });
@@ -43,7 +43,6 @@ function OrderBtnUpdate({order, ...props}) {
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully updated order" });
                 navigate(0);
-                window.open("/orders/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot update order" });
@@ -114,9 +113,35 @@ function OrderBtnDelete({order}) {
     return <SharedBtn.BtnDelete onClick={openConfirmModal}/>
 }
 
+function OrderBtnMarkComplete({order, ...props}) {
+    const navigate = useNavigate();
+
+    const onProcess = (order) => {
+        orderApi.markAsCompleted(order.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully update order" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot update order" });
+            });
+    };
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm action",
+			content: <div>Confirm to mark order <b>{order.name}</b> as completed</div>,
+			onOk: () => onProcess(order),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Mark as completed</Button>
+}
+
 export {
     OrderBtnSave,
     OrderBtnUpdate,
     OrderBtnDelete,
-    OrderBtnAddItem
+    OrderBtnAddItem,
+    OrderBtnMarkComplete
 }
