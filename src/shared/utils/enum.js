@@ -25,6 +25,8 @@ const UserRole = {
 };
 
 const OrderStatus = {
+	PENDING_APPROVAL: "PENDING_APPROVAL",
+	REJECTED: "REJECTED",
 	PENDING: "PENDING",
 	COMPLETED: "COMPLETED",
 };
@@ -42,6 +44,11 @@ const BatchItemStatus = {
 	COMPLETED: "COMPLETED",
 };
 
+const ApprovalStatus = {
+	PENDING_APPROVAL: "PENDING_APPROVAL",
+	REJECTED: "REJECTED",
+};
+
 const Enum = {
 	InventoryAction,
 	CategoryType,
@@ -51,6 +58,7 @@ const Enum = {
 	OrderStatus,
 	BatchStatus,
 	BatchItemStatus,
+	ApprovalStatus,
 };
 
 export default Enum;

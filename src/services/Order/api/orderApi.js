@@ -32,6 +32,18 @@ const markAsCompleted = (orderId) => {
 	});
 };
 
+const approve = (orderId) => {
+	return axios.patch(ORDER_API.BASE + `/${orderId}/approve`, null, {
+		headers: authHeader(),
+	});
+};
+
+const reject = (orderId) => {
+	return axios.patch(ORDER_API.BASE + `/${orderId}/reject`, null, {
+		headers: authHeader(),
+	});
+};
+
 const orderApi = {
 	getAllOrders,
 	saveOrder,
@@ -40,6 +52,8 @@ const orderApi = {
 	deleteOrder,
 	addOrderItem,
 	markAsCompleted,
+	approve,
+	reject,
 };
 
 export default orderApi;

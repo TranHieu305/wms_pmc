@@ -145,10 +145,63 @@ function OrderBtnMarkComplete({order, ...props}) {
     return <Button onClick={openConfirmModal} {...props}>Mark as completed</Button>
 }
 
+function OrderBtnApprove({order, ...props}) {
+    const navigate = useNavigate();
+
+    const onProcess = (order) => {
+        orderApi.approve(order.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully approve order" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot approve order" });
+            });
+    };
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm action",
+			content: <div>Confirm to approve order <b>{order.name}</b></div>,
+			onOk: () => onProcess(order),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Approve</Button>
+}
+
+function OrderBtnReject({order, ...props}) {
+    const navigate = useNavigate();
+
+    const onProcess = (order) => {
+        orderApi.reject(order.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully reject order" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot reject order" });
+            });
+    };
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm action",
+			content: <div>Confirm to reject order <b>{order.name}</b></div>,
+			onOk: () => onProcess(order),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Reject</Button>
+}
+
+
 export {
     OrderBtnSave,
     OrderBtnUpdate,
     OrderBtnDelete,
     OrderBtnAddItem,
+    OrderBtnApprove,
+    OrderBtnReject,
     OrderBtnMarkComplete
 }

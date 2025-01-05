@@ -28,8 +28,9 @@ function FormSaveOrder({setBeforeSave, order}) {
     const [products, setProducts] = useState([]);
     const users = useSelector((state) => state.users.userList);
     const loadingUsers = useSelector((state) => state.users.status === 'loading');
-    const [approversText, setApproversText] = useState(inputHelper.covertIdsToUserMentions(order?.approvers, users));
- 
+    const [approversText, setApproversText] = useState(inputHelper.covertIdsToUserMentions(order?.approverIds, users));
+    const [participantsText, setParticipantsText] = useState(inputHelper.covertIdsToUserMentions(order?.participantIds, users));
+
     // Get categories for options
     useEffect(() => {
         const fetchPartners = async () => {
@@ -66,8 +67,8 @@ function FormSaveOrder({setBeforeSave, order}) {
         ? moment(order?.expectedDeliveryDate)
         : null,
 		orderItems: order?.orderItems || [initialOrderItemValues],
-        approvers: order?.approvers || [],
-        participants: order?.participants || []
+        approverIds: order?.approverIds || [],
+        participantIds: order?.participantIds || []
 	};
 
     
@@ -207,27 +208,36 @@ function FormSaveOrder({setBeforeSave, order}) {
             <Row gutter={24}>
                 <Col span={12}>
                     <SharedForm.FormBodyItem>
-                        <SharedInput.Label forName="partnerId">Approvers</SharedInput.Label>
+                        <SharedInput.Label forName="approverIds">Approvers</SharedInput.Label>
                         <SharedInput.UserMention
-                            name="approvers"
+                            name="approverIds"
                             placeholder="Please choose approvers"
                             loading={loadingUsers}
                             value={approversText}
                             onChange={(value) => {
-                                formik.setFieldValue("approvers", inputHelper.convertUserMentionsToIds(value, users))
+                                formik.setFieldValue("approverIds", inputHelper.convertUserMentionsToIds(value, users))
                                 setApproversText(value);
                             }}
                             onBlur={formik.handleBlur}
-                            error={formik.touched.approvers && formik.errors.approvers}
+                            error={formik.touched.approverIds && formik.errors.approverIds}
                         />
                     </SharedForm.FormBodyItem>	
                 </Col>
                 <Col span={12}>
-                    <SharedForm.FormBodyItem>
-                        <SharedInput.Label forName="inventoryAction">Participants</SharedInput.Label>
-                        <SharedInput.Text
-                        placeholder="Participants"
-                    />
+                <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="participantIds">Participants</SharedInput.Label>
+                        <SharedInput.UserMention
+                            name="participantIds"
+                            placeholder="Please choose participants"
+                            loading={loadingUsers}
+                            value={participantsText}
+                            onChange={(value) => {
+                                formik.setFieldValue("participantIds", inputHelper.convertUserMentionsToIds(value, users))
+                                setParticipantsText(value);
+                            }}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.participantIds && formik.errors.participantIds}
+                        />
                     </SharedForm.FormBodyItem>			
                 </Col>
             </Row>

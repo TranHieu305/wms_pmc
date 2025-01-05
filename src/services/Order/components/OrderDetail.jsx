@@ -48,6 +48,7 @@ function OrderItemBoard({order}) {
 }
 
 function Info({order}) {
+
     return (
         <DetailPage.DetailContainer>
             <DetailPage.InfoCard>
@@ -66,14 +67,14 @@ function Info({order}) {
                     <DetailPage.InfoItem label="Type" value={<SharedTag.InventoryAction action={order.inventoryAction}/>}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Order date" value={dataHelper.formatDate(order.orderDate)}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Expected delivery date" value={dataHelper.formatDate(order.expectedDeliveryDate)}></DetailPage.InfoItem>
-                    <DetailPage.InfoItem label="Responsible person" >
-                        <Avatar.SingleUser name="hieu.tran"/>
+                    <DetailPage.InfoItem label="Created by" >
+                        <Avatar.SingleUser userId={order.createdBy}/>
                     </DetailPage.InfoItem>
-                    <DetailPage.InfoItem label="Approver" >
-                        <Avatar.SingleUser name="admin"/>
+                    <DetailPage.InfoItem label="Approvers" >
+                        <Avatar.MultiUser userIds={order.approverIds}/>
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Participants" >
-                        <Avatar.MultiUser name="hieu.tran"/>
+                        <Avatar.MultiUser userIds={order.participantIds}/>
                     </DetailPage.InfoItem>
                 </div>
             </DetailPage.InfoCard>
