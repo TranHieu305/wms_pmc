@@ -5,7 +5,6 @@ import WarehouseStatusTag from "./WarehouseStatusTag";
 import SharedIcon from "../../../shared/components/common/Icon";
 
 function WarehouseBoard({warehouses, loading}) {
-    console.log(warehouses);
 	const columns = [
 		{
 			key: "name",

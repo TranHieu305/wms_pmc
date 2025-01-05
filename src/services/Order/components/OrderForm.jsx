@@ -11,6 +11,7 @@ import { SharedBtn, SharedForm, SharedInput } from "../../../shared/components/c
 import { Button, Col, Divider, Row } from "antd";
 import moment from "moment-timezone";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 const initialOrderItemValues = {
 	id: 0,
@@ -21,11 +22,14 @@ const initialOrderItemValues = {
 	quantity: 0,
 };
 
-function FormSaveOrder({order}) {
+function FormSaveOrder({setBeforeSave, order}) {
     const {setModalData} = useModal();
     const [partners, setPartners] = useState([]);
     const [products, setProducts] = useState([]);
-
+    const users = useSelector((state) => state.users.userList);
+    const loadingUsers = useSelector((state) => state.users.status === 'loading');
+    const [approversText, setApproversText] = useState(inputHelper.covertIdsToUserMentions(order?.approvers, users));
+ 
     // Get categories for options
     useEffect(() => {
         const fetchPartners = async () => {
@@ -62,21 +66,32 @@ function FormSaveOrder({order}) {
         ? moment(order?.expectedDeliveryDate)
         : null,
 		orderItems: order?.orderItems || [initialOrderItemValues],
+        approvers: order?.approvers || [],
+        participants: order?.participants || []
 	};
 
     
     const formik = useFormik({
 		initialValues: initialValues,
 		validationSchema: orderValidationShema,
-		onSubmit: (values) => {},
+		onSubmit: (values) => {
+            // Not submit yet, submit function call at button
+        },
 	});
 
-    const [orderItems, setOrderItems] = useState(formik.values.orderItems);
-
-     // Sync form data with ModalProvider
+    // Sync form data with ModalProvider
     useEffect(() => {
         setModalData(formik.values);
     }, [formik.values, setModalData]);
+
+    // BeforSave: validate
+    useEffect(() => {
+        if (setBeforeSave) {
+            setBeforeSave(() => formik.submitForm());
+        }
+    }, [setBeforeSave, formik]);
+
+    const [orderItems, setOrderItems] = useState(formik.values.orderItems);
 
     const partnerOptions = inputHelper.convertArrToSelectOption(partners);
     const productOptions = inputHelper.convertArrToSelectOption(products);
@@ -188,6 +203,35 @@ function FormSaveOrder({order}) {
                     </SharedForm.FormBodyItem>			
                 </Col>
             </Row>
+
+            <Row gutter={24}>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="partnerId">Approvers</SharedInput.Label>
+                        <SharedInput.UserMention
+                            name="approvers"
+                            placeholder="Please choose approvers"
+                            loading={loadingUsers}
+                            value={approversText}
+                            onChange={(value) => {
+                                formik.setFieldValue("approvers", inputHelper.convertUserMentionsToIds(value, users))
+                                setApproversText(value);
+                            }}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.approvers && formik.errors.approvers}
+                        />
+                    </SharedForm.FormBodyItem>	
+                </Col>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="inventoryAction">Participants</SharedInput.Label>
+                        <SharedInput.Text
+                        placeholder="Participants"
+                    />
+                    </SharedForm.FormBodyItem>			
+                </Col>
+            </Row>
+            
             {/* orderDate & expectedDeliveryDate */}
             <Row gutter={24}>
                 <Col span={12}>
@@ -359,6 +403,7 @@ function FormUpdateOrder({order}) {
                     </SharedForm.FormBodyItem>			
                 </Col>
             </Row>
+
             {/* orderDate & expectedDeliveryDate */}
             <Row gutter={24}>
                 <Col span={12}>

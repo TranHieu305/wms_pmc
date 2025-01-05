@@ -2,7 +2,6 @@ import { Table } from "antd";
 import { Link } from "react-router-dom";
 
 function PartnerTable({ partners, loading = true }) {
-    console.log(partners);
 	const columns = [
 		{
 			key: "name",

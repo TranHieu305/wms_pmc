@@ -73,23 +73,17 @@ function Info({batch}) {
                     <DetailPage.InfoItem label="Date" value={dataHelper.formatDate(batch.batchDate)}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Order">
                         <Link to={`/partners/${batch.order?.id}`}> 
-                            <Button type="link" icon={<SharedIcon.Order width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                                {batch.order?.name || "---"}
-                            </Button>
+                            {batch.order?.name || "---"}
                         </Link>
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Partner">
                         <Link to={`/partners/${batch.partner?.id}`}> 
-                            <Button type="link" icon={<SharedIcon.Partner width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                                {batch.partner?.name || "---"}
-                            </Button>
+                            {batch.partner?.name || "---"}
                         </Link>                    
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Warehouse">
                         <Link to={`/warehouses/${batch.warehouse?.id}`}> 
-                            <Button type="link" icon={<SharedIcon.Warehouse width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                                {batch.warehouse?.name || "---"}
-                            </Button>
+                            {batch.warehouse?.name || "---"}
                         </Link>    
                     </DetailPage.InfoItem>
 

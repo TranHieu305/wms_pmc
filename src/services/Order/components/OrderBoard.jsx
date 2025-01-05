@@ -12,18 +12,14 @@ function OrderBoard({orders, loading}) {
 		{ key: "name", title: "Order Name", dataIndex: "name", width: "20%",
             render: (text, record) => (
                 <Link to={`/orders/${record.id}`}> 
-                    <Button type="link" icon={<SharedIcon.Order width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                        {record.name}
-                    </Button>
+                    {record.name}
                 </Link>
             ),
         },
         { key: "partner", title: "Partner", dataIndex: ["partner", "name"], width: "20%",
             render: (text, record) => (
                 <Link to={`/partners/${record.partner?.id}`}> 
-                    <Button type="link" icon={<SharedIcon.Partner width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                        {record.partner?.name}
-                    </Button>
+                    {record.partner?.name}
                 </Link>
             ),
         },

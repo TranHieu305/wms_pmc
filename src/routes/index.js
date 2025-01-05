@@ -10,6 +10,10 @@ import batchRouter from "./batch";
 import userRouter from "./user";
 import inventoryItemRouter from "./inventoryItem";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchAllUsers } from "../redux/slices/user";
+
 const appRouter = createBrowserRouter([
 	{
 		path: "/login",
@@ -19,7 +23,9 @@ const appRouter = createBrowserRouter([
 		index: "/",
 		element: (
 			<ProtectedRoute>
-				<AppLayout />
+				<InitData>
+					<AppLayout />
+				</InitData>
 			</ProtectedRoute>
 		),
 		children: [
@@ -33,5 +39,17 @@ const appRouter = createBrowserRouter([
 		],
 	},
 ]);
+
+function InitData({ children }) {
+	const dispatch = useDispatch();
+	const userStatus = useSelector((state) => state.users.status);
+
+	useEffect(() => {
+		if (userStatus === "idle") {
+			dispatch(fetchAllUsers()); // Fetch users when the app starts
+		}
+	}, [dispatch, userStatus]);
+	return <>{children}</>;
+}
 
 export default appRouter;

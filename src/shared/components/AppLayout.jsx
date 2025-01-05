@@ -8,7 +8,7 @@ import LogoutBtn from "../../services/Auth/components/AuthButton";
 function AppLayout() {
 	return (
 		<>
-            <Layout className="h-screen">
+            <Layout className="min-h-screen">
                 <SiderMenu />
                 <Layout>
                     <AppHeader />

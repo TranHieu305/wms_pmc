@@ -10,6 +10,10 @@ const getAllUserrs = () => {
 	return axios.get(APP_API.USER, { headers: authHeader() });
 };
 
+const getAllUserGeneral = () => {
+	return axios.get(APP_API.USER + "/general", { headers: authHeader() });
+};
+
 const deleteUser = (user) => {
 	return axios.delete(APP_API.USER + `/${user.id}`, { headers: authHeader() });
 };
@@ -23,6 +27,7 @@ const userApi = {
 	getAllUserrs,
 	deleteUser,
 	updateUser,
+	getAllUserGeneral,
 };
 
 export default userApi;

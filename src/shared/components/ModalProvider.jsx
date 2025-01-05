@@ -10,6 +10,7 @@
  *      - `onCancel`: Callback for the "Cancel" button.
  *      - `onSaveText`: Custom text for the "Save" button.
  *      - `onCancelText`: Custom text for the "Cancel" button.
+ * - `submitForm`: (Optional) Function to trigger form logic before executing `onSave`.
  * - `hideModal`: Closes the modal and clears its configuration.
  * - `modalData`: Shared state for passing data between the modal and its parent.
  * 
@@ -42,6 +43,7 @@ export const useModal = () => useContext(ModalContext);
 export const ModalProvider = ({ children }) => {
     const [modalConfig, setModalConfig] = useState(null);
     const [modalData, setModalData] = useState(null); // Shared state for form data
+    const [handleBeforeSave, setHandleBeforeSave] = useState(null); // State to store the handleBeforeSave function
 
     const showModal = ({ 
         title, 
@@ -51,18 +53,36 @@ export const ModalProvider = ({ children }) => {
         onSaveText, 
         onCancelText,
         widthModal = "small", 
+        beforeSaveCallback,
     }) => {
-      setModalConfig({ title, body, onSave, onCancel, onSaveText, onCancelText, widthModal });
+        setModalConfig({ 
+            title, 
+            body, 
+            onSave, 
+            onCancel, 
+            onSaveText, 
+            onCancelText, 
+            widthModal,
+        });
+
+        // Dynamically set handleBeforeSave when showing the modal
+        setHandleBeforeSave(() => beforeSaveCallback || null);
     };
   
     const hideModal = () => {   
         setModalConfig(null);
         setModalData(null); // Clear modal data
+        setHandleBeforeSave(null); // Clear the handleBeforeSave function
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
+        if (handleBeforeSave) {
+            // Trigger handleBeforeSave before executing onSave
+            await handleBeforeSave();
+        }
         if (modalConfig?.onSave) {
-          modalConfig.onSave(modalData); // Trigger the passed onSave callback
+            // After Formik's logic is handled, pass modalData to the onSave callback.
+            modalConfig.onSave(modalData); 
         }
     };
 

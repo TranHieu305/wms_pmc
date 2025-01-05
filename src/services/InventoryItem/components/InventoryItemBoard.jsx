@@ -1,28 +1,22 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import { Link } from "react-router-dom";
-import SharedIcon from "../../../shared/components/common/Icon";
 import SharedTag from "../../../shared/components/common/Tag";
 import dataHelper from "../../../shared/utils/dataHelper";
 
 function InventoryItemBoard({inventoryItems, loading}) {
-    console.log(inventoryItems[0]);
     const columns = [
         { key: "code", title: "Product Code", dataIndex: ["product","code"], width: "15%" },
 		{ key: "name", title: "Product Name", dataIndex: ["product","name"], width: "15%",
             render: (text, record) => (
                 <Link to={`/products/${record.product.id}`}> 
-                    <Button type="link" icon={<SharedIcon.Product width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                        {record.product.name}
-                    </Button>
+                    {record.product.name}
                 </Link>
             ),
         },
 		{ key: "batch", title: "Batch", dataIndex: "batchName", width: "15%",
             render: (text, record) => (
                 <Link to={`/batches/${record.batchId}`}> 
-                    <Button type="link" icon={<SharedIcon.Shipment width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                        {record.batchName}
-                    </Button>
+                    {record.batchName}
                 </Link>
             ),        
         },
@@ -31,9 +25,7 @@ function InventoryItemBoard({inventoryItems, loading}) {
         { key: "warehouse", title: "Warehouse", dataIndex: "warehouseName", width: "15%",
             render: (text, record) => (
                 <Link to={`/products/${record.warehouseId}`}> 
-                    <Button type="link" icon={<SharedIcon.Warehouse width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                        {record.warehouseName}
-                    </Button>
+                    {record.warehouseName}
                 </Link>
             ),        
         },

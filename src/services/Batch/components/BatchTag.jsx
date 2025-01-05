@@ -27,7 +27,6 @@ function BatchStatusTag({status}) {
 }
 
 function BatchItemStatusTag({status}) {
-    console.log(status);
     let tag;
     switch (status) {
         case Enum.BatchItemStatus.PENDING:

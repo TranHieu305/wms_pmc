@@ -29,8 +29,6 @@ function FormCreateFromOrder({order}) {
         fetchWarehouses();
     }, []);
 
-    console.log(order);
-
     // Map orderitems to batchitems
     const initialBatchItems = order.orderItems.map(item => {
         const batchItem = {

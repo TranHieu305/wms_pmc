@@ -5,7 +5,7 @@ import { Button, Table } from "antd";
 import { ProductWarehouseActionForWarehouse } from "../../Product/components/ProductWarehouseHistoryAction";
 import SharedIcon from "../../../shared/components/common/Icon";
 import Enum from "../../../shared/utils/enum";
-import { SharedTag } from "../../../shared/components/common";
+import { Avatar, SharedTag } from "../../../shared/components/common";
 import dataHelper from "../../../shared/utils/dataHelper";
 
 function Info({warehouse}) {
@@ -19,6 +19,9 @@ function Info({warehouse}) {
                 <div className="space-y-4">
                     <DetailPage.InfoItem label="Name" value={warehouse.name}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Address" value={warehouse.address}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Responsible person" >
+                        <Avatar.SingleUser name="hieu.tran"/>
+                    </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Description" value={warehouse.description}></DetailPage.InfoItem>
                 </div>
             </DetailPage.InfoCard>

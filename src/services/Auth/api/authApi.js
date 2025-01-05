@@ -12,6 +12,7 @@ const login = (email, password) => {
 			if (response.data.data.accessToken) {
 				localStorage.setItem("user", JSON.stringify(response.data.data));
 			}
+			// Init Redux store
 			return response.data;
 		})
 		.catch((err) => {

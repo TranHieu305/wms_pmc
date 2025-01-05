@@ -23,9 +23,16 @@ function OrderBtnSave({...props}) {
     }
 
     const handleClick = () => {
+        let beforeSaveOrder;
+
         showModal({
             title: "Create new order",
-            body: (<FormSaveOrder />),
+            body: (
+                <FormSaveOrder 
+                    setBeforeSave={(callback) => {beforeSaveOrder = callback;}}
+                    />
+                ),
+            beforeSaveCallback: () => beforeSaveOrder(),
             onSave: handleSave,
             widthModal: "large"
         })

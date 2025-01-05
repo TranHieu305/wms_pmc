@@ -5,6 +5,9 @@ const orderValidationShema = Yup.object().shape({
 		.trim()
 		.required("Order Name is required")
 		.max(255, "Order name must be between 1 and 255 characters"),
+	partnerId: Yup.number()
+		.required("Please select order partner")
+		.min(1, "Please select order partner"),
 	orderDate: Yup.string().required("Order date is required"),
 	expectedDeliveryDate: Yup.string().required("Order expexted delivery date is required"),
 	orderItems: Yup.array().of(

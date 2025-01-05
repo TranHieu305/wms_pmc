@@ -1,15 +1,13 @@
-import { Button, Divider, Table } from "antd";
+import { Divider, Table } from "antd";
 import DetailPage from "../../../shared/components/DetailPage";
 import dataHelper from "../../../shared/utils/dataHelper";
 import { Link } from "react-router-dom";
 import OrderItemAction from "./OrderItemAction";
 import { OrderBtnAddItem } from "./OrderButton";
-import { SharedTag } from "../../../shared/components/common";
-import SharedIcon from "../../../shared/components/common/Icon";
+import { Avatar, SharedTag } from "../../../shared/components/common";
 import Enum from "../../../shared/utils/enum";
 
 function OrderItemBoard({order}) {
-    console.log(order);
     const editable = order.status !== Enum.OrderStatus.COMPLETED;
     const orderItems = order.orderItems || [];
 
@@ -61,15 +59,22 @@ function Info({order}) {
                     <DetailPage.InfoItem label="Name" value={order.name}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Partner" value={(
                         <Link to={`/partners/${order.partner?.id}`}> 
-                            <Button type="link" icon={<SharedIcon.Partner width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                                {order.partner?.name}
-                            </Button>
+                            {order.partner?.name}
                         </Link>
                     )}>
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Type" value={<SharedTag.InventoryAction action={order.inventoryAction}/>}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Order date" value={dataHelper.formatDate(order.orderDate)}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Expected delivery date" value={dataHelper.formatDate(order.expectedDeliveryDate)}></DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Responsible person" >
+                        <Avatar.SingleUser name="hieu.tran"/>
+                    </DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Approver" >
+                        <Avatar.SingleUser name="admin"/>
+                    </DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Participants" >
+                        <Avatar.MultiUser name="hieu.tran"/>
+                    </DetailPage.InfoItem>
                 </div>
             </DetailPage.InfoCard>
         </DetailPage.DetailContainer>
