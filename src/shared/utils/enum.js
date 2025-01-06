@@ -32,6 +32,8 @@ const OrderStatus = {
 };
 
 const BatchStatus = {
+	PENDING_APPROVAL: "PENDING_APPROVAL",
+	REJECTED: "REJECTED",
 	PENDING: "PENDING",
 	PACKING: "PACKING",
 	COMPLETED: "COMPLETED",
@@ -44,9 +46,16 @@ const BatchItemStatus = {
 	COMPLETED: "COMPLETED",
 };
 
+const ProducedItemStatus = {
+	PENDING: "PENDING",
+	COMPLETED: "COMPLETED",
+	APPROVED: "APPROVED",
+};
+
 const ApprovalStatus = {
 	PENDING_APPROVAL: "PENDING_APPROVAL",
 	REJECTED: "REJECTED",
+	APPROVED: "APPROVED",
 };
 
 const Enum = {
@@ -59,6 +68,7 @@ const Enum = {
 	BatchStatus,
 	BatchItemStatus,
 	ApprovalStatus,
+	ProducedItemStatus,
 };
 
 export default Enum;

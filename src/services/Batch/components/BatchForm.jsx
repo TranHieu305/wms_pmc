@@ -10,11 +10,16 @@ import batchValidationSchema, { batchUpdateValidationSchema } from "../utils/val
 import inputHelper from "../../../shared/utils/inputHelper";
 import { SharedForm, SharedInput } from "../../../shared/components/common";
 import moment from "moment-timezone";
+import { useSelector } from "react-redux";
 
 
-function FormCreateFromOrder({order}) {
+function FormCreateFromOrder({setBeforeSave, order}) {
     const {setModalData} = useModal();
     const [warehouses, setWarehouses] = useState([]);
+    const users = useSelector((state) => state.users.userList);
+    const loadingUsers = useSelector((state) => state.users.status === 'loading');
+    const [approversText, setApproversText] = useState(inputHelper.covertIdsToUserMentions(order?.approverIds, users));
+    const [participantsText, setParticipantsText] = useState(inputHelper.covertIdsToUserMentions(order?.participantIds, users));
 
     // Get warehouses for options
     useEffect(() => {
@@ -51,6 +56,8 @@ function FormCreateFromOrder({order}) {
 		inventoryAction: Enum.InventoryAction.IMPORT,
 		batchDate: null,
 		batchItems: initialBatchItems,
+        approverIds: order?.approverIds || [],
+        participantIds: order?.participantIds || []
 	};
 
     const formik = useFormik({
@@ -65,6 +72,14 @@ function FormCreateFromOrder({order}) {
     useEffect(() => {
         setModalData(formik.values);
     }, [formik.values, setModalData]);
+
+     // BeforSave: validate
+     useEffect(() => {
+        if (setBeforeSave) {
+            setBeforeSave(() => formik.submitForm());
+        }
+    }, [setBeforeSave, formik]);
+
 
     const actionOptions = inputHelper.convertEnumToSelectOption(Enum.InventoryAction);
 
@@ -128,6 +143,14 @@ function FormCreateFromOrder({order}) {
                     />
             </SharedForm.FormBodyItem>
 
+            <SharedForm.FormBodyItem>
+                <SharedInput.Label forName="name">Order name*</SharedInput.Label>
+                <SharedInput.Text
+                        value={order.name}
+                        disabled
+                    />
+            </SharedForm.FormBodyItem>
+
             {/* Partner and action */}
             <Row gutter={24}>
                 <Col span={12}>
@@ -185,6 +208,43 @@ function FormCreateFromOrder({order}) {
                              style={{
                                  width: '100%',
                              }}
+                        />
+                    </SharedForm.FormBodyItem>			
+                </Col>
+            </Row>
+
+            <Row gutter={24}>
+                <Col span={12}>
+                    <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="approverIds">Approvers</SharedInput.Label>
+                        <SharedInput.UserMention
+                            name="approverIds"
+                            placeholder="Please choose approvers"
+                            loading={loadingUsers}
+                            value={approversText}
+                            onChange={(value) => {
+                                formik.setFieldValue("approverIds", inputHelper.convertUserMentionsToIds(value, users))
+                                setApproversText(value);
+                            }}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.approverIds && formik.errors.approverIds}
+                        />
+                    </SharedForm.FormBodyItem>	
+                </Col>
+                <Col span={12}>
+                <SharedForm.FormBodyItem>
+                        <SharedInput.Label forName="participantIds">Participants</SharedInput.Label>
+                        <SharedInput.UserMention
+                            name="participantIds"
+                            placeholder="Please choose participants"
+                            loading={loadingUsers}
+                            value={participantsText}
+                            onChange={(value) => {
+                                formik.setFieldValue("participantIds", inputHelper.convertUserMentionsToIds(value, users))
+                                setParticipantsText(value);
+                            }}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.participantIds && formik.errors.participantIds}
                         />
                     </SharedForm.FormBodyItem>			
                 </Col>

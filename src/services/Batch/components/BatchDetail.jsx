@@ -60,6 +60,8 @@ function BatchItemBoard({batch}) {
 }
 
 function Info({batch}) {
+    console.log(batch);
+
     return (
         <DetailPage.DetailContainer>
             <DetailPage.InfoCard>

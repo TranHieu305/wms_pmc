@@ -25,7 +25,19 @@ const updateBatch = (data) => {
 };
 
 const deleteBatch = (batch) => {
-	return axios.delete(APP_API.BATCH + `/${batch.batchId}`, { headers: authHeader() });
+	return axios.delete(APP_API.BATCH + `/${batch.id}`, { headers: authHeader() });
+};
+
+const approve = (batchId) => {
+	return axios.patch(APP_API.BATCH + `/${batchId}/approve`, null, {
+		headers: authHeader(),
+	});
+};
+
+const reject = (batchId) => {
+	return axios.patch(APP_API.BATCH + `/${batchId}/reject`, null, {
+		headers: authHeader(),
+	});
 };
 
 const batchApi = {
@@ -35,6 +47,8 @@ const batchApi = {
 	markAsDelivered,
 	updateBatch,
 	deleteBatch,
+	approve,
+	reject,
 };
 
 export default batchApi;

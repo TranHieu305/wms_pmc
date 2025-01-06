@@ -24,9 +24,16 @@ function BatchBtnCreateFromOrder({order, ...props}) {
     }
 
     const handleClick = () => {
+        let beforeSaveOrder;
+
         showModal({
             title: "Create new batch",
-            body: (<FormCreateFromOrder order={order} />),
+            body: (
+            <FormCreateFromOrder 
+                order={order}
+                setBeforeSave={(callback) => {beforeSaveOrder = callback;}}
+                />),
+            beforeSaveCallback: () => beforeSaveOrder(),
             onSave: handleSave,
             widthModal: "large"
         })
@@ -112,9 +119,62 @@ function BatchBtnUpdate({batch, ...props}) {
     return <SharedBtn.BtnEdit onClick={handleClick} {...props}/>
 }
 
+function BatchBtnApprove({batch, ...props}) {
+    const navigate = useNavigate();
+
+    const onProcess = (batch) => {
+        batchApi.approve(batch.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully approve batch" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot approve batch" });
+            });
+    };
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm action",
+			content: <div>Confirm to approve batch <b>{batch.name}</b></div>,
+			onOk: () => onProcess(batch),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Approve</Button>
+}
+
+function BatchBtnReject({batch, ...props}) {
+    const navigate = useNavigate();
+
+    const onProcess = (batch) => {
+        batchApi.reject(batch.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully reject batch" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot reject batch" });
+            });
+    };
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm action",
+			content: <div>Confirm to reject batch <b>{batch.name}</b></div>,
+			onOk: () => onProcess(batch),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Reject</Button>
+}
+
+
 export {
     BatchBtnCreateFromOrder, 
     BatchBtnMarkAsDelivered,
     BatchBtnDelete,
-    BatchBtnUpdate
+    BatchBtnUpdate,
+    BatchBtnApprove,
+    BatchBtnReject
 }

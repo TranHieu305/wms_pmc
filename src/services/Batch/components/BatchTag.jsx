@@ -3,9 +3,16 @@ import Enum from "../../../shared/utils/enum";
 
 function BatchStatusTag({status}) {
     let tag;
+    console.log(status);
     switch (status) {
+        case Enum.BatchStatus.PENDING_APPROVAL:
+            tag = <Tag color="default">{Enum.BatchStatus.PENDING_APPROVAL}</Tag>;
+            break;
+        case Enum.BatchStatus.REJECTED:
+                tag = <Tag color="error">{Enum.BatchStatus.REJECTED}</Tag>;
+                break;
         case Enum.BatchStatus.PENDING:
-            tag = <Tag color="default">{Enum.BatchStatus.PENDING}</Tag>
+            tag = <Tag color="processing">{Enum.BatchStatus.PENDING}</Tag>
             break;
         case Enum.BatchStatus.PACKING:
             tag = <Tag color="blue">{Enum.BatchStatus.PACKING}</Tag>
@@ -20,7 +27,7 @@ function BatchStatusTag({status}) {
             tag = <Tag color="success">{Enum.BatchStatus.DELIVERED}</Tag>
             break;
         default:
-            tag = <Tag color="default">{Enum.BatchStatus.PENDING}</Tag>
+            tag = <Tag color="default">NO STATUS</Tag>;
     }
 
     return tag;
