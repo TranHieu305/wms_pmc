@@ -58,6 +58,11 @@ const ApprovalStatus = {
 	APPROVED: "APPROVED",
 };
 
+const VehicleStatus = {
+	AVAILABLE: "AVAILABLE",
+	IN_TRANSIT: "IN_TRANSIT",
+};
+
 const Enum = {
 	InventoryAction,
 	CategoryType,
@@ -68,6 +73,7 @@ const Enum = {
 	BatchStatus,
 	BatchItemStatus,
 	ApprovalStatus,
+	VehicleStatus,
 	ProducedItemStatus,
 };
 

@@ -40,4 +40,5 @@ export const APP_API = {
 	BATCH_ITEM: `${API_BASE_URL}/batch-items`,
 	USER: `${API_BASE_URL}/users`,
 	PRODUCED_ITEM: `${API_BASE_URL}/produced-items`,
+	VEHICLE: `${API_BASE_URL}/vehicles`,
 };

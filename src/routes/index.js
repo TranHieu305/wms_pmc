@@ -13,6 +13,7 @@ import inventoryItemRouter from "./inventoryItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAllUsers } from "../redux/slices/user";
+import vehicleRouter from "./vehicle";
 
 const appRouter = createBrowserRouter([
 	{
@@ -36,6 +37,7 @@ const appRouter = createBrowserRouter([
 			...batchRouter,
 			...userRouter,
 			...inventoryItemRouter,
+			...vehicleRouter,
 		],
 	},
 ]);

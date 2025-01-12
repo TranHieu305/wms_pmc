@@ -14,8 +14,7 @@ function WarehouseBtnSave({warehouse}) {
         warehouseApi.saveWarehouse(data)
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created warehouse" });
-                navigate(0);
-                window.open("/warehouses/" + response.data.data.id, "_blank", "noopener,noreferrer");
+                setTimeout(() => navigate(0), 1000);
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot created warehouse" });

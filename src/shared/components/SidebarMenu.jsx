@@ -68,6 +68,10 @@ function SiderMenu() {
 					key: "/users",
 					label: "User",
 				},
+                {
+					key: "/vehicles",
+					label: "Vehicle",
+				},
 			],
 		},
 	];
