@@ -2,6 +2,7 @@ import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
 import { BatchItemBtnDelete, BatchItemBtnMarkComplete, BatchItemBtnUpdate } from "./BatchItemButton";
 import Enum from "../../../shared/utils/enum";
+import { ProducedItemCreateFromBatchItemBtn } from "../../ProducedItem/components/ProducedItemButton";
 
 function BatchItemAction({batch, item, ...props}) {
     let items = [
@@ -37,6 +38,12 @@ function BatchItemAction({batch, item, ...props}) {
             },
         )
     } 
+    items.unshift(
+        {
+            key: 'produce-' + item.id,
+            label: <ProducedItemCreateFromBatchItemBtn batch={batch} batchItem={item} key={item.id} type="dash" />,
+        },
+    )
     
 
     return (

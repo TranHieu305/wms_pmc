@@ -1,15 +1,41 @@
-import { Button, Divider, Table } from "antd";
+import { Button, Divider, Table, Tabs } from "antd";
 import DetailPage from "../../../shared/components/DetailPage";
 import dataHelper from "../../../shared/utils/dataHelper";
 import { Link } from "react-router-dom";
 import BatchItemAction from "./BatchItemAction";
-import { SharedTag } from "../../../shared/components/common";
+import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import SharedIcon from "../../../shared/components/common/Icon";
 import { BatchItemStatusTag } from "./BatchTag";
 import Enum from "../../../shared/utils/enum";
+import { ProducedItemBatchBoard } from "../../ProducedItem/components/ProducedItemBoard";
+
+function ItemTabs({batch, producedItems}) {
+    console.log(batch);
+    const menuItems = [
+        {
+            key: '1',
+            label: 'Batch Item',
+            children: <BatchDetail.BatchItemBoard batch={batch} />
+          ,
+        },
+    ];
+
+    if (batch.inventoryAction === Enum.InventoryAction.EXPORT) {
+        menuItems.push( {
+            key: '2',
+            label: 'Produced Item',
+          children: <ProducedItemBatchBoard producedItems={producedItems}/>,
+        })
+    }
+    return (
+        <>
+            <Tabs defaultActiveKey="1" items={menuItems} />
+        </>
+    )
+}
+
 
 function BatchItemBoard({batch}) {
-    console.log(batch.batchItems);
     const batchItems = batch.batchItems || [];
 
     const columns = [
@@ -22,14 +48,16 @@ function BatchItemBoard({batch}) {
             </Link>
             ),
         },
-		{ key: "quantity", title: "Quantity", dataIndex: "quantity", width: "20%" },
-        { key: "uom", title: "Unit", dataIndex: "uom", width: "15%" },
+		{ key: "quantity", title: "Quantity", dataIndex: "quantity", width: "15%" },
+        { key: "producedQuantity", title: "Produced quantity", dataIndex: "producedQuantity", width: "20%" },
+
+        { key: "uom", title: "Unit", dataIndex: "uom", width: "10%" },
         { key: "weight", title: "Weight(Kg)", dataIndex: "weight", width: "15%" },
     ];
 
     if (batch.inventoryAction === Enum.InventoryAction.EXPORT) {
         columns.push(
-            { key: "status", title: "Status", dataIndex: "status", width: "20%",
+            { key: "status", title: "Status", dataIndex: "status", width: "10%",
                 render: (_, {status}) => (<BatchItemStatusTag status={status}/>)
             }
         )
@@ -47,21 +75,12 @@ function BatchItemBoard({batch}) {
 
     return (
         <DetailPage.DetailContainer>
-            <DetailPage.InfoCardTitle>
-                <div className="flex items-center justify-between p-4"> 
-                    <div>Batch item</div>
-                    {/* <OrderBtnAddItem order={order}/> */}
-                </div>
-            </DetailPage.InfoCardTitle>
             <Table dataSource={batchItems} columns={columns} rowKey="id"></Table>
         </DetailPage.DetailContainer>
     );
-
 }
 
 function Info({batch}) {
-    console.log(batch);
-
     return (
         <DetailPage.DetailContainer>
             <DetailPage.InfoCard>
@@ -88,6 +107,15 @@ function Info({batch}) {
                             {batch.warehouse?.name || "---"}
                         </Link>    
                     </DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Creator" >
+                        <SharedAvatar.SingleUser userId={batch.createdBy}/>
+                    </DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Approvers" >
+                        <SharedAvatar.MultiUser userIds={batch.approverIds}/>
+                    </DetailPage.InfoItem>
+                    <DetailPage.InfoItem label="Participants" >
+                        <SharedAvatar.MultiUser userIds={batch.participantIds}/>
+                    </DetailPage.InfoItem>
 
                 </div>
             </DetailPage.InfoCard>
@@ -97,7 +125,8 @@ function Info({batch}) {
 
 const BatchDetail = {
     BatchItemBoard,
-    Info
+    Info,
+    ItemTabs
 }
 
 export default BatchDetail;

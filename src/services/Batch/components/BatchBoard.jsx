@@ -2,7 +2,7 @@ import { Table } from "antd";
 import { Link } from "react-router-dom";
 import BatchAction from "./BatchAction";
 import dataHelper from "../../../shared/utils/dataHelper";
-import { SharedTag } from "../../../shared/components/common";
+import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import { BatchStatusTag } from "./BatchTag";
 
 function BatchBoard({batches, loading}) {
@@ -40,6 +40,9 @@ function BatchBoard({batches, loading}) {
          },
 		{ key: "batchDate", title: "Date", dataIndex: "batchDate", width: "10%",
             render: (_,{batchDate}) => (<div>{dataHelper.formatDate(batchDate)}</div>)
+        },
+        { key: "creator", title: "Creator", dataIndex: "createdBy", width: "10%",
+            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} />}</div>)
         },
 		{
 		    key: "actions",

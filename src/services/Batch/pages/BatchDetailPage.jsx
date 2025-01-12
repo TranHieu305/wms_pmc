@@ -5,17 +5,18 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import DetailPage from "../../../shared/components/DetailPage";
 import LoadingPage from "../../../shared/components/LoadingPage";
 import BatchAction from "../components/BatchAction";
-import { Col, Row } from "antd";
+import { Col, Row, Tabs } from "antd";
 import BatchDetail from "../components/BatchDetail";
 import { BatchStatusTag } from "../components/BatchTag";
-
+import producedItemApi from "../../ProducedItem/api/producedItemApi";
 
 function BatchDetailPage() {
     const {batchId} = useParams();
     const [batch, setBatch] = useState();
     const navigate = useNavigate();
+    const [producedItems, setProducedItems] = useState();
 
-     // Get orders
+    // Get batch
     useEffect(() => {
         const fetchBatch = async () => {
           try {
@@ -29,6 +30,20 @@ function BatchDetailPage() {
     
         fetchBatch();
     }, [batchId, navigate]);
+
+    // Get produced items of batch
+    useEffect(() => {
+        const fetchProducedItems = async () => {
+            try {
+                const response = await producedItemApi.getFromBatch(batchId);
+                setProducedItems(response.data.data); 
+            } catch (err) {
+                notificationHelper.showErrorNotification({description : err.response.data.message})
+            } 
+        };
+    
+        fetchProducedItems();
+    }, [batchId]);
 
     return (
         <DetailPage.Layout>
@@ -53,7 +68,7 @@ function BatchDetailPage() {
                          {/* Content */}
                          <Row gutter={24}>
                             <Col span={18}>
-                                <BatchDetail.BatchItemBoard batch={batch} />
+                                <BatchDetail.ItemTabs batch={batch} producedItems={producedItems}/>
                             </Col>
                             <Col span={6}>
                                 <BatchDetail.Info batch={batch} />

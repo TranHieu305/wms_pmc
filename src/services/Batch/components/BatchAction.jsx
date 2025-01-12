@@ -1,54 +1,10 @@
 import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
 import { BatchBtnApprove, BatchBtnDelete, BatchBtnMarkAsDelivered, BatchBtnReject, BatchBtnUpdate } from "./BatchButton";
-import Enum from "../../../shared/utils/enum";
-import actionHelper from "../../../shared/utils/actionHelper";
+import batchActionPermission from "../utils/actionPermission";
 
 function BatchAction({batch, ...props}) {
-    let items = [
-        {
-            key: 'no-action' + batch.id,
-            label: "No action",
-        },
-    ];
-    
-    if (batch.status !== Enum.BatchStatus.DELIVERED) {
-        items = [
-          
-            {
-                key: 'update' + batch.id,
-                label: <BatchBtnUpdate batch={batch}/>,
-            },
-            {
-                key: 'delete' + batch.id,
-                label: <BatchBtnDelete batch={batch}/>,
-            },
-        ];
-    }
-
-    if ((batch.inventoryAction === Enum.InventoryAction.IMPORT 
-        && batch.status !== Enum.BatchStatus.DELIVERED) || 
-        (batch.inventoryAction === Enum.InventoryAction.EXPORT
-        && batch.status === Enum.BatchStatus.COMPLETED)
-    ) {
-        items.unshift(  
-            {
-            key: "mark-as-delivered" + batch.id,
-            label: <BatchBtnMarkAsDelivered batch={batch} type="dash"/>,
-            },
-        )
-    }
-    if (actionHelper.currentUserCanApprove(batch)) {
-        items.unshift({
-            key: 'approve' + batch.id,
-            label: <BatchBtnApprove batch={batch} key={batch.id} type="dash"/>,
-        });
-        items.push({
-            key: 'reject' + batch.id,
-            label: <BatchBtnReject batch={batch} key={batch.id} type="dash"/>,
-        });
-    }
-
+    let items = getActionItems(batch);
     return (
         <Dropdown
             menu={{
@@ -60,6 +16,49 @@ function BatchAction({batch, ...props}) {
             <SharedBtn.BtnAction />
         </Dropdown>
     );
+}
+
+const getActionItems = (batch) => {
+    let actionItems = [];
+    if (batchActionPermission.canApprove(batch)) {
+        actionItems.push({
+            key: 'approve' + batch.id,
+            label: <BatchBtnApprove batch={batch} key={batch.id} type="dash"/>,
+        });
+        actionItems.push({
+            key: 'reject' + batch.id,
+            label: <BatchBtnReject batch={batch} key={batch.id} type="dash"/>,
+        });
+    }
+
+    if (batchActionPermission.canUpdate(batch)) {
+        actionItems.push( {
+            key: 'update' + batch.id,
+            label: <BatchBtnUpdate batch={batch} key={batch.id}/>,
+        });
+    }
+    if (batchActionPermission.canDelete(batch)) {
+        actionItems.push( {
+            key: 'delete' + batch.id,
+            label: <BatchBtnDelete batch={batch}/>,
+        });
+    }
+    if (batchActionPermission.canMarkAsDelivered(batch)) {
+        actionItems.push({
+            key: 'mark-complete' + batch.id,
+            label: <BatchBtnMarkAsDelivered batch={batch} type="dash"/>,
+        });
+    }
+    
+    if (actionItems.length === 0) {
+        actionItems = [
+            {
+                key: 'no-action' + batch.id,
+                label: "No action",
+            },
+        ]
+    }
+    return actionItems;
 }
 
 export default BatchAction;

@@ -47,7 +47,7 @@ const BatchItemStatus = {
 };
 
 const ProducedItemStatus = {
-	PENDING: "PENDING",
+	PENDING_APPROVAL: "PENDING_APPROVAL",
 	COMPLETED: "COMPLETED",
 	APPROVED: "APPROVED",
 };

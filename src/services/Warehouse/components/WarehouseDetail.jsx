@@ -5,7 +5,7 @@ import { Button, Table } from "antd";
 import { ProductWarehouseActionForWarehouse } from "../../Product/components/ProductWarehouseHistoryAction";
 import SharedIcon from "../../../shared/components/common/Icon";
 import Enum from "../../../shared/utils/enum";
-import { Avatar, SharedTag } from "../../../shared/components/common";
+import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import dataHelper from "../../../shared/utils/dataHelper";
 
 function Info({warehouse}) {
@@ -20,7 +20,7 @@ function Info({warehouse}) {
                     <DetailPage.InfoItem label="Name" value={warehouse.name}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Address" value={warehouse.address}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Responsible person" >
-                        <Avatar.SingleUser name="hieu.tran"/>
+                        <SharedAvatar.SingleUser name="hieu.tran"/>
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Description" value={warehouse.description}></DetailPage.InfoItem>
                 </div>

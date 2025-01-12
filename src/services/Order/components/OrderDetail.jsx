@@ -4,8 +4,9 @@ import dataHelper from "../../../shared/utils/dataHelper";
 import { Link } from "react-router-dom";
 import OrderItemAction from "./OrderItemAction";
 import { OrderBtnAddItem } from "./OrderButton";
-import { Avatar, SharedTag } from "../../../shared/components/common";
+import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import Enum from "../../../shared/utils/enum";
+import orderActionPermission from "../utils/actionPermission";
 
 function OrderItemBoard({order}) {
     const editable = order.status !== Enum.OrderStatus.COMPLETED;
@@ -24,7 +25,7 @@ function OrderItemBoard({order}) {
        
 
 	];
-    if (editable) {
+    if (!orderActionPermission.itemViewOnly(order)) {
         columns.push(
             {
                 key: "actions",
@@ -39,7 +40,7 @@ function OrderItemBoard({order}) {
             <DetailPage.InfoCardTitle>
                 <div className="flex items-center justify-between p-4"> 
                     <div>Order item</div>
-                    {editable && <OrderBtnAddItem order={order}/>}
+                    {!orderActionPermission.itemViewOnly(order) && <OrderBtnAddItem order={order}/>}
                 </div>
             </DetailPage.InfoCardTitle>
             <Table dataSource={orderItems} columns={columns} rowKey="id"></Table>
@@ -67,14 +68,14 @@ function Info({order}) {
                     <DetailPage.InfoItem label="Type" value={<SharedTag.InventoryAction action={order.inventoryAction}/>}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Order date" value={dataHelper.formatDate(order.orderDate)}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Expected delivery date" value={dataHelper.formatDate(order.expectedDeliveryDate)}></DetailPage.InfoItem>
-                    <DetailPage.InfoItem label="Created by" >
-                        <Avatar.SingleUser userId={order.createdBy}/>
+                    <DetailPage.InfoItem label="Creator" >
+                        <SharedAvatar.SingleUser userId={order.createdBy}/>
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Approvers" >
-                        <Avatar.MultiUser userIds={order.approverIds}/>
+                        <SharedAvatar.MultiUser userIds={order.approverIds}/>
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Participants" >
-                        <Avatar.MultiUser userIds={order.participantIds}/>
+                        <SharedAvatar.MultiUser userIds={order.participantIds}/>
                     </DetailPage.InfoItem>
                 </div>
             </DetailPage.InfoCard>

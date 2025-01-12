@@ -1,15 +1,14 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import { Link } from "react-router-dom";
 import OrderAction from "./OrderAction";
 import dataHelper from "../../../shared/utils/dataHelper";
-import { SharedTag } from "../../../shared/components/common";
+import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import { OrderStatusTag } from "./OrderTag";
-import SharedIcon from "../../../shared/components/common/Icon";
 
 
 function OrderBoard({orders, loading}) {
     const columns = [
-		{ key: "name", title: "Order Name", dataIndex: "name", width: "20%",
+		{ key: "name", title: "Order Name", dataIndex: "name", width: "15%",
             render: (text, record) => (
                 <Link to={`/orders/${record.id}`}> 
                     {record.name}
@@ -30,11 +29,15 @@ function OrderBoard({orders, loading}) {
         { key: "status", title: "Status", dataIndex: "status", width: "10%",
             render: (_, {status}) => (<OrderStatusTag status={status}/>)
          },
-		{ key: "orderDate", title: "Order Date", dataIndex: "orderDate", width: "15%",
+         
+		{ key: "orderDate", title: "Order Date", dataIndex: "orderDate", width: "10%",
             render: (_, {orderDate}) => (<div>{dataHelper.formatDate(orderDate)}</div>)
         },
 		{ key: "expectedDeliveryDate", title: "Expected Delivery Date", dataIndex: "expectedDeliveryDate", width: "15%",
             render: (_, {expectedDeliveryDate}) => (<div>{dataHelper.formatDate(expectedDeliveryDate)}</div>)
+        },
+        { key: "creator", title: "Creator", dataIndex: "createdBy", width: "15%",
+            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} />}</div>)
         },
 		{
 		    key: "actions",

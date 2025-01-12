@@ -37,13 +37,14 @@ const MultiUser = ({userIds}) => {
                 }}
                 >
                     {users.map((user, index) => (
-                        <Tooltip title={user.fullName || "---"} placement="top">
-                            <Avatar key={index} src={user.avatarUrl}>
-                                {/* Fallback initials if no avatarUrl */}
-                                {!user.avatarUrl && user.username.charAt(0).toUpperCase()}
-                            </Avatar>
-                        </Tooltip>
-
+                        <div key={index}>
+                            <Tooltip title={user.fullName || "---"} placement="top">
+                                <Avatar key={index} src={user.avatarUrl}>
+                                    {/* Fallback initials if no avatarUrl */}
+                                    {!user.avatarUrl && user.username.charAt(0).toUpperCase()}
+                                </Avatar>
+                            </Tooltip>
+                        </div>
                     ))}
             </Avatar.Group>
         </>
