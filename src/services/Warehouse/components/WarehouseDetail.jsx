@@ -7,6 +7,7 @@ import SharedIcon from "../../../shared/components/common/Icon";
 import Enum from "../../../shared/utils/enum";
 import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import dataHelper from "../../../shared/utils/dataHelper";
+import warehouseActionPermission from "../utils/actionPermission";
 
 function Info({warehouse}) {
     return (
@@ -19,8 +20,8 @@ function Info({warehouse}) {
                 <div className="space-y-4">
                     <DetailPage.InfoItem label="Name" value={warehouse.name}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Address" value={warehouse.address}></DetailPage.InfoItem>
-                    <DetailPage.InfoItem label="Responsible person" >
-                        <SharedAvatar.SingleUser name="hieu.tran"/>
+                    <DetailPage.InfoItem label="Supervisor" >
+                        <SharedAvatar.SingleUser userId={warehouse.supervisorId}/>
                     </DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Description" value={warehouse.description}></DetailPage.InfoItem>
                 </div>
@@ -60,7 +61,10 @@ function Inventory({warehouse, productWarehouses, loading}) {
                 <div>
                    <h2 className="text-base font-semibold text-gray-800">Inventory</h2>
                 </div>
-                <ProductWarehouseActionForWarehouse warehouse={warehouse} />
+                {
+                    warehouseActionPermission.canImportExport(warehouse)
+                    && <ProductWarehouseActionForWarehouse warehouse={warehouse} />
+                }
             </div>
 
                 

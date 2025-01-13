@@ -5,7 +5,7 @@ const currentUser = JSON.parse(localStorage.getItem("user"));
 const canAdd = () => {
 	return (
 		currentUser.authorities.includes(Enum.UserRole.ADMIN) ||
-		currentUser.authorities.includes(Enum.UserRole.WAREHOUSE_MANAGER)
+		currentUser.authorities.includes(Enum.UserRole.ACCOUNTANT)
 	);
 };
 

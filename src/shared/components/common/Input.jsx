@@ -1,8 +1,8 @@
 import { AutoComplete, DatePicker, Input, Mentions, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { debounce } from "lodash";
 
 
 function Label({forName, children}) {
@@ -96,104 +96,87 @@ function UserMention({value, onChange, options, ...props}) {
     )
 }
 
-const MapWrapper = () => {
-    const map = useMap();
-  
-    useEffect(() => {
-      setTimeout(() => {
-        map.invalidateSize(); // Recalculate map size
-      }, 300); // Delay to ensure proper rendering
-    }, [map]);
-  
-    return null;
-  };
-
-function Location({...props}) {
+function Location({onSelectLocation, ...props}) {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [loading, setLoading] = useState(false); // Loading state
 
+    
     // Function to fetch search results
     const fetchSearchResults = async (term) => {
-      if (!term || term.length <= 2) return [];
-      try {
-        setLoading(true); // Set loading state
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-            term
-          )}&format=json&addressdetails=1&limit=5`
-        );
-        const data = await response.json();
-        return data.map((result) => ({
-            value: result.display_name,
-            lat: parseFloat(result.lat),
-            lon: parseFloat(result.lon),
-        }));
-      } catch (error) {
-        console.error("Error fetching search results:", error); // Debugging
-        return [];
+        if (!term || term.length <= 2) return [];
+        try {
+            setLoading(true); // Set loading state
+            const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+                term
+            )}&format=json&addressdetails=1&limit=5`
+            );
+            const data = await response.json();
+            return data.map((result) => ({
+                    value: result.display_name,
+                    lat: parseFloat(result.lat),
+                    lon: parseFloat(result.lon),
+                }));
+        } catch (error) {
+            console.error("Error fetching search results:", error); // Debugging
+            return [];
       } finally {
         setLoading(false); // Reset loading state
       }
     };
+
+    const debouncedFetchResults = useCallback(
+        debounce(async (term) => {
+            const results = await fetchSearchResults(term);
+            console.log(results);
+            setSearchResults(results);
+        }, 1000),
+        []
+    );
+
   
     // Effect to fetch results when the search term changes
     useEffect(() => {
-      const fetchResults = async () => {
         if (searchTerm.length > 2) {
-            const results = await fetchSearchResults(searchTerm);
-            setSearchResults(results); // Update state with results
+          debouncedFetchResults(searchTerm);
         } else {
-            setSearchResults([]); // Clear results for short inputs
+          setSearchResults([]);
         }
-      };
-      fetchResults();
-    }, [searchTerm]); // Runs whenever searchTerm changes
+      }, [debouncedFetchResults, searchTerm]);
   
     // Handle location selection
     const handleLocationSelect = (value, option) => {
-      console.log("Selected location:", option); // Debugging
-      setSelectedLocation({
-        lat: option.lat,
-        lon: option.lon,
-      });
+        const location = {
+            address: option.value,
+            longitude: option.lat,
+            latitude: option.lon,
+        };
+
+        setSelectedLocation(location);
+        console.log("Selected location:", option); // Debugging
+        if (onSelectLocation) {
+            onSelectLocation(location);
+        }
     };
 
-  return (
-    <div>
-      {/* Search Input */}
-        <AutoComplete
-            style={{ width: "100%", marginBottom: "10px" }}
-            options={searchResults}
-            onSearch={(value) => setSearchTerm(value)} // Update search term
-            onSelect={handleLocationSelect} // Handle selection
-            placeholder="Search for a location"
-            loading={loading}
-        >
-            <Input />
-        </AutoComplete>
-
-      {/* Map */}
-        {/* <div style={{ height: "300px", width: "100%" }}>
-            <MapContainer
-                center={selectedLocation || [51.505, -0.09]} // Default center
-                zoom={selectedLocation ? 15 : 5}
-                style={{ height: "100%", width: "100%" }}
+    return (
+        <div>
+        {/* Search Input */}
+            <AutoComplete
+                style={{ width: "100%", marginBottom: "10px" }}
+                options={searchResults}
+                onSearch={(value) => setSearchTerm(value)} // Update search term
+                onSelect={handleLocationSelect} // Handle selection
+                placeholder="Search for a location"
+                loading={loading}
             >
-                <MapWrapper />
-                <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {selectedLocation && (
-                <Marker position={[selectedLocation.lat, selectedLocation.lon]} />
-                )}
-            </MapContainer>
-        </div> */}
-    </div>
-  );
-    
+                <Input.Search loading={loading} />
+            </AutoComplete>
+            {props.error && <InputError message={props.error}/>}
+        </div>
+    );
 }
 
 function InputError({ message }) {

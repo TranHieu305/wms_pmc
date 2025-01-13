@@ -10,7 +10,7 @@ import Enum from "../../../shared/utils/enum";
 import { userCreateValidationSchema } from "../utils/validation";
 import inputHelper from "../../../shared/utils/inputHelper";
 
-function UserBtnCreate(...props) {
+function UserBtnCreate({...props}) {
     const { showModal } = useModal(); 
     const navigate = useNavigate();
 

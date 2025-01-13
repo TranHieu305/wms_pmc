@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import WarehouseAction from "./WarehouseAction";
 import WarehouseStatusTag from "./WarehouseStatusTag";
 import SharedIcon from "../../../shared/components/common/Icon";
+import warehouseActionPermission from "../utils/actionPermission";
 
 function WarehouseBoard({warehouses, loading}) {
 	const columns = [
@@ -24,12 +25,16 @@ function WarehouseBoard({warehouses, loading}) {
 		{ key: "address", title: "Address", dataIndex: "address",width: "25%" },
 		{ key: "description", title: "Description", dataIndex: "description", width: "25%" },
         // { key: "Responsible_person", title: "Responsible person", dataIndex: "supervisorId" },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (title, record) => <WarehouseAction warehouse={record} />,
-		},
 	];
+    if (warehouseActionPermission.canAction()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (title, record) => <WarehouseAction warehouse={record} />,
+            },
+        )
+    }
 
 	return (
     <>

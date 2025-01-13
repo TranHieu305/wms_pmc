@@ -45,7 +45,7 @@ const FormLogin = () => {
                 />
             </div>
             <div className="mb-4">
-                <SharedInput.Text 
+                <SharedInput.TextPassword 
                     placeholder="Password"
                     className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none"
                     name="password"

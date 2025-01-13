@@ -4,8 +4,19 @@ import SharedIcon from "../../../shared/components/common/Icon";
 import inventoryItemApi from "../api/inventoryItemApi";
 import BoardPage from "../../../shared/components/BoardPage";
 import InventoryItemBoard from "../components/InventoryItemBoard";
+import inventoryItemActionPermission from "../utils/actionPermission";
+import NoPermissionPage from "../../../shared/components/NoPermissionPage";
 
 function InventoryItemBoardPage() {
+    if (!inventoryItemActionPermission.canViewBoard()) {
+        return <NoPermissionPage />
+    }
+    
+    return <InventoryItemBoardContent />
+}
+
+function InventoryItemBoardContent() {
+   
     const [inventoryItems, setInventoryItems] = useState([]);
     const [loading, setLoading] = useState(true);
     

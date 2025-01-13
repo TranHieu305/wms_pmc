@@ -20,8 +20,9 @@ const PartnerType = {
 
 const UserRole = {
 	USER: "USER",
-	ADMIN: "ADMIN",
 	WAREHOUSE_MANAGER: "WAREHOUSE_MANAGER",
+	ACCOUNTANT: "ACCOUNTANT",
+	ADMIN: "ADMIN",
 };
 
 const OrderStatus = {

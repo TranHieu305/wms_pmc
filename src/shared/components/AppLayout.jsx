@@ -2,8 +2,9 @@ import { Outlet } from "react-router-dom";
 import { SiderMenu } from "./SidebarMenu";
 import { Avatar, Dropdown, Layout } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { UserOutlined } from "@ant-design/icons";
 import LogoutBtn from "../../services/Auth/components/AuthButton";
+import { useSelector } from "react-redux";
+ 
 
 function AppLayout() {
 	return (
@@ -41,6 +42,9 @@ function AppHeader() {
 }
 
 function AvatarDropdown() {
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const users = useSelector((state) => state.users.userList);
+    const user = users.find(user => user.id === currentUser.userId);
     const items = [
         {
             key: 'logout',
@@ -55,10 +59,12 @@ function AvatarDropdown() {
             }}
             placement="bottomRight"
         >
-            <Avatar 
-                style={{backgroundColor: '#87d068',}}
-                icon={<UserOutlined />}
-            />
+            <Avatar
+                size={36}
+                src={user?.avatarUrl}
+            >
+                {user?.username?.charAt(0).toUpperCase() || "U"}
+            </Avatar>
         </Dropdown>
     );
 }

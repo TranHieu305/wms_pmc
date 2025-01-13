@@ -5,6 +5,7 @@ import SharedIcon from "../../../shared/components/common/Icon";
 import WarehouseBoard from "../components/WarehouseBoard";
 import { WarehouseBtnSave } from "../components/WarehouseButton";
 import BoardPage from "../../../shared/components/BoardPage";
+import warehouseActionPermission from "../utils/actionPermission";
 
 function WarehouseBoardPage() {
     const [warehouses, setWarehouses] = useState([]);
@@ -33,7 +34,7 @@ function WarehouseBoardPage() {
             icon={(<SharedIcon.Warehouse width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Warehouse>)}
             title = "Warehouse"
         >
-            <WarehouseBtnSave />
+            {warehouseActionPermission.canAction() && <WarehouseBtnSave />}
         </BoardPage.Subheader >
      
         {/* Table */}

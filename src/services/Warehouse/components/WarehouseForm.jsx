@@ -2,11 +2,16 @@ import { useFormik } from "formik";
 import { validationWarehouseSchema } from "../utils/validation";
 
 import { SharedForm, SharedInput } from "../../../shared/components/common";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useModal } from "../../../shared/components/ModalProvider";
+import { useSelector } from "react-redux";
+import inputHelper from "../../../shared/utils/inputHelper";
 
 function FormBodySaveWarehouse({warehouse, onSave}) {
     const {setModalData} = useModal();
+    const users = useSelector((state) => state.users.userList);
+    const loadingUsers = useSelector((state) => state.users.status === 'loading');
+    const [supervisor, setSupervisor] = useState(inputHelper.covertIdsToUserMentions([warehouse?.supervisorId], users));
 
     const initialValues = {
 		id: warehouse?.id || 0,
@@ -32,7 +37,7 @@ function FormBodySaveWarehouse({warehouse, onSave}) {
 
     return (
         <SharedForm.FormBody>
-            
+            {/* Name */}
             <SharedForm.FormBodyItem>
                 <SharedInput.Label forName="name">Name*</SharedInput.Label>
                 <SharedInput.Text
@@ -45,19 +50,41 @@ function FormBodySaveWarehouse({warehouse, onSave}) {
                     />
             </SharedForm.FormBodyItem>
 				
+            {/* Address */}
             <SharedForm.FormBodyItem>
                 <SharedInput.Label forName="address">Address*</SharedInput.Label>
-                <SharedInput.Text
-					name="address"
-					placeholder="Warehouse address*"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.address}
-					error={formik.touched.address && formik.errors.address}
-				/>
-            </SharedForm.FormBodyItem>			
+                <SharedInput.Location
+                    onSelectLocation={(location) => {
+                        formik.setFieldValue("address", location?.address);
+                        formik.setFieldValue("longitude", location?.longitude);
+                        formik.setFieldValue("latitude", location?.latitude);
+                    }}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.address}
+                    error={formik.touched.address && formik.errors.address}
+                >    
+                </SharedInput.Location>
+            </SharedForm.FormBodyItem>		
 
-             <SharedForm.FormBodyItem>
+            {/* Supervisor */}
+            <SharedForm.FormBodyItem>
+                <SharedInput.Label forName="supervisorId">Supervisor*</SharedInput.Label>
+                <SharedInput.UserMention
+                    name="supervisorId"
+                    placeholder="Please choose a supervisor"
+                    loading={loadingUsers}
+                    value={supervisor}
+                    onChange={(value) => {
+                        formik.setFieldValue("supervisorId", inputHelper.convertUserMentionsToIds(value, users)[0])
+                        setSupervisor(value);
+                    }}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.supervisorId && formik.errors.supervisorId}
+                />
+            </SharedForm.FormBodyItem>	
+
+            {/* Description */}
+            <SharedForm.FormBodyItem>
                 <SharedInput.Label forName="description">Description*</SharedInput.Label>
                 <SharedInput.TextAreaCustom
 					name="description"
@@ -69,12 +96,7 @@ function FormBodySaveWarehouse({warehouse, onSave}) {
 				/>
             </SharedForm.FormBodyItem>	
             
-            <SharedForm.FormBodyItem>
-                <SharedInput.Label forName="description">Address*</SharedInput.Label>
-                <SharedInput.Location>
-                    
-                </SharedInput.Location>
-            </SharedForm.FormBodyItem>
+           
         </SharedForm.FormBody>
     )
 }

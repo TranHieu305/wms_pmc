@@ -5,6 +5,7 @@ import orderApi from "../api/orderApi";
 import BoardPage from "../../../shared/components/BoardPage";
 import OrderBoard from "../components/OrderBoard";
 import { OrderBtnSave } from "../components/OrderButton";
+import orderActionPermission from "../utils/actionPermission";
 
 function OrderBoardPage() {
     const [orders, setOrders] = useState([]);
@@ -33,7 +34,7 @@ function OrderBoardPage() {
             icon={(<SharedIcon.Order width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Order>)}
             title = "All Order"
         >
-            <OrderBtnSave />
+            {orderActionPermission.canAdd() && <OrderBtnSave />}
         </BoardPage.Subheader >
      
         {/* Table */}

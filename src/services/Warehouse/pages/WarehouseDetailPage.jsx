@@ -10,6 +10,7 @@ import WarehouseDetail from "../components/WarehouseDetail";
 import productWarehouseApi from "../../Product/api/productWarehouseApi";
 import WarehouseStatusTag from "../components/WarehouseStatusTag";
 import productWarehouseHistoryApi from "../../Product/api/productWarehouseHistoryApi";
+import warehouseActionPermission from "../utils/actionPermission";
 
 function WarehouseDetailPage() {
     const { warehouseId } = useParams();
@@ -62,7 +63,9 @@ function WarehouseDetailPage() {
                             id={warehouse.id}
                             backLink="/warehouses"
                         >
-                            <WarehouseAction warehouse={warehouse} className="bg-white"/>
+                            {warehouseActionPermission.canAction()
+                                && <WarehouseAction warehouse={warehouse} className="bg-white"/>
+                            }
                         </DetailPage.Subheader>
     
                         {/* Content */}

@@ -1,4 +1,3 @@
-import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Tooltip } from "antd";
 import { useSelector } from "react-redux";
 

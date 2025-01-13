@@ -52,7 +52,8 @@ function WarehouseBtnEdit({warehouse, ...props}) {
         showModal({
             title: <div>Edit warehouse: {warehouse.name}</div>,
             body: (<FormBodySaveWarehouse warehouse={warehouse}/>),
-            onSave: handleSave
+            onSave: handleSave,
+            widthModal: "medium"
         })
     }
 
