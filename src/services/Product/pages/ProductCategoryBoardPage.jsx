@@ -5,6 +5,7 @@ import SharedIcon from "../../../shared/components/common/Icon";
 import ProductCategoryBoard from "../components/ProductCategoryBoard";
 import { ProductCategoryBtnSave } from "../components/ProductCategoryButton";
 import BoardPage from "../../../shared/components/BoardPage";
+import productActionPermission from "../utils/actionPermission";
 
 
 function ProductCategoryBoardPage() {
@@ -34,7 +35,7 @@ function ProductCategoryBoardPage() {
             icon={(<SharedIcon.Product width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Product>)}
             title = "Category"
         >
-            <ProductCategoryBtnSave />
+            {productActionPermission.canAction() && <ProductCategoryBtnSave />}
         </BoardPage.Subheader >
      
         {/* Table */}

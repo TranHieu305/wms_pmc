@@ -8,6 +8,7 @@ import ProductAction from "../components/ProductAction";
 import DetailPage from "../../../shared/components/DetailPage";
 import { Col, Row } from "antd";
 import ProductDetail from "../components/ProductDetail";
+import productActionPermission from "../utils/actionPermission";
 
 function ProductDetailPage() {
     const { productId } = useParams();
@@ -40,18 +41,30 @@ function ProductDetailPage() {
                         id={product.id}
                         backLink="/products"
                     >
-                        <ProductAction product={product} className="bg-white"/>
+                        {
+                            productActionPermission.canAction()
+                            && <ProductAction product={product} className="bg-white"/>
+                        }
                     </DetailPage.Subheader>
-
+                    
                     {/* Content */}
-                    <Row gutter={24}>
-                        <Col span={12}>
-                            <ProductDetail.Info product={product}/>
-                        </Col>
-                        <Col span={12}>
-                            <ProductDetail.DetailsPanel product={product}/>
-                        </Col>
-                    </Row>
+                    {
+                        productActionPermission.viewOnlyGeneral() ?
+                           ( <Row gutter={24}>
+                                <Col span={12}>
+                                    <ProductDetail.Info product={product}/>
+                                </Col>
+                            </Row>)
+                        : ( <Row gutter={24}>
+                                <Col span={12}>
+                                    <ProductDetail.Info product={product}/>
+                                </Col>
+                                <Col span={12}>
+                                    <ProductDetail.DetailsPanel product={product}/>
+                                </Col>
+                            </Row>)
+                    }
+                  
                 </>
                 
             ) 

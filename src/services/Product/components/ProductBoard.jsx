@@ -2,6 +2,7 @@ import { Button, Table } from "antd";
 import ProductAction from "./ProductAction";
 import { Link } from "react-router-dom";
 import SharedIcon from "../../../shared/components/common/Icon";
+import productActionPermission from "../utils/actionPermission";
 
 function ProductBoard({products, loading}) {
     const columns = [
@@ -21,12 +22,17 @@ function ProductBoard({products, loading}) {
 		{ key: "quantity", title: "Quantity", dataIndex: "quantity", width: "10%" },
         { key: "unit", title: "Unit", dataIndex: "uom", width: "10%" },
 		{ key: "description", title: "Description", dataIndex: "description", width: "30%" },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (_, record) => <ProductAction product={record} />,
-		},
+	
 	];
+    if (productActionPermission.canAction()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (_, record) => <ProductAction product={record} />,
+            },
+        )
+    }
 
     return (
         <>

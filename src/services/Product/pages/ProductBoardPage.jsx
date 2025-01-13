@@ -5,6 +5,7 @@ import productApi from "../api/productApi";
 import ProductBoard from "../components/ProductBoard";
 import { ProductBtnSave } from "../components/ProductButton";
 import BoardPage from "../../../shared/components/BoardPage";
+import productActionPermission from "../utils/actionPermission";
 
 function ProductBoardPage() {
     const [products, setProducts] = useState([]);
@@ -33,7 +34,7 @@ function ProductBoardPage() {
             icon={(<SharedIcon.Product width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Product>)}
             title = "All Product"
         >
-            <ProductBtnSave />
+            {productActionPermission.canAction() && <ProductBtnSave />}
         </BoardPage.Subheader >
      
         {/* Table */}

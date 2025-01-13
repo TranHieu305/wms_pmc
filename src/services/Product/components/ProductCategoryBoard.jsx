@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import ProductCategoryTypeTag from "./ProductCategoryTypeTag";
 import ProductCategoryAction from "./ProductCategoryAction";
+import productActionPermission from "../utils/actionPermission";
 
 function ProductCategoryBoard({categories, loading}) {
     const columns = [
@@ -9,12 +10,18 @@ function ProductCategoryBoard({categories, loading}) {
             render: (_, record) => (<ProductCategoryTypeTag category={record} />)
         },
 		{ key: "description", title: "Description", dataIndex: "description", width: "50%" },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (_, record) => <ProductCategoryAction category={record} />,
-		},
+		
 	];
+
+    if (productActionPermission.canAction()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (_, record) => <ProductCategoryAction category={record} />,
+            },
+        )
+    }
 
     return (
         <>
