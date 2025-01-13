@@ -54,9 +54,12 @@ function SiderMenu() {
             children: [
 				{
 					key: "/batches",
-					label: "All Batch",
+					label: "Batches",
 				},
-				
+                {
+					key: "/shipments",
+					label: "Shipments",
+				},
 			],
 		},
         {

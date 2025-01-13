@@ -41,4 +41,6 @@ export const APP_API = {
 	USER: `${API_BASE_URL}/users`,
 	PRODUCED_ITEM: `${API_BASE_URL}/produced-items`,
 	VEHICLE: `${API_BASE_URL}/vehicles`,
+	SHIPMENT: `${API_BASE_URL}/shipments`,
+	PARTNER_ADDRESS: `${API_BASE_URL}/partner-addresses`,
 };

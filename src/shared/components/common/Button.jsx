@@ -8,7 +8,7 @@ function BtnSave({label, ...props}) {
             type="primary"
             {...props}
         >
-            {label}
+            {label || "Add new"}
         </Button>
     )
    

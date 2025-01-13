@@ -39,6 +39,7 @@ const BatchStatus = {
 	COMPLETED: "COMPLETED",
 	IN_TRANSIT: "IN_TRANSIT",
 	DELIVERED: "DELIVERED",
+	PACKED: "PACKED",
 };
 
 const BatchItemStatus = {
@@ -63,6 +64,14 @@ const VehicleStatus = {
 	IN_TRANSIT: "IN_TRANSIT",
 };
 
+const ShipmentStatus = {
+	PENDING_APPROVAL: "PENDING_APPROVAL",
+	REJECTED: "REJECTED",
+	PENDING: "PENDING",
+	COMPLETED: "COMPLETED",
+	IN_TRANSIT: "IN_TRANSIT",
+};
+
 const Enum = {
 	InventoryAction,
 	CategoryType,
@@ -75,6 +84,7 @@ const Enum = {
 	ApprovalStatus,
 	VehicleStatus,
 	ProducedItemStatus,
+	ShipmentStatus,
 };
 
 export default Enum;

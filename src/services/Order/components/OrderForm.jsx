@@ -224,7 +224,7 @@ function FormSaveOrder({setBeforeSave, order}) {
                     </SharedForm.FormBodyItem>	
                 </Col>
                 <Col span={12}>
-                <SharedForm.FormBodyItem>
+                    <SharedForm.FormBodyItem>
                         <SharedInput.Label forName="participantIds">Participants</SharedInput.Label>
                         <SharedInput.UserMention
                             name="participantIds"

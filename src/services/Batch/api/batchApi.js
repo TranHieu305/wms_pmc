@@ -1,6 +1,7 @@
 import axios from "axios";
 import { APP_API } from "../../../shared/utils/apiConstants";
 import authHeader from "../../../shared/utils/authHeader";
+import Enum from "../../../shared/utils/enum";
 
 const getAllBatches = () => {
 	return axios.get(APP_API.BATCH, { headers: authHeader() });
@@ -16,6 +17,12 @@ const getBatchDetail = (batchId) => {
 
 const markAsDelivered = (batchId) => {
 	return axios.patch(APP_API.BATCH + `/${batchId}/status/delivered`, null, {
+		headers: authHeader(),
+	});
+};
+
+const getPackedBatch = () => {
+	return axios.get(APP_API.BATCH + `/status/${Enum.BatchStatus.PACKED}`, {
 		headers: authHeader(),
 	});
 };
@@ -49,6 +56,7 @@ const batchApi = {
 	deleteBatch,
 	approve,
 	reject,
+	getPackedBatch,
 };
 
 export default batchApi;
