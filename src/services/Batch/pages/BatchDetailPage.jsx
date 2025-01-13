@@ -9,6 +9,7 @@ import { Col, Row, Tabs } from "antd";
 import BatchDetail from "../components/BatchDetail";
 import { BatchStatusTag } from "../components/BatchTag";
 import producedItemApi from "../../ProducedItem/api/producedItemApi";
+import batchActionPermission from "../utils/actionPermission";
 
 function BatchDetailPage() {
     const {batchId} = useParams();
@@ -63,7 +64,7 @@ function BatchDetailPage() {
                             id={batch.id}
                             backLink="/batches"
                         >
-                            <BatchAction batch={batch} className="bg-white"/>
+                            {!batchActionPermission.viewOnly() && <BatchAction batch={batch} className="bg-white"/>}
                         </DetailPage.Subheader>
                          {/* Content */}
                          <Row gutter={24}>

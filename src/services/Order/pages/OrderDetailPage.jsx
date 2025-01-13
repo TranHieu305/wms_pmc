@@ -8,6 +8,7 @@ import { Col, Row } from "antd";
 import LoadingPage from "../../../shared/components/LoadingPage";
 import OrderDetail from "../components/OrderDetail";
 import { OrderStatusTag } from "../components/OrderTag";
+import orderActionPermission from "../utils/actionPermission";
 
 function OrderDetailPage() {
     const {orderId} = useParams();
@@ -47,7 +48,7 @@ function OrderDetailPage() {
                             id={order.id}
                             backLink="/orders"
                         >
-                            <OrderAction order={order} className="bg-white"/>
+                            {!orderActionPermission.viewOnly() && <OrderAction order={order} className="bg-white"/>}      
                         </DetailPage.Subheader>
     
                         {/* Content */}

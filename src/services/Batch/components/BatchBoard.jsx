@@ -4,6 +4,7 @@ import BatchAction from "./BatchAction";
 import dataHelper from "../../../shared/utils/dataHelper";
 import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import { BatchStatusTag } from "./BatchTag";
+import batchActionPermission from "../utils/actionPermission";
 
 function BatchBoard({batches, loading}) {
     const columns = [
@@ -44,12 +45,17 @@ function BatchBoard({batches, loading}) {
         { key: "creator", title: "Creator", dataIndex: "createdBy", width: "10%",
             render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} />}</div>)
         },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (_, record) => <BatchAction batch={record} />,
-		},
 	];
+
+    if (!batchActionPermission.viewOnly()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (_, record) => <BatchAction batch={record} />,
+            },
+        )
+    }
 
     return (
         <>

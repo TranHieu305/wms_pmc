@@ -4,6 +4,7 @@ import OrderAction from "./OrderAction";
 import dataHelper from "../../../shared/utils/dataHelper";
 import { SharedAvatar, SharedTag } from "../../../shared/components/common";
 import { OrderStatusTag } from "./OrderTag";
+import orderActionPermission from "../utils/actionPermission";
 
 
 function OrderBoard({orders, loading}) {
@@ -39,12 +40,18 @@ function OrderBoard({orders, loading}) {
         { key: "creator", title: "Creator", dataIndex: "createdBy", width: "15%",
             render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} />}</div>)
         },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (_, record) => <OrderAction order={record} />,
-		},
+		
 	];
+
+    if (!orderActionPermission.viewOnly()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (_, record) => <OrderAction order={record} />,
+            },
+        )
+    }
 
     return (
         <>

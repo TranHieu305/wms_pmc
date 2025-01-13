@@ -34,7 +34,7 @@ function VehicleBoardPage() {
             icon={(<SharedIcon.Setting width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Setting>)}
             title = "Vehicle"
         >
-            {vehicleActionPermission.canAdd && <VehicleBtnAdd />}
+            {vehicleActionPermission.canAction() && <VehicleBtnAdd />}
         </BoardPage.Subheader >
      
         {/* Table */}

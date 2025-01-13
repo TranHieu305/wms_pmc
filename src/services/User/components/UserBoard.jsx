@@ -1,6 +1,7 @@
 import { Avatar, Table, Tag, Typography } from "antd";
 import UserAction from "./UserAction";
 import { UserOutlined } from "@ant-design/icons";
+import userActionPermission from "../utils/actionPermission";
 
 
 function UserBoard({users, loading}) {
@@ -15,12 +16,18 @@ function UserBoard({users, loading}) {
 		{ key: "status", title: "Status", dataIndex: "status", width: "10%",
             render: (_, record) => <UserStatus status={record.status} />
         },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (_, record) => <UserAction user={record} />,
-		},
+		
 	];
+
+    if (userActionPermission.canAction()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (_, record) => <UserAction user={record} />,
+            },
+        )
+    }
 
     return (
         <>

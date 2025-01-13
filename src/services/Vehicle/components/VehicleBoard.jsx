@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import VehicleAction from "./VehicleAction";
 import VehicleStatusTag from "./VehicleStatusTag";
+import vehicleActionPermission from "../utils/actionPermission";
 
 function VehicleBoard({vehicles, loading}) {
 	const columns = [
@@ -15,13 +16,18 @@ function VehicleBoard({vehicles, loading}) {
             render: (text, record) => <VehicleStatusTag status={record.status}/>
          }, 
 		{ key: "description", title: "Description", dataIndex: "description", width: "25%" },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (title, record) => <VehicleAction vehicle={record} />,
-            width: "10%"
-		},
+	
 	];
+    if (vehicleActionPermission.canAction()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (title, record) => <VehicleAction vehicle={record} />,
+                width: "10%"
+            },
+        )
+    }
 
 	return (
     <>

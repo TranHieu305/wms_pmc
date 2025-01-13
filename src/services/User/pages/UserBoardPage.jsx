@@ -5,6 +5,7 @@ import userApi from "../api/userApi";
 import BoardPage from "../../../shared/components/BoardPage";
 import UserBoard from "../components/UserBoard";
 import { UserBtnCreate } from "../components/UserButton";
+import userActionPermission from "../utils/actionPermission";
 
 
 function UserBoardPage() {
@@ -34,7 +35,7 @@ function UserBoardPage() {
             icon={(<SharedIcon.User width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.User>)}
             title = "All User"
         >
-            <UserBtnCreate />
+            {userActionPermission.canAction() && <UserBtnCreate />}
         </BoardPage.Subheader >
      
         {/* Table */}
