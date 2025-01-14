@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import shipmentBatchApi from "../api/shipmentBatchApi";
-import { notificationHelper } from "../../../shared/utils/notificationHelper123";
+import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { Button, Modal } from "antd";
 
 function ShipmentBatchBtnMarkAsDelivered({shipmentBatch, ...props}) {

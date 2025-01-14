@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { notificationHelper } from "../../../shared/utils/notificationHelper123";
+import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { Button } from "antd";
 
 function LogoutBtn() {

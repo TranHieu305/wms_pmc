@@ -1,6 +1,6 @@
 
 import { useModal } from "../../../shared/components/ModalProvider";
-import { notificationHelper } from "../../../shared/utils/notificationHelper123";
+import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
 import producedItemApi from "../api/producedItemApi";
