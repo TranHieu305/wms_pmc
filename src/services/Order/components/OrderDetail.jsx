@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 import OrderItemAction from "./OrderItemAction";
 import { OrderBtnAddItem } from "./OrderButton";
 import { SharedAvatar, SharedTag } from "../../../shared/components/common";
-import Enum from "../../../shared/utils/enum";
 import orderActionPermission from "../utils/actionPermission";
 
 function OrderItemBoard({order}) {
-    const editable = order.status !== Enum.OrderStatus.COMPLETED;
     const orderItems = order.orderItems || [];
 
     const columns = [

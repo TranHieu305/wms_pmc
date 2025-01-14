@@ -3,8 +3,9 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import SharedIcon from "../../../shared/components/common/Icon";
 import shipmentApi from "../api/shipmentApi";
 import BoardPage from "../../../shared/components/BoardPage";
+import { ShipmentCreateBtn } from "../components/ShipmentButton";
 import ShipmentBoard from "../components/ShipmentBoard";
-import { ShipmentBtnSave, ShipmentCreateBtn } from "../components/ShipmentButton";
+import shipmentActionPermission from "../utils/actionPermission";
 
 function ShipmentBoardPage() {
     const [shipments, setShipments] = useState([]);
@@ -33,7 +34,7 @@ function ShipmentBoardPage() {
             icon={(<SharedIcon.Shipment width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Shipment>)}
             title = "All Shipment"
         >
-            <ShipmentCreateBtn />
+            {shipmentActionPermission.canAdd() && <ShipmentCreateBtn />}
         </BoardPage.Subheader >
      
         {/* Table */}

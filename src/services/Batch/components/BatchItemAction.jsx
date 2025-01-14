@@ -3,20 +3,13 @@ import { SharedBtn } from "../../../shared/components/common";
 import { BatchItemBtnDelete, BatchItemBtnMarkComplete, BatchItemBtnUpdate } from "./BatchItemButton";
 import Enum from "../../../shared/utils/enum";
 import { ProducedItemCreateFromBatchItemBtn } from "../../ProducedItem/components/ProducedItemButton";
+import batchActionPermission from "../utils/actionPermission";
 
 function BatchItemAction({batch, item, ...props}) {
-    let items = [
-        {
-            key: 'no-action' + item.id,
-            label: "No action",
-        },
-    ];
+    let items = [];
     
-    if (item.status !== Enum.BatchItemStatus.COMPLETED && 
-        batch.status !== Enum.BatchStatus.DELIVERED
-    ) {
+    if (batchActionPermission.itemCanEdit(batch, item)) {
         items = [
-          
             {
                 key: 'update' + item.id,
                 label: <BatchItemBtnUpdate item={item} key={item.id}/>,
@@ -29,8 +22,7 @@ function BatchItemAction({batch, item, ...props}) {
         ];
     }
 
-    if (batch.inventoryAction === Enum.InventoryAction.EXPORT &&
-        item.status !== Enum.BatchItemStatus.COMPLETED ) {
+    if (batchActionPermission.itemCanMarkComplete(batch, item)) {
         items.unshift(
             {
                 key: 'mark-complete' + item.id,
@@ -38,13 +30,23 @@ function BatchItemAction({batch, item, ...props}) {
             },
         )
     } 
-    items.unshift(
-        {
-            key: 'produce-' + item.id,
-            label: <ProducedItemCreateFromBatchItemBtn batch={batch} batchItem={item} key={item.id} type="dash" />,
-        },
-    )
-    
+    if (batchActionPermission.itemCanAddProduced(batch, item)) {
+        items.unshift(
+            {
+                key: 'produce-' + item.id,
+                label: <ProducedItemCreateFromBatchItemBtn batch={batch} batchItem={item} key={item.id} type="dash" />,
+            },
+        )
+    }
+
+    if (items.length === 0) {
+        items = [
+            {
+                key: 'no-action' + batch.id,
+                label: "No action",
+            },
+        ]
+    }
 
     return (
         <Dropdown

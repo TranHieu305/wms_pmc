@@ -1,9 +1,10 @@
 import { Table } from "antd";
 import { Link } from "react-router-dom";
-import ShipmentAction from "./ShipmentAction";
 import dataHelper from "../../../shared/utils/dataHelper";
 import { SharedAvatar } from "../../../shared/components/common";
 import { ShipmentStatusTag } from "./ShipmentTag";
+import ShipmentAction from "./ShipmentAction";
+import shipmentActionPermission from "../utils/actionPermission";
 
 
 function ShipmentBoard({shipments, loading}) {
@@ -26,15 +27,20 @@ function ShipmentBoard({shipments, loading}) {
             render: (_, {date}) => (<div>{dataHelper.formatDate(date)}</div>)
         },
         { key: "creator", title: "Creator", dataIndex: "createdBy", width: "15%",
-            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} />}</div>)
+            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} avatarOnly/>}</div>)
         },
-		{
-		    key: "actions",
-		    title: "Action",
-		    render: (_, record) => <ShipmentAction shipment={record} />,
-            width: "10%",
-		},
 	];
+
+    if (!shipmentActionPermission.viewOnly()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (_, record) => <ShipmentAction shipment={record} />,
+                width: "10%",
+            },
+        )
+    }
 
     return (
         <>

@@ -39,7 +39,7 @@ const canMarkAsComplete = (order) => {
 // Created batch from PENDING order
 // Admin or warehouse_manager - participant can action
 const canCreateBatch = (order) => {
-	if (!order.status === Enum.OrderStatus.PENDING) {
+	if (order.status !== Enum.OrderStatus.PENDING) {
 		return false;
 	}
 	return (

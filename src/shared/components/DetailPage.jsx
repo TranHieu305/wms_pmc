@@ -41,11 +41,11 @@ function InfoCard({children}) {
 function InfoItem({label, value, children}) {
     return (
         <div>
-            <p className=" text-gray-800 font-medium">{label}</p>
-            <p className=" text-gray-500 font-normal">
+            <div className=" text-gray-800 font-medium">{label}</div>
+            <div className=" text-gray-500 font-normal">
                 {value}
                 {children}
-            </p>
+            </div>
         </div>
     )
 }

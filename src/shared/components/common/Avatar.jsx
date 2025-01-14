@@ -1,14 +1,24 @@
 import { Avatar, Tooltip } from "antd";
 import { useSelector } from "react-redux";
 
-const SingleUser = ({userId}) => {
+const SingleUser = ({userId, avatarOnly}) => {
     const users = useSelector((state) => state.users.userList);
     const user = users.find(user => user.id === userId);
+    if (avatarOnly) {
+        return (
+            <Tooltip title={user?.fullName || "---"} placement="top">
+                <Avatar key={user.id} src={user?.avatarUrl} size={32}>
+                    {/* Fallback initials if no avatarUrl */}
+                    {!user.avatarUrl && user.username.charAt(0).toUpperCase()}
+                </Avatar>
+            </Tooltip>
+        )
+    }
     return (
         <div className="flex items-center space-x-4">
           {/* Avatar */}
           <Avatar
-            size={36}
+            size={32}
             src={user?.avatarUrl}
             className="bg-purple-500"
           >
@@ -37,8 +47,8 @@ const MultiUser = ({userIds}) => {
                 >
                     {users.map((user, index) => (
                         <div key={index}>
-                            <Tooltip title={user.fullName || "---"} placement="top">
-                                <Avatar key={index} src={user.avatarUrl}>
+                            <Tooltip title={user?.fullName || "---"} placement="top">
+                                <Avatar key={index} src={user.avatarUrl} size={32}>
                                     {/* Fallback initials if no avatarUrl */}
                                     {!user.avatarUrl && user.username.charAt(0).toUpperCase()}
                                 </Avatar>

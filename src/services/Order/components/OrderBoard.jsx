@@ -38,7 +38,7 @@ function OrderBoard({orders, loading}) {
             render: (_, {expectedDeliveryDate}) => (<div>{dataHelper.formatDate(expectedDeliveryDate)}</div>)
         },
         { key: "creator", title: "Creator", dataIndex: "createdBy", width: "15%",
-            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} />}</div>)
+            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} avatarOnly/>}</div>)
         },
 		
 	];

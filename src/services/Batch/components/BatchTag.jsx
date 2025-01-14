@@ -23,11 +23,8 @@ function BatchStatusTag({status}) {
             tag = <Tag color="orange">{Enum.BatchStatus.IN_TRANSIT}</Tag>
             break;
         case Enum.BatchStatus.DELIVERED:
-            tag = <Tag color="lime">{Enum.BatchStatus.DELIVERED}</Tag>
+            tag = <Tag color="success">{Enum.BatchStatus.DELIVERED}</Tag>
             break;
-        case Enum.BatchStatus.COMPLETED:
-                tag = <Tag color="success">{Enum.BatchStatus.COMPLETED}</Tag>
-                break;
         default:
             tag = <Tag color="default">NO STATUS</Tag>;
     }

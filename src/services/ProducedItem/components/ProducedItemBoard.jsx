@@ -24,7 +24,7 @@ function ProducedItemBatchBoard({producedItems}) {
             render: (text, record) => (<ProducedItemStatusTag status={record.status}/>),
          },
         { key: "creator", title: "Creator", dataIndex: "createdBy", width: "10%",
-            render: (text, record) => (<SharedAvatar.SingleUser userId={record.createdBy}/>)
+            render: (text, record) => (<SharedAvatar.SingleUser userId={record.createdBy} avatarOnly/>)
          },
         { key: "approvers", title: "Approvers", dataIndex: "approverIds", width: "20%",
             render: (text, record) => (<SharedAvatar.MultiUser userIds={record.approverIds}/>)

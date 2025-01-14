@@ -43,7 +43,7 @@ function BatchBoard({batches, loading}) {
             render: (_,{batchDate}) => (<div>{dataHelper.formatDate(batchDate)}</div>)
         },
         { key: "creator", title: "Creator", dataIndex: "createdBy", width: "10%",
-            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} />}</div>)
+            render: (_, {createdBy}) => (<div>{<SharedAvatar.SingleUser userId={createdBy} avatarOnly/>}</div>)
         },
 	];
 

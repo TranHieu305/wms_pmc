@@ -10,7 +10,6 @@ import Enum from "../../../shared/utils/enum";
 import { ProducedItemBatchBoard } from "../../ProducedItem/components/ProducedItemBoard";
 
 function ItemTabs({batch, producedItems}) {
-    console.log(batch);
     const menuItems = [
         {
             key: '1',
@@ -20,7 +19,8 @@ function ItemTabs({batch, producedItems}) {
         },
     ];
 
-    if (batch.inventoryAction === Enum.InventoryAction.EXPORT) {
+    if (batch.orderInventoryAction === Enum.InventoryAction.EXPORT &&
+        batch.inventoryAction === Enum.InventoryAction.EXPORT) {
         menuItems.push( {
             key: '2',
             label: 'Produced Item',
@@ -49,11 +49,13 @@ function BatchItemBoard({batch}) {
             ),
         },
 		{ key: "quantity", title: "Quantity", dataIndex: "quantity", width: "15%" },
-        { key: "producedQuantity", title: "Produced quantity", dataIndex: "producedQuantity", width: "20%" },
-
         { key: "uom", title: "Unit", dataIndex: "uom", width: "10%" },
         { key: "weight", title: "Weight(Kg)", dataIndex: "weight", width: "15%" },
     ];
+    if (batch.orderInventoryAction === Enum.InventoryAction.EXPORT &&
+        batch.inventoryAction === Enum.InventoryAction.EXPORT) {
+            columns.push({ key: "producedQuantity", title: "Produced quantity", dataIndex: "producedQuantity", width: "20%" },)
+        }
 
     if (batch.inventoryAction === Enum.InventoryAction.EXPORT) {
         columns.push(
@@ -63,7 +65,7 @@ function BatchItemBoard({batch}) {
         )
     }
 
-    if (batch.status !== Enum.BatchStatus.COMPLETED) {
+    if (batch.status !== Enum.BatchStatus.DELIVERED) {
         columns.push(
             {
                 key: "actions",
@@ -93,7 +95,7 @@ function Info({batch}) {
                     <DetailPage.InfoItem label="Type" value={<SharedTag.InventoryAction action={batch.inventoryAction}/>}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Date" value={dataHelper.formatDate(batch.batchDate)}></DetailPage.InfoItem>
                     <DetailPage.InfoItem label="Order">
-                        <Link to={`/partners/${batch.order?.id}`}> 
+                        <Link to={`/orders/${batch.order?.id}`}> 
                             {batch.order?.name || "---"}
                         </Link>
                     </DetailPage.InfoItem>

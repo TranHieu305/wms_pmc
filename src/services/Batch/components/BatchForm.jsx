@@ -42,7 +42,7 @@ function FormCreateFromOrder({setBeforeSave, order}) {
             orderItemId: item.id,
             productName: item.product.name,
             uom: item.product.uom,
-            quantity: item.quantity,
+            quantity: item.quantity - item.deliveredQuantity,
             weight: 0,
         }
        return batchItem;
