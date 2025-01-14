@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 const SingleUser = ({userId, avatarOnly}) => {
     const users = useSelector((state) => state.users.userList);
     const user = users.find(user => user.id === userId);
+    if (!user) {
+        return <></>
+    }
     if (avatarOnly) {
         return (
             <Tooltip title={user?.fullName || "---"} placement="top">

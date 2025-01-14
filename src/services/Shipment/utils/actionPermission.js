@@ -34,12 +34,37 @@ const canApprove = (shipment) => {
 	);
 };
 
+const canMarkAsCompleted = (shipment) => {
+	return (
+		shipment.pendingApproverIds.includes(currentUser.userId) &&
+		shipment.status === Enum.BatchStatus.IN_TRANSIT
+	);
+};
+
+const canMarkAsInTransit = (shipment) => {
+	return (
+		shipment.pendingApproverIds.includes(currentUser.userId) &&
+		shipment.status === Enum.BatchStatus.PENDING
+	);
+};
+
+const itemCanMarkDelivered = (shipment, shipmentBatch) => {
+	return (
+		shipment.participantIds.includes(currentUser.userId) &&
+		shipment.status === Enum.ShipmentStatus.IN_TRANSIT &&
+		shipmentBatch.status === Enum.ShipmentBatchStatus.IN_TRANSIT
+	);
+};
+
 const shipmentActionPermission = {
 	viewOnly,
 	canAdd,
 	canDelete,
 	canApprove,
 	canAction,
+	canMarkAsInTransit,
+	canMarkAsCompleted,
+	itemCanMarkDelivered,
 };
 
 export default shipmentActionPermission;

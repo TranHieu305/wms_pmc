@@ -43,4 +43,5 @@ export const APP_API = {
 	VEHICLE: `${API_BASE_URL}/vehicles`,
 	SHIPMENT: `${API_BASE_URL}/shipments`,
 	PARTNER_ADDRESS: `${API_BASE_URL}/partner-addresses`,
+	SHIPMENT_BATCH: `${API_BASE_URL}/shipment-batches`,
 };

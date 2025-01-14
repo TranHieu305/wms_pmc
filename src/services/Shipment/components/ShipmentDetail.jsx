@@ -1,32 +1,10 @@
-import { Divider, Table } from "antd";
+import { Divider } from "antd";
 import DetailPage from "../../../shared/components/DetailPage";
 import dataHelper from "../../../shared/utils/dataHelper";
-import { Link } from "react-router-dom";
-import { SharedAvatar, SharedTag } from "../../../shared/components/common";
+import { SharedAvatar } from "../../../shared/components/common";
+import ShipmentBatchBoard from "./ShipmentBatchBoard";
 
-function  ShipmentBatchBoard({shipment}) {
-    const shipmentBatches = shipment.shipmentBatches || [];
-
-    const columns = [
-		{ key: "name", title: "Batch name", dataIndex: ["batch","name"], width: "20%",
-            render: (text, record) => <Link to={`/batches/${record.batch?.id}`}>{record.batch?.name}</Link>,
-        },
-        { key: "address", title: "Address", dataIndex: ["partnerAddress","address"], width: "20%",
-            render: (text, record) => <div>{record.partnerAddress?.address || "---"}</div>,
-        },
-        { key: "status", title: "Status", dataIndex: "status", width: "10%" },
-		{ key: "order", title: "Shipment order", dataIndex: "shipmentOrder", width: "20%" },
-	];
-    // if (!shipmentActionPermission.itemViewOnly(shipment)) {
-    //     columns.push(
-    //         {
-    //             key: "actions",
-    //             title: "Action",
-    //             render: (_, record) => <ShipmentItemAction item={record} />,
-    //         },
-    //     );
-    // }
-
+function  ShipmentBatch({shipment}) {
     return (
         <DetailPage.DetailContainer>
             <DetailPage.InfoCardTitle>
@@ -34,7 +12,7 @@ function  ShipmentBatchBoard({shipment}) {
                     <div>Shipment batch</div>
                 </div>
             </DetailPage.InfoCardTitle>
-            <Table dataSource={shipmentBatches} columns={columns} rowKey="id"></Table>
+            <ShipmentBatchBoard shipment={shipment}/>
         </DetailPage.DetailContainer>
     );
 }
@@ -67,7 +45,7 @@ function Info({shipment}) {
 }
 
 const ShipmentDetail = {
-    ShipmentBatchBoard,
+    ShipmentBatch,
     Info
 }
 

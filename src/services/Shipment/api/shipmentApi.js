@@ -30,6 +30,18 @@ const reject = (shipmentId) => {
 	});
 };
 
+const markAsInTransit = (shipmentId) => {
+	return axios.patch(APP_API.SHIPMENT + `/${shipmentId}/status/inTransit`, null, {
+		headers: authHeader(),
+	});
+};
+
+const markAsCompleted = (shipmentId) => {
+	return axios.patch(APP_API.SHIPMENT + `/${shipmentId}/status/completed`, null, {
+		headers: authHeader(),
+	});
+};
+
 const shipmentApi = {
 	create,
 	getAllShipments,
@@ -37,6 +49,8 @@ const shipmentApi = {
 	deleteShipment,
 	approve,
 	reject,
+	markAsInTransit,
+	markAsCompleted,
 };
 
 export default shipmentApi;

@@ -116,9 +116,62 @@ function ShipmentBtnDelete({shipment}) {
     return <SharedBtn.BtnDelete onClick={openConfirmModal}/>
 }
 
+function ShipmentBtnMarkInTransit({shipment, ...props}) {
+    const navigate = useNavigate();
+
+    const onProcess = (shipment) => {
+        shipmentApi.markAsInTransit(shipment.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully update shipment" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot update shipment" });
+            });
+    };
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm action",
+			content: <div>Confirm to mark shipment <b>{shipment.name}</b> as in transit</div>,
+			onOk: () => onProcess(shipment),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Mark as in transit</Button>
+}
+
+
+function ShipmentBtnMarkAsCompleted({shipment, ...props}) {
+    const navigate = useNavigate();
+
+    const onProcess = (shipment) => {
+        shipmentApi.markAsCompleted(shipment.id)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully update shipment" });
+                setTimeout(() => navigate(0), 1000);
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot update shipment" });
+            });
+    };
+
+    const openConfirmModal = () => {
+        Modal.confirm({
+			title: "Confirm action",
+			content: <div>Confirm to mark shipment <b>{shipment.name}</b> as completed</div>,
+			onOk: () => onProcess(shipment),
+		});
+    }
+
+    return <Button onClick={openConfirmModal} {...props}>Mark as completed</Button>
+}
+
 export {
     ShipmentCreateBtn,
     ShipmentBtnApprove,
     ShipmentBtnReject,
-    ShipmentBtnDelete
+    ShipmentBtnDelete,
+    ShipmentBtnMarkAsCompleted,
+    ShipmentBtnMarkInTransit
 }

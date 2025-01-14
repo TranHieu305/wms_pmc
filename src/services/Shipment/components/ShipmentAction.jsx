@@ -1,7 +1,7 @@
 import { Dropdown } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
 import shipmentActionPermission from "../utils/actionPermission";
-import { ShipmentBtnApprove, ShipmentBtnDelete, ShipmentBtnReject } from "./ShipmentButton";
+import { ShipmentBtnApprove, ShipmentBtnDelete, ShipmentBtnMarkAsCompleted, ShipmentBtnMarkInTransit, ShipmentBtnReject } from "./ShipmentButton";
 
 function ShipmentAction({shipment, ...props}) {
     let items = getActionItems(shipment);
@@ -35,6 +35,18 @@ const getActionItems = (shipment) => {
             key: 'delete' + shipment.id,
             label: <ShipmentBtnDelete shipment={shipment}/>,
         });
+    }
+    if (shipmentActionPermission.canMarkAsInTransit(shipment)) {
+        actionItems.unshift({
+            key: 'mark-in-transit' + shipment.id,
+            label: <ShipmentBtnMarkInTransit shipment={shipment}/>,
+        })
+    }
+    if (shipmentActionPermission.canMarkAsCompleted(shipment)) {
+        actionItems.unshift({
+            key: 'mark-completed' + shipment.id,
+            label: <ShipmentBtnMarkAsCompleted shipment={shipment}/>,
+        })
     }
     if (actionItems.length === 0) {
         actionItems = [

@@ -73,6 +73,12 @@ const ShipmentStatus = {
 	IN_TRANSIT: "IN_TRANSIT",
 };
 
+const ShipmentBatchStatus = {
+	PACKED: "PACKED",
+	IN_TRANSIT: "IN_TRANSIT",
+	DELIVERED: "DELIVERED",
+};
+
 const Enum = {
 	InventoryAction,
 	CategoryType,
@@ -86,6 +92,7 @@ const Enum = {
 	VehicleStatus,
 	ProducedItemStatus,
 	ShipmentStatus,
+	ShipmentBatchStatus,
 };
 
 export default Enum;
