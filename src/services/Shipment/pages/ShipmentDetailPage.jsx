@@ -29,7 +29,7 @@ function ShipmentDetailPage() {
                 title: "Shipment detail",
             },
         ]);
-    }, [setSelectedMenuKey, setBreadcrumbItems]);
+    }, [setSelectedMenuKey, setBreadcrumbItems, setOpenMenuKey]);
     
     // Get shipments
     useEffect(() => {

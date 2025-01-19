@@ -32,7 +32,7 @@ function BatchDetailPage() {
                 title: "Batch detail",
             },
         ]);
-    }, [setSelectedMenuKey, setBreadcrumbItems]);
+    }, [setSelectedMenuKey, setBreadcrumbItems, setOpenMenuKey]);
 
     // Get batch
     useEffect(() => {
