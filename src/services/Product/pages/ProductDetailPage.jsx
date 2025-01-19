@@ -9,11 +9,30 @@ import DetailPage from "../../../shared/components/DetailPage";
 import { Col, Row } from "antd";
 import ProductDetail from "../components/ProductDetail";
 import productActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function ProductDetailPage() {
     const { productId } = useParams();
     const [product, setProduct] = useState();
     const navigate = useNavigate();
+    const {setSelectedMenuKey, setBreadcrumbItems, setOpenMenuKey} = useLayoutContext();
+
+    useEffect(() => {
+        setOpenMenuKey([Enum.Menu.product.key]);
+        setSelectedMenuKey(Enum.Menu.products.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.product.label,
+            },
+            {
+                title: Enum.Menu.products.label,
+            },
+            {
+                title: "Product detail",
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems, setOpenMenuKey]);
 
     // Get products
     useEffect(() => {

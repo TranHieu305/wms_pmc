@@ -9,12 +9,28 @@ import { ShipmentStatusTag } from "../components/ShipmentTag";
 import ShipmentDetail from "../components/ShipmentDetail";
 import shipmentActionPermission from "../utils/actionPermission";
 import ShipmentAction from "../components/ShipmentAction";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function ShipmentDetailPage() {
     const {shipmentId} = useParams();
     const [shipment, setShipment] = useState();
     const navigate = useNavigate();
+    const {setSelectedMenuKey, setBreadcrumbItems, setOpenMenuKey} = useLayoutContext();
 
+    useEffect(() => {
+        setOpenMenuKey([Enum.Menu.shipment.key]);
+        setSelectedMenuKey(Enum.Menu.shipments.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.shipment.label,
+            },
+            {
+                title: "Shipment detail",
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+    
     // Get shipments
     useEffect(() => {
         const fetchProducts = async () => {

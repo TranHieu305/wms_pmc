@@ -6,11 +6,27 @@ import ProductBoard from "../components/ProductBoard";
 import { ProductBtnSave } from "../components/ProductButton";
 import BoardPage from "../../../shared/components/BoardPage";
 import productActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function ProductBoardPage() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.products.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.product.label,
+            },
+            {
+                title: "All product",
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+
+
     // Get all partners
     useEffect(() => {
         const fetchProducts = async () => {

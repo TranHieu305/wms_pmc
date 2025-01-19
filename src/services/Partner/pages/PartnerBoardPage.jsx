@@ -6,10 +6,22 @@ import SharedIcon from "../../../shared/components/common/Icon.js";
 import BtnSavePartner from "../components/PartnerButton.jsx";
 import BoardPage from "../../../shared/components/BoardPage.jsx";
 import orderActionPermission from "../../Order/utils/actionPermission.js";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function PartnerBoardPage() {
     const [partners, setPartners] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.partner.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.partner.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
     
     // Get all partners
     useEffect(() => {

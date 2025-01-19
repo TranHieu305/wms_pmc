@@ -5,17 +5,34 @@ import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import DetailPage from "../../../shared/components/DetailPage";
 import LoadingPage from "../../../shared/components/LoadingPage";
 import BatchAction from "../components/BatchAction";
-import { Col, Row, Tabs } from "antd";
+import { Col, Row } from "antd";
 import BatchDetail from "../components/BatchDetail";
 import { BatchStatusTag } from "../components/BatchTag";
 import producedItemApi from "../../ProducedItem/api/producedItemApi";
 import batchActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function BatchDetailPage() {
     const {batchId} = useParams();
     const [batch, setBatch] = useState();
     const navigate = useNavigate();
     const [producedItems, setProducedItems] = useState();
+
+    const {setSelectedMenuKey, setBreadcrumbItems, setOpenMenuKey} = useLayoutContext();
+
+    useEffect(() => {
+        setOpenMenuKey([Enum.Menu.shipment.key]);
+        setSelectedMenuKey(Enum.Menu.batch.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.batch.label,
+            },
+            {
+                title: "Batch detail",
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
 
     // Get batch
     useEffect(() => {

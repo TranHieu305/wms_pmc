@@ -1,14 +1,35 @@
 import { Outlet } from "react-router-dom";
-import { SiderMenu } from "./SidebarMenu";
-import { Avatar, Dropdown, Layout } from "antd";
-import { Header } from "antd/es/layout/layout";
-import LogoutBtn from "../../services/Auth/components/AuthButton";
-import { useSelector } from "react-redux";
+import { SiderMenu } from "./AppMenu";
+import { Layout } from "antd";
+import { createContext, useContext, useState } from "react";
+import AppHeader from "./AppHeader";
  
+const LayoutContext = createContext();
+
+const LayoutProvider = ({children}) => {
+    const [openMenuKey, setOpenMenuKey] = useState([]);
+    const [selectedMenuKey, setSelectedMenuKey] = useState();
+    const [breadcrumbItems, setBreadcrumbItems] = useState([]);
+
+    return (
+        <LayoutContext.Provider value={{
+            selectedMenuKey, 
+            setSelectedMenuKey,
+            breadcrumbItems,
+            setBreadcrumbItems,
+            openMenuKey,
+            setOpenMenuKey
+            }}>   
+            {children}
+        </LayoutContext.Provider>
+    )
+}
+
+export const useLayoutContext = () => useContext(LayoutContext);
 
 function AppLayout() {
 	return (
-		<>
+		<LayoutProvider>
             <Layout className="min-h-screen">
                 <SiderMenu />
                 <Layout>
@@ -18,58 +39,9 @@ function AppLayout() {
                     </div>
                 </Layout>
             </Layout>
-		</>
+		</LayoutProvider>
 	);
 }
-
-function AppHeader() {
-    return (
-        <Header
-            style={{
-                padding: 0,
-                background: "#FFFFFF",
-                boxShadow: "0px 4px 8px 0px rgba(145, 158, 171, 0.16)",
-            }}
-        >
-            <div className="px-6 flex items-center justify-between">
-                <div></div>
-                <div>
-                    <AvatarDropdown />
-                </div>
-            </div>
-        </Header>
-    );
-}
-
-function AvatarDropdown() {
-    const currentUser = JSON.parse(localStorage.getItem("user"));
-    const users = useSelector((state) => state.users.userList);
-    const user = users.find(user => user.id === currentUser.userId);
-    const items = [
-        {
-            key: 'logout',
-            label: <LogoutBtn />,
-        },
-    ];
-
-    return (
-        <Dropdown
-            menu={{
-                items,
-            }}
-            placement="bottomRight"
-        >
-            <Avatar
-                size={36}
-                src={user?.avatarUrl}
-            >
-                {user?.username?.charAt(0).toUpperCase() || "U"}
-            </Avatar>
-        </Dropdown>
-    );
-}
-
-
 
 export default AppLayout;
 

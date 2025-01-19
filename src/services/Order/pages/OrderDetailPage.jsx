@@ -9,12 +9,26 @@ import LoadingPage from "../../../shared/components/LoadingPage";
 import OrderDetail from "../components/OrderDetail";
 import { OrderStatusTag } from "../components/OrderTag";
 import orderActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function OrderDetailPage() {
     const {orderId} = useParams();
     const [order, setOrder] = useState();
     const navigate = useNavigate();
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
 
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.order.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.order.label,
+            },
+            {
+                title: "Order detail",
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
     // Get orders
     useEffect(() => {
         const fetchProducts = async () => {

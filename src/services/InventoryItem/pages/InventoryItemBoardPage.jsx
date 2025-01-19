@@ -6,6 +6,8 @@ import BoardPage from "../../../shared/components/BoardPage";
 import InventoryItemBoard from "../components/InventoryItemBoard";
 import inventoryItemActionPermission from "../utils/actionPermission";
 import NoPermissionPage from "../../../shared/components/NoPermissionPage";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function InventoryItemBoardPage() {
     if (!inventoryItemActionPermission.canViewBoard()) {
@@ -19,6 +21,16 @@ function InventoryItemBoardContent() {
    
     const [inventoryItems, setInventoryItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.inventoryItem.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.inventoryItem.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
     
     // Get all partners
     useEffect(() => {

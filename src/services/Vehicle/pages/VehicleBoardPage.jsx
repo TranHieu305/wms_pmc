@@ -6,10 +6,22 @@ import BoardPage from "../../../shared/components/BoardPage";
 import VehicleBoard from "../components/VehicleBoard";
 import vehicleActionPermission from "../utils/actionPermission";
 import { VehicleBtnAdd } from "../components/VehicleButton";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function VehicleBoardPage() {
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.vehicles.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.vehicles.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
     
     // Get all partners
     useEffect(() => {

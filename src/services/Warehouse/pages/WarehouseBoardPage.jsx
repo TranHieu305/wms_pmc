@@ -6,11 +6,23 @@ import WarehouseBoard from "../components/WarehouseBoard";
 import { WarehouseBtnSave } from "../components/WarehouseButton";
 import BoardPage from "../../../shared/components/BoardPage";
 import warehouseActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function WarehouseBoardPage() {
     const [warehouses, setWarehouses] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.warehouse.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.warehouse.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+
     // Get all partners
     useEffect(() => {
         const fetchWarehouses = async () => {

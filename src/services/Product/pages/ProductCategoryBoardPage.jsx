@@ -6,12 +6,28 @@ import ProductCategoryBoard from "../components/ProductCategoryBoard";
 import { ProductCategoryBtnSave } from "../components/ProductCategoryButton";
 import BoardPage from "../../../shared/components/BoardPage";
 import productActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 
 function ProductCategoryBoardPage() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.productCategory.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.product.label,
+            },
+            {
+                title: "Category",
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+
+
     // Get all categories
     useEffect(() => {
         const fetchCategories = async () => {

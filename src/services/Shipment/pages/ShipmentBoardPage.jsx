@@ -6,10 +6,22 @@ import BoardPage from "../../../shared/components/BoardPage";
 import { ShipmentCreateBtn } from "../components/ShipmentButton";
 import ShipmentBoard from "../components/ShipmentBoard";
 import shipmentActionPermission from "../utils/actionPermission";
-
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 function ShipmentBoardPage() {
     const [shipments, setShipments] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.shipment.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.shipment.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+
     
     // Get all partners
     useEffect(() => {

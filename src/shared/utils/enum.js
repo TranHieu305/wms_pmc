@@ -79,6 +79,61 @@ const ShipmentBatchStatus = {
 	DELIVERED: "DELIVERED",
 };
 
+const Menu = {
+	warehouse: {
+		key: "warehouses",
+		label: "Warehouses",
+	},
+	product: {
+		key: "product",
+		label: "Products",
+	},
+	products: {
+		key: "/products",
+		label: "All Product",
+	},
+	productCategory: {
+		key: "/product-categories",
+		label: "Category",
+	},
+	partner: {
+		key: "partners",
+		label: "Partners",
+	},
+	inventoryItem: {
+		key: "inventory-items",
+		label: "Inventory items",
+	},
+	order: {
+		key: "orders",
+		label: "Orders",
+	},
+	shipment: {
+		key: "shipments",
+		label: "Shipments",
+	},
+	batch: {
+		key: "/batches",
+		label: "Batches",
+	},
+	shipments: {
+		key: "/shipments",
+		label: "Shipments",
+	},
+	vehicles: {
+		key: "/vehicles",
+		label: "Vehicles",
+	},
+	setting: {
+		key: "settings",
+		label: "Settings",
+	},
+	user: {
+		key: "/users",
+		label: "Users",
+	},
+};
+
 const Enum = {
 	InventoryAction,
 	CategoryType,
@@ -93,6 +148,7 @@ const Enum = {
 	ProducedItemStatus,
 	ShipmentStatus,
 	ShipmentBatchStatus,
+	Menu,
 };
 
 export default Enum;

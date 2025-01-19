@@ -6,12 +6,24 @@ import BoardPage from "../../../shared/components/BoardPage";
 import UserBoard from "../components/UserBoard";
 import { UserBtnCreate } from "../components/UserButton";
 import userActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 
 function UserBoardPage() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.user.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.user.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+
     // Get all partners
     useEffect(() => {
         const fetchUsers = async () => {

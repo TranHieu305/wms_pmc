@@ -1,6 +1,6 @@
 import { AutoComplete, DatePicker, Input, Mentions, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { debounce } from "lodash";
 
@@ -99,44 +99,51 @@ function UserMention({value, onChange, options, ...props}) {
 function Location({onSelectLocation, ...props}) {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    const [selectedLocation, setSelectedLocation] = useState(null);
+    // const [selectedLocation, setSelectedLocation] = useState(null);
     const [loading, setLoading] = useState(false); // Loading state
 
     
     // Function to fetch search results
-    const fetchSearchResults = async (term) => {
-        if (!term || term.length <= 2) return [];
-        try {
-            setLoading(true); // Set loading state
-            const response = await fetch(
-            `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-                term
-            )}&format=json&addressdetails=1&limit=5`
-            );
-            const data = await response.json();
-            return data.map((result) => ({
+    const fetchSearchResults = useMemo(() => {
+        return async (term) => {
+            if (!term || term.length <= 2) return [];
+            try {
+                setLoading(true);
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+                        term
+                    )}&format=json&addressdetails=1&limit=5`
+                );
+                const data = await response.json();
+                return data.map((result) => ({
                     value: result.display_name,
                     lat: parseFloat(result.lat),
                     lon: parseFloat(result.lon),
                 }));
-        } catch (error) {
-            console.error("Error fetching search results:", error); // Debugging
-            return [];
-      } finally {
-        setLoading(false); // Reset loading state
-      }
-    };
-
-    const debouncedFetchResults = useCallback(
-        debounce(async (term) => {
+            } catch (error) {
+                console.error("Error fetching search results:", error);
+                return [];
+            } finally {
+                setLoading(false);
+            }
+        };
+    }, []);
+    
+    const debouncedFetchResults = useMemo(() => {
+        return debounce(async (term) => {
             const results = await fetchSearchResults(term);
             console.log(results);
             setSearchResults(results);
-        }, 1000),
-        []
-    );
+        }, 1000);
+    }, [fetchSearchResults]);
 
-  
+    // Cleanup the debounced function
+    useEffect(() => {
+        return () => {
+            debouncedFetchResults.cancel();
+        };
+    }, [debouncedFetchResults]);
+
     // Effect to fetch results when the search term changes
     useEffect(() => {
         if (searchTerm.length > 2) {
@@ -154,7 +161,7 @@ function Location({onSelectLocation, ...props}) {
             latitude: option.lon,
         };
 
-        setSelectedLocation(location);
+        // setSelectedLocation(location);
         console.log("Selected location:", option); // Debugging
         if (onSelectLocation) {
             onSelectLocation(location);

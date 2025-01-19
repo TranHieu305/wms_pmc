@@ -4,10 +4,23 @@ import SharedIcon from "../../../shared/components/common/Icon";
 import batchApi from "../api/batchApi";
 import BoardPage from "../../../shared/components/BoardPage";
 import BatchBoard from "../components/BatchBoard";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function BatchBoardPage() {
     const [batchs, setBatchs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.batch.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.batch.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+
     
     // Get all partners
     useEffect(() => {

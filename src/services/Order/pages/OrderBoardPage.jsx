@@ -6,11 +6,23 @@ import BoardPage from "../../../shared/components/BoardPage";
 import OrderBoard from "../components/OrderBoard";
 import { OrderBtnSave } from "../components/OrderButton";
 import orderActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function OrderBoardPage() {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.order.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.order.label,
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
+
     // Get all partners
     useEffect(() => {
         const fetchOrders = async () => {

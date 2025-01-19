@@ -11,11 +11,26 @@ import productWarehouseApi from "../../Product/api/productWarehouseApi";
 import WarehouseStatusTag from "../components/WarehouseStatusTag";
 import productWarehouseHistoryApi from "../../Product/api/productWarehouseHistoryApi";
 import warehouseActionPermission from "../utils/actionPermission";
+import { useLayoutContext } from "../../../shared/components/AppLayout";
+import Enum from "../../../shared/utils/enum";
 
 function WarehouseDetailPage() {
     const { warehouseId } = useParams();
     const [warehouse, setWarehouse] = useState();
     const navigate = useNavigate();
+    const {setSelectedMenuKey, setBreadcrumbItems} = useLayoutContext();
+
+    useEffect(() => {
+        setSelectedMenuKey(Enum.Menu.warehouse.key);
+        setBreadcrumbItems([
+            {
+                title: Enum.Menu.warehouse.label,
+            },
+            {
+                title: "Warehouse detail",
+            },
+        ]);
+    }, [setSelectedMenuKey, setBreadcrumbItems]);
 
     // Get warehouses
     useEffect(() => {
