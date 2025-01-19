@@ -71,7 +71,7 @@ function ShipmentDetailPage() {
                         {/* Content */}
                         <Row gutter={24}>
                             <Col span={18}>
-                                <ShipmentDetail.ShipmentBatchBoard shipment={shipment} />
+                                <ShipmentDetail.ShipmentBatch shipment={shipment} />
                             </Col>
                             <Col span={6}>
                                 <ShipmentDetail.Info shipment={shipment} />

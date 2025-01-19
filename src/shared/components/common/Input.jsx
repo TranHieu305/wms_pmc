@@ -49,6 +49,8 @@ function SelectInput({value, onChange, options,...props}) {
         <>
             <Select key={"select" + value} 
                 value={value} 
+                showSearch
+                optionFilterProp="label"
                 onChange={(value) => onChange(value)} 
                 options={options}
                 {...props} 

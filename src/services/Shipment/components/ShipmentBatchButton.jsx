@@ -25,7 +25,7 @@ function ShipmentBatchBtnMarkAsDelivered({shipmentBatch, ...props}) {
 		});
     }
 
-    return <Button onClick={openConfirmModal} {...props}>Mark as delivered</Button>
+    return <Button onClick={openConfirmModal} type="dash" {...props}>Mark as delivered</Button>
 }
 
 export {ShipmentBatchBtnMarkAsDelivered}

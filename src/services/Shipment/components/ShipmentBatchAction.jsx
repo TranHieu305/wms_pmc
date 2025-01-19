@@ -23,7 +23,7 @@ const getActionItems = (shipment, shipmentBatch) => {
    
     if (shipmentActionPermission.itemCanMarkDelivered(shipment, shipmentBatch)) {
         actionItems.unshift({
-            key: 'mark-in-transit' + shipment.id,
+            key: 'mark-delivered' + shipment.id,
             label: <ShipmentBatchBtnMarkAsDelivered shipmentBatch={shipmentBatch}/>,
         })
     }

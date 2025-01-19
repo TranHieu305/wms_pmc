@@ -16,7 +16,7 @@ function ShipmentCreateBtn({...props}) {
             .then((response) => {
                 notificationHelper.showSuccessNotification({ description: "Successfully created shipment" });
                 navigate(0);
-                window.open("/shipmentes/" + response.data.data.id, "_blank", "noopener,noreferrer");
+                window.open("/shipments/" + response.data.data.id, "_blank", "noopener,noreferrer");
             })
             .catch((err) => {
                 notificationHelper.showErrorNotification({ description: "Cannot create shipment" });
@@ -138,7 +138,7 @@ function ShipmentBtnMarkInTransit({shipment, ...props}) {
 		});
     }
 
-    return <Button onClick={openConfirmModal} {...props}>Mark as in transit</Button>
+    return <Button onClick={openConfirmModal} type="dash" {...props}>Mark as in transit</Button>
 }
 
 
@@ -164,7 +164,7 @@ function ShipmentBtnMarkAsCompleted({shipment, ...props}) {
 		});
     }
 
-    return <Button onClick={openConfirmModal} {...props}>Mark as completed</Button>
+    return <Button onClick={openConfirmModal} type="dash" {...props}>Mark as completed</Button>
 }
 
 export {

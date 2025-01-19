@@ -26,4 +26,22 @@ function ShipmentStatusTag({status}) {
     return tag;
 }
 
-export {ShipmentStatusTag}
+function ShipmentBatchStatusTag({status}) {
+    let tag;
+    switch (status) {
+        case Enum.ShipmentBatchStatus.PACKED:
+            tag = <Tag color="blue">{Enum.ShipmentBatchStatus.PACKED}</Tag>;
+            break;
+        case Enum.ShipmentBatchStatus.IN_TRANSIT:
+                tag = <Tag color="orange">{Enum.ShipmentBatchStatus.IN_TRANSIT}</Tag>;
+                break;
+        case Enum.ShipmentBatchStatus.DELIVERED:
+            tag = <Tag color="success">{Enum.ShipmentBatchStatus.DELIVERED}</Tag>
+            break;
+            default:
+                tag = <Tag color="default">NO STATUS</Tag>;
+        }
+    return tag;
+} 
+
+export {ShipmentStatusTag, ShipmentBatchStatusTag}

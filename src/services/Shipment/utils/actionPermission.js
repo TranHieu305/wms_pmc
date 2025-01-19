@@ -23,28 +23,27 @@ const canAdd = () => {
 const canDelete = (shipment) => {
 	return (
 		shipment.createdBy === currentUser.userId &&
-		shipment.status === Enum.BatchStatus.PENDING_APPROVAL
+		shipment.status === Enum.ShipmentStatus.PENDING_APPROVAL
 	);
 };
 
 const canApprove = (shipment) => {
 	return (
 		shipment.pendingApproverIds.includes(currentUser.userId) &&
-		shipment.status === Enum.BatchStatus.PENDING_APPROVAL
+		shipment.status === Enum.ShipmentStatus.PENDING_APPROVAL
 	);
 };
 
 const canMarkAsCompleted = (shipment) => {
 	return (
-		shipment.pendingApproverIds.includes(currentUser.userId) &&
-		shipment.status === Enum.BatchStatus.IN_TRANSIT
+		shipment.createdBy === currentUser.userId &&
+		shipment.status === Enum.ShipmentStatus.IN_TRANSIT
 	);
 };
 
 const canMarkAsInTransit = (shipment) => {
 	return (
-		shipment.pendingApproverIds.includes(currentUser.userId) &&
-		shipment.status === Enum.BatchStatus.PENDING
+		shipment.createdBy === currentUser.userId && shipment.status === Enum.ShipmentStatus.PENDING
 	);
 };
 
