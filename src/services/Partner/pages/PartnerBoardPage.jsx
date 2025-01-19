@@ -3,11 +3,11 @@ import partnerApi from "../api/partnerApi";
 import { notificationHelper } from "../../../shared/utils/notificationHelper";
 import PartnerTable from "../components/PartnerBoard.jsx";
 import SharedIcon from "../../../shared/components/common/Icon.js";
-import BtnSavePartner from "../components/PartnerButton.jsx";
+import { BtnCreatePartner } from "../components/PartnerButton.jsx";
 import BoardPage from "../../../shared/components/BoardPage.jsx";
-import orderActionPermission from "../../Order/utils/actionPermission.js";
 import { useLayoutContext } from "../../../shared/components/AppLayout";
 import Enum from "../../../shared/utils/enum";
+import partnerActionPermission from "../utils/actionPermission.js";
 
 function PartnerBoardPage() {
     const [partners, setPartners] = useState([]);
@@ -46,7 +46,7 @@ function PartnerBoardPage() {
             icon={(<SharedIcon.Partner width={24} height={24} fill="rgba(0, 167, 111, 1)"></SharedIcon.Partner>)}
             title = "All Partner"
         >
-            {orderActionPermission.canAdd() && <BtnSavePartner />}
+            {partnerActionPermission.canAction() && <BtnCreatePartner />}
         </BoardPage.Subheader >
        
         {/* Table */}

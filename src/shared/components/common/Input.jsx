@@ -98,7 +98,7 @@ function UserMention({value, onChange, options, ...props}) {
     )
 }
 
-function Location({onSelectLocation, ...props}) {
+function Location({onSelectLocation, value, ...props}) {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     // const [selectedLocation, setSelectedLocation] = useState(null);
@@ -176,6 +176,7 @@ function Location({onSelectLocation, ...props}) {
             <AutoComplete
                 style={{ width: "100%", marginBottom: "10px" }}
                 options={searchResults}
+                defaultValue={value}
                 onSearch={(value) => setSearchTerm(value)} // Update search term
                 onSelect={handleLocationSelect} // Handle selection
                 placeholder="Search for a location"

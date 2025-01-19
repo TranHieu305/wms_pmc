@@ -1,5 +1,8 @@
 import { Table } from "antd";
 import { Link } from "react-router-dom";
+import { PartnerTypeTag } from "./PartnerTag";
+import partnerActionPermission from "../utils/actionPermission";
+import PartnerAction from "./PartnerAction";
 
 function PartnerTable({ partners, loading = true }) {
 	const columns = [
@@ -8,19 +11,24 @@ function PartnerTable({ partners, loading = true }) {
 			title: "Name",
 			dataIndex: "name",
 			render: (text, record) => <Link to={`${record.id}`}>{text}</Link>,
-            width: "20%"
 		},
-		{ key: "type", title: "Type", dataIndex: "type", width: "10%"},
-		{ key: "address", title: "Address", dataIndex: "address", width: "15%" },
+		{ key: "type", title: "Type", dataIndex: "type", width: "10%",
+            render: (_, {type}) => <PartnerTypeTag type={type}/>
+        },
 		{ key: "email", title: "Email", dataIndex: "email", width: "15%" },
 		{ key: "phone", title: "Phone number", dataIndex: "phoneNumber", width: "10%" },
-		{ key: "description", title: "Description", dataIndex: "description", width: "20%" },
-		// {
-		//     key: "actions",
-		//     title: "Action",
-		//     render: (title, record) => <CustomerActions customer={record} />,
-		// },
+		{ key: "description", title: "Description", dataIndex: "description", width: "25%" },
 	];
+
+    if (partnerActionPermission.canAction()) {
+        columns.push(
+            {
+                key: "actions",
+                title: "Action",
+                render: (title, record) => <PartnerAction partner={record} />,
+            },
+        )
+    }
 
 	return (
     <>

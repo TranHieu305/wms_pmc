@@ -14,10 +14,20 @@ const editPartner = (data) => {
 	return axios.put(PARTNER_API.BASE, data, { headers: authHeader() });
 };
 
+const deletePartner = (partner) => {
+	return axios.delete(PARTNER_API.BASE + `/${partner.id}`, { headers: authHeader() });
+};
+
+const getPartnerDetail = (partnerId) => {
+	return axios.get(PARTNER_API.BASE + `/${partnerId}`, { headers: authHeader() });
+};
+
 const partnerApi = {
 	getAllPartners,
 	savePartner,
 	editPartner,
+	deletePartner,
+	getPartnerDetail,
 };
 
 export default partnerApi;
