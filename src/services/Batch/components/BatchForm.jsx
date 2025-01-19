@@ -193,8 +193,8 @@ function FormCreateFromOrder({setBeforeSave, order}) {
                             placeholder="Please choose a warehouse"
                             onChange={(value) => formik.setFieldValue("warehouseId", value)}
                             onBlur={formik.handleBlur}
-                            value={formik.values.partnerId}
-                            error={formik.touched.partnerId && formik.errors.partnerId}
+                            value={formik.values.warehouseId}
+                            error={formik.touched.warehouseId && formik.errors.warehouseId}
                         />
                     </SharedForm.FormBodyItem>	
                 </Col>

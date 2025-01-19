@@ -1,8 +1,6 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import { Link } from "react-router-dom";
 import WarehouseAction from "./WarehouseAction";
-import WarehouseStatusTag from "./WarehouseStatusTag";
-import SharedIcon from "../../../shared/components/common/Icon";
 import warehouseActionPermission from "../utils/actionPermission";
 
 function WarehouseBoard({warehouses, loading}) {
@@ -12,16 +10,11 @@ function WarehouseBoard({warehouses, loading}) {
 			title: "Name",
 			dataIndex: "name",
 			render: (text, record) => 
-                (<Link to={`${record.id}`}>
-                    <Button type="link" icon={<SharedIcon.Warehouse width={18} height={18} fill="rgba(0, 167, 111, 1)"/>}>
-                        {record.name}
-                    </Button>
-                </Link>),
-            width: "20%"
+                (<Link to={`/warehouses/${record.id}`}>{record.name}</Link>),
 		},
-		{ key: "status", title: "Status", dataIndex: "isActive", width: "20%",
-            render: (text, record) => <WarehouseStatusTag warehouse={record}/>
-         }, 
+		// { key: "status", title: "Status", dataIndex: "isActive", width: "20%",
+        //     render: (text, record) => <WarehouseStatusTag warehouse={record}/>
+        //  }, 
 		{ key: "address", title: "Address", dataIndex: "address",width: "25%" },
 		{ key: "description", title: "Description", dataIndex: "description", width: "25%" },
         // { key: "Responsible_person", title: "Responsible person", dataIndex: "supervisorId" },
@@ -32,6 +25,7 @@ function WarehouseBoard({warehouses, loading}) {
                 key: "actions",
                 title: "Action",
                 render: (title, record) => <WarehouseAction warehouse={record} />,
+                width: "10%"
             },
         )
     }

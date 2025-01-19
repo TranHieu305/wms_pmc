@@ -5,7 +5,7 @@ import { Modal } from "antd";
 import { Button } from "antd";
 import { SharedBtn } from "../../../shared/components/common";
 import shipmentApi from "../api/shipmentApi";
-import { FormCreateShipment } from "./ShipmentForm";
+import { FormCreateShipment, FormCreateShipmentVrp } from "./ShipmentForm";
 
 function ShipmentCreateBtn({...props}) {
     const { showModal } = useModal(); 
@@ -167,11 +167,46 @@ function ShipmentBtnMarkAsCompleted({shipment, ...props}) {
     return <Button onClick={openConfirmModal} type="dash" {...props}>Mark as completed</Button>
 }
 
+function ShipmentVrpBtn({...props}) {
+    const { showModal } = useModal(); 
+    const navigate = useNavigate();
+
+    const handleSave = (data) => {
+        shipmentApi.create(data)
+            .then((response) => {
+                notificationHelper.showSuccessNotification({ description: "Successfully created shipment" });
+                navigate(0);
+                window.open("/shipments/" + response.data.data.id, "_blank", "noopener,noreferrer");
+            })
+            .catch((err) => {
+                notificationHelper.showErrorNotification({ description: "Cannot create shipment" });
+            });
+    }
+
+    const handleClick = () => {
+        let beforeSaveOrder;
+
+        showModal({
+            title: "Create new shipment use recommendation",
+            body: (
+            <FormCreateShipmentVrp 
+                setBeforeSave={(callback) => {beforeSaveOrder = callback;}}
+                />),
+            beforeSaveCallback: () => beforeSaveOrder(),
+            onSave: handleSave,
+            widthModal: "large"
+        })
+    }
+
+    return <SharedBtn.BtnSave onClick={handleClick} label="Recommendation" {...props} ></SharedBtn.BtnSave>
+}
+
 export {
     ShipmentCreateBtn,
     ShipmentBtnApprove,
     ShipmentBtnReject,
     ShipmentBtnDelete,
     ShipmentBtnMarkAsCompleted,
-    ShipmentBtnMarkInTransit
+    ShipmentBtnMarkInTransit,
+    ShipmentVrpBtn
 }

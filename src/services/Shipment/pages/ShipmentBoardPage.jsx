@@ -47,6 +47,8 @@ function ShipmentBoardPage() {
             title = "All Shipment"
         >
             {shipmentActionPermission.canAdd() && <ShipmentCreateBtn />}
+            {/* {shipmentActionPermission.canAdd() && <ShipmentVrpBtn />} */}
+
         </BoardPage.Subheader >
      
         {/* Table */}
