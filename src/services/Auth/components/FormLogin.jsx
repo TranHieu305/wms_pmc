@@ -13,12 +13,16 @@ const FormLogin = () => {
         password:""
     };
     
-    const handleLogin = (values) => {
-        authApi.login(values.email, values.password)
-            .then((res) => {
-                notificationHelper.showSuccessNotification({description: res.message})
-                setTimeout(() => navigate("/warehouses"), 1000); 
-            })
+    const handleLogin = async (values) => {
+        try {
+            const res = await authApi.login(values.email, values.password);
+            notificationHelper.showSuccessNotification({ description: res.message });
+            // Navigate after success with a delay
+            setTimeout(() => navigate("/warehouses"), 1000);
+        } catch (error) {
+            // Handle error (e.g., show a notification)
+            notificationHelper.showErrorNotification({ description: error.message });
+        }
     };
 
     const formik = useFormik({
